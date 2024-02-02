@@ -1,0 +1,1 @@
+# This contains the code for student side web solution which stores all the documents and information of student.
