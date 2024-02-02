@@ -1,1 +1,1 @@
-# Edumarshal_web
+# Edumarshal is a complete & personalised software Solution for AKGEC
