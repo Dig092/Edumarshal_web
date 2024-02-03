@@ -13,7 +13,7 @@ function SwitchProfile({ activeIndex, onSwitchChange }) {
             activeIndex === index
               ? "bg-[#004BB8] text-white"
               : "bg-[#F2F6FF] text-black"
-          } h-[42px] flex items-center justify-center p-2 px-4 font-medium text-base rounded-[0.5rem] cursor-pointer`}
+          } h-[45px] flex items-center justify-center p-3 px-5 font-medium text-base rounded-[0.5rem] cursor-pointer`}
         >
           {item}
         </div>

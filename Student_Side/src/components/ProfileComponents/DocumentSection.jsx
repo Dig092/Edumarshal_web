@@ -1,6 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 export default function DocumentSection() {
+    const [uploadedFiles, setUploadedFiles] = useState(Array(14).fill(null));
     const documents = [
         {
             name: "Student Photo",
@@ -45,16 +46,38 @@ export default function DocumentSection() {
             name: "Affidavit for the gap period After Qualifying exam",
         },
     ];
-    const handleUploadClick = () => {
-        if (fileInputRef.current) {
-            fileInputRef.current.click();
+
+    const handleUploadClick = (cardIndex) => {
+        if (currentlyUploadingIndex === null) {
+            setCurrentlyUploadingIndex(cardIndex);
+            if (fileInputRef.current) {
+                fileInputRef.current.click();
+            }
+        } else {
+            const a = document.createElement("a");
+            a.href = uploadedFiles[cardIndex];
+            a.download = `downloaded_image_${cardIndex + 1}.jpg`;
+            a.click();
+            setCurrentlyUploadingIndex(null); 
         }
     };
+    
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const updatedFiles = [...uploadedFiles];
+            updatedFiles[currentlyUploadingIndex] = URL.createObjectURL(file);
+            setUploadedFiles(updatedFiles);
+        }
+    };
+
     const fileInputRef = useRef(null);
+    const [currentlyUploadingIndex, setCurrentlyUploadingIndex] = useState(null);
+
     return (
         <div>
             <div className="bg-[#ffffff] h-[72vh] rounded-3xl mx-4 mt-4 overflow-y-auto">
-                <div className="text-lg ml-10 mt-4 font-medium">
+            <div className="text-lg ml-10 mt-4 font-medium">
                     Upload/Update Document
                 </div>
                 <div className="flex justify-center items-center">
@@ -67,14 +90,22 @@ export default function DocumentSection() {
                             key={cardIndex}
                             className="md:w-42 w-21 relative md:ml-14 ml-2 my-7"
                         >
-                            <div className="rounded-t-2xl bg-slate-700 h-[214px] w-[214px] relative"></div>
+                            <div
+                                className="rounded-t-2xl bg-slate-700 h-[214px] w-[214px] relative"
+                                style={{
+                                    backgroundImage: `url(${uploadedFiles[cardIndex]})`,
+                                    backgroundSize: "cover",
+                                    backgroundPosition: "center",
+                                }}
+                            ></div>
                             <div className="absolute bottom-0 left-0 right-0 mb-4 ml-48 cursor-pointer">
                                 <img
                                     src="./downloadarrow.svg"
                                     style={{
                                         transform: "translate(-35%,-100%)",
                                     }}
-                                    onClick={handleUploadClick}
+                                    onClick={() => handleUploadClick(cardIndex)}
+                                    
                                 />
                             </div>
                             <div
@@ -91,7 +122,6 @@ export default function DocumentSection() {
                     ))}
                 </div>
             </div>
-            {/* Cards Ends */}
             <input
                 type="file"
                 id="fileInput"
@@ -99,6 +129,7 @@ export default function DocumentSection() {
                 accept=".jpg,.jpeg,.png,.heic"
                 ref={fileInputRef}
                 style={{ display: "none" }}
+                onChange={handleFileChange}
             />
         </div>
     );
