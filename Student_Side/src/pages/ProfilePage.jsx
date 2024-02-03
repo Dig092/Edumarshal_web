@@ -5,9 +5,9 @@ import SideBar from "../components/SideBar";
 // import arrowdown from "./icons/arrowdown.svg";
 import { useRef } from "react";
 // import { Scrollbar } from "react-scrollbars-custom";
-import SwitchProfile from "../components/SwitchProfile";
-import DocumentSection from "../components/DocumentSection";
-import ProfileSection from "../components/ProfileSection";
+import SwitchProfile from "../components/ProfileComponents/SwitchProfile";
+import DocumentSection from "../components/ProfileComponents/DocumentSection";
+import ProfileSection from "../components/ProfileComponents/ProfileSection";
 import { useLocation } from "react-router-dom";
 export default function ProfilePage() {
   const [active, setActive] = useState("");
