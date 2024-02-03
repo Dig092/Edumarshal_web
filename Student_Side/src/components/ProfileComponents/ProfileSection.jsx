@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import InputBox from "./InputBox";
+import InputBox from "../InputBox";
 
 export default function ProfileSection() {
     const [activeoption, setActiveoption] = useState(0);

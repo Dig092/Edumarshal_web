@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import SideBar from "../components/SideBar";
 import { useRef } from "react";
-import SwitchProfile from "../components/SwitchProfile";
+import SwitchProfile from "../components/ProfileComponents/SwitchProfile";
 import Attendance from "../components/ClassroomComponents/Attendance";
 import Assignments from "../components/ClassroomComponents/Assignments";
 import { useLocation } from "react-router-dom";
