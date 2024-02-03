@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import SideBar from "../components/SideBar";
 import { useRef } from "react";
 import SwitchProfile from "../components/SwitchProfile";
-import DocumentSection from "../components/DocumentSection";
-import ProfileSection from "../components/ProfileSection";
+import Attendance from "../components/ClassroomComponents/Attendance";
+import Assignments from "../components/ClassroomComponents/Assignments";
 import { useLocation } from "react-router-dom";
 
 export default function Classroom() {
@@ -25,7 +25,7 @@ export default function Classroom() {
         <div className="flex flex-col w-full">
           {/*Navbar Starts*/}
           <div className="h-[84px] w-full bg-[#FBFBFB] rounded-2xl flex justify-between items-center">
-            <div className="text-2xl font-semibold ml-8">Profile</div>
+            <div className="text-2xl font-semibold ml-8">Classroom</div>
             <div className="flex items-center mr-5 gap-8">
               <div>
                 <img src="./icons/notifications.png" />
@@ -36,19 +36,19 @@ export default function Classroom() {
           {/* Navbar Ends */}
 
           {/* Select Bar Starts */}
-          <div className="h-[9.6vh] bg-[#ffffff] mt-4 mx-4 flex flex-wrap items-center">
-            <div className="ml-10">
+          <div className="h-[9.6vh] bg-[#ffffff] mt-4 mx-4 flex flex-wrap items-center rounded-3xl">
+            <div className="ml-10 rounded-2xl">
               <SwitchProfile onSwitchChange={handleSwitchChange} />
             </div>
           </div>
           {/* Select Bar Ends */}
 
           {/* Document Page*/}
-          {activeItem === 1 && <DocumentSection />}
+          {activeItem === 1 && <Attendance />}
           {/* Document Page Ends */}
           
           {/* Profile Section Starts */}
-          {activeItem === 0 && <ProfileSection />}
+          {activeItem === 0 && <Assignments />}
         </div>
       </div>
     </>
