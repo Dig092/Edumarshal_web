@@ -1,0 +1,49 @@
+[
+    {
+        "title": "Dashboard",
+        "focus": "dashboard",
+        "unfocus": "dashboardUnfocus",
+        "link": "dashboard"
+    },
+    {
+        "title": "Profile",
+        "focus": "profile",
+        "unfocus": "profileUnfocus",
+        "link": "profile"
+    },
+    {
+        "title": "Classroom",
+        "focus": "classroom",
+        "unfocus": "classroomUnfocus"
+    },
+    {
+        "title": "Hostel",
+        "focus": "hostelUnfocus",
+        "unfocus": "hostelUnfocus"
+    },
+    {
+        "title": "Placement",
+        "focus": "placementUnfocus",
+        "unfocus": "placementUnfocus"
+    },
+    {
+        "title": "PYQ's Papers",
+        "focus": "pyqUnfocus",
+        "unfocus": "pyqUnfocus"
+    },
+    {
+        "title": "Fees",
+        "focus": "feesUnfocus",
+        "unfocus": "feesUnfocus"
+    },
+    {
+        "title": "Events",
+        "focus": "eventsUnfocus",
+        "unfocus": "eventsUnfocus"
+    },
+    {
+        "title": "Settings",
+        "focus": "settingUnfocus",
+        "unfocus": "settingUnfocus"
+    }
+]
