@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import SideBar from "../components/SideBar";
-import NavBar from "../components/NavBar";
-import DoughNut from "../components/DonutGraph";
-import ColumnGraph from "../components/ColumnGraph";
-import SemiCircle from "../components/SemiCircle";
-import SideCard from "../components/SideCard";
+import NavBar from "../components/DashboardComponents/NavBar";
+import DoughNut from "../components/DashboardComponents/DonutGraph";
+import ColumnGraph from "../components/DashboardComponents/ColumnGraph";
+import SemiCircle from "../components/DashboardComponents/SemiCircle";
+import SideCard from "../components/DashboardComponents/SideCard";
 import { useLocation } from "react-router-dom";
 
 export default function DashBoardPage() {
