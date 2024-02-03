@@ -54,14 +54,14 @@ export default function DocumentSection() {
     return (
         <div>
             <div className="bg-[#ffffff] h-[72vh] rounded-3xl mx-4 mt-4 overflow-y-auto">
-                <div className="text-md ml-10 mt-4 font-medium">
+                <div className="text-lg ml-10 mt-4 font-medium">
                     Upload/Update Document
                 </div>
                 <div className="flex justify-center items-center">
                     <div className="w-[94%]  h-[2px] bg-[#D9D9D9] my-4"></div>
                 </div>
                 {/* Cards Starts */}
-                <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10">
+                <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 mx-10">
                     {documents.map((document, cardIndex) => (
                         <div
                             key={cardIndex}
@@ -72,7 +72,7 @@ export default function DocumentSection() {
                                 <img
                                     src="./downloadarrow.svg"
                                     style={{
-                                        transform: "translate(-23%,-73%)",
+                                        transform: "translate(-35%,-100%)",
                                     }}
                                     onClick={handleUploadClick}
                                 />
@@ -80,7 +80,7 @@ export default function DocumentSection() {
                             <div
                                 className="absolute bottom-0 left-0 right-0 bg-[#004BB8]  h-[30%] md:w-[13.39rem] w-[13.39rem] flex justify-center items-center rounded-b-2xl"
                                 style={{
-                                    transform: "translateY(33%)",
+                                    transform: "translateY(43%)",
                                 }}
                             >
                                 <span className="text-sm text-center text-white">

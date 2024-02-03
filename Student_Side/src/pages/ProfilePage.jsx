@@ -37,9 +37,9 @@ export default function ProfilePage() {
           </div>
           {/* Navbar Ends */}
           {/* Select Bar Starts */}
-          <div className="h-[9.6vh] bg-[#ffffff] mt-4 mx-4 flex flex-wrap items-center rounded-3xl">
+          <div className="h-[70px] bg-[#ffffff] mt-4 mx-4 flex flex-wrap items-center rounded-3xl">
             <div className="ml-10">
-              <SwitchProfile onSwitchChange={handleSwitchChange} />
+              <SwitchProfile onSwitchChange={handleSwitchChange} activeIndex={activeItem}/>
             </div>
           </div>
           {/* Select Bar Ends */}
