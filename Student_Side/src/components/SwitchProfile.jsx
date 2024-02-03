@@ -5,6 +5,7 @@ function SwitchProfile({ onSwitchChange }) {
     return (
         <div
             style={{
+                borderRadius:20,
                 height: 45,
                 width: 500,
             }}
@@ -14,8 +15,8 @@ function SwitchProfile({ onSwitchChange }) {
                 onChange={onSwitchChange}
                 backgroundColor="#F2F6FF"
                 selectedBackgroundColor="#004BB8"
-                optionBorderRadius={6}
-                wrapperBorderRadius={0}
+                optionBorderRadius={12}
+                wrapperBorderRadius={12}
                 border={0}
                 fontSize={16}
                 options={[

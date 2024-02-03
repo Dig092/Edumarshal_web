@@ -14,7 +14,8 @@
     {
         "title": "Classroom",
         "focus": "classroom",
-        "unfocus": "classroomUnfocus"
+        "unfocus": "classroomUnfocus",
+        "link" : "classroom"
     },
     {
         "title": "Hostel",
