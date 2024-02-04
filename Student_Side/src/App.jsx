@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import DashBoardPage from "./pages/DashBoardPage";
 import ProfilePage from "./pages/ProfilePage";
 import Classroom from "./pages/Classroom";
+import Fees from "./pages/Fees";
 
 export default function App() {
     return (
@@ -13,6 +14,7 @@ export default function App() {
                 <Route exact path="/dashboard" element={<DashBoardPage />} />
                 <Route exact path="/profile" element={<ProfilePage/>}/>
                 <Route exact path="/Classroom" element={<Classroom/>}/>
+                <Route exact path="/Fees" element={<Fees/>}/>
             </Routes>
         </Router>
     );
