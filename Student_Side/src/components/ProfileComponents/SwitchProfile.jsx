@@ -1,41 +1,25 @@
 import React from "react";
-import SwitchSelector from "react-switch-selector";
 
-function SwitchProfile({ onSwitchChange }) {
-    return (
+const ProfileSections = ["My profile", "My document", "Registration Form"];
+
+function SwitchProfile({ activeIndex, onSwitchChange }) {
+  return (
+    <div className="flex gap-6 cursor-pointer">
+      {ProfileSections.map((item, index) => (
         <div
-            style={{
-                borderRadius:20,
-                height: 45,
-                width: 500,
-            }}
+          key={index}
+          onClick={() => onSwitchChange(index)}
+          className={`${
+            activeIndex === index
+              ? "bg-[#004BB8] text-white"
+              : "bg-[#F2F6FF] text-black"
+          } h-[45px] flex items-center justify-center p-3 px-5 font-medium text-base rounded-[0.5rem] cursor-pointer`}
         >
-            <SwitchSelector
-                initialSelectedIndex={1}
-                onChange={onSwitchChange}
-                backgroundColor="#F2F6FF"
-                selectedBackgroundColor="#004BB8"
-                optionBorderRadius={12}
-                wrapperBorderRadius={12}
-                border={0}
-                fontSize={16}
-                options={[
-                    {
-                        label: "My profile",
-                        value: 0,
-                    },
-                    {
-                        label: "My document",
-                        value: 1,
-                    },
-                    {
-                        label: "Registration Form",
-                        value: 2,
-                    },
-                ]}
-            />
+          {item}
         </div>
-    );
+      ))}
+    </div>
+  );
 }
 
 export default SwitchProfile;
