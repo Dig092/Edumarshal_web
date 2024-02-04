@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import '../App.css';
@@ -9,6 +9,7 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
     const [dob, setDob] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const storedUsername = localStorage.getItem('rememberedUsername');
@@ -37,23 +38,26 @@ const LoginPage = () => {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
                 },
+                withCredentials: true,
             });
-
-            if (response.status === 200) {
-                if (rememberMe) {
-                    localStorage.setItem('rememberedUsername', username);
-                    localStorage.setItem('rememberedPassword', password);
-                    localStorage.setItem('rememberedDob', dob);
-                    localStorage.setItem('rememberMe', true);
-                } else {
-                    localStorage.removeItem('rememberedUsername');
-                    localStorage.removeItem('rememberedPassword');
-                    localStorage.removeItem('rememberedDob');
-                    localStorage.removeItem('rememberMe');
-                }
-
-                // Continue with your login logic
-                // ...
+                if (response.status === 200) {
+                    if (rememberMe) {
+                        localStorage.setItem('rememberedUsername', username);
+                        localStorage.setItem('rememberedPassword', password);
+                        localStorage.setItem('rememberedDob', dob);
+                        localStorage.setItem('rememberMe', true);
+                    } else {
+                        localStorage.removeItem('rememberedUsername');
+                        localStorage.removeItem('rememberedPassword');
+                        localStorage.removeItem('rememberedDob');
+                        localStorage.removeItem('rememberMe');
+                    }
+                    // Use the headers in the Axios request
+                    const result2 = await axios.post('https://akgec-edu.onrender.com/v1/student/login', item,{withCredentials:true});
+            
+                    // login();
+                    navigate('/Dashboard');
+                    console.log();
 
                 toast.success('Login successful!', { position: 'top-right' });
             } else {
@@ -72,7 +76,7 @@ const LoginPage = () => {
     return (
         <div
             style={{
-                backgroundImage: `url(../src/assets/Loginbg.png)`,
+                backgroundImage: 'url(../src/assets/Loginbg.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 minHeight: '100vh',
@@ -141,7 +145,7 @@ const LoginPage = () => {
                         </div>
                     </div>
                     <br />
-                    <button className="bg-[#004BB8] text-white w-full md:w-80 p-2.5 mb-2 rounded-md hover:bg-sky-700 active:bg-sky-900 focus:outline-none focus:ring ..." onClick={signIn}>
+                    <button className="bg-[#004BB8] text-white w-full md:w-80 p-2.5 mb-2 rounded-md hover:bg-sky-700 active:bg-sky-900 focus:outline-none focus:ring" onClick={signIn}>
                         Login
                     </button>
                 </div>
@@ -158,4 +162,3 @@ const LoginPage = () => {
 }
 
 export default LoginPage;
-
