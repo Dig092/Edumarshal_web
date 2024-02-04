@@ -76,7 +76,7 @@ const LoginPage = () => {
     return (
         <div
             style={{
-                backgroundImage: 'url(../src/assets/Loginbg.png)',
+                backgroundImage: 'url(../icons/Loginbg.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 minHeight: '100vh',
