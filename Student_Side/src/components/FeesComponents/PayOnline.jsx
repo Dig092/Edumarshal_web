@@ -25,6 +25,6 @@ export default function PayOnline() {
         <input type="text" className="h-[40px] w-[284px] border-2 border-black rounded-xl bg-[#f2f6ff] p-2"></input>
         <div><button className="border-2 py-2 px-5 border-none rounded-2xl bg-[#004BB8] text-white">Pay fee</button></div>
          </div> 
-          </div>
+         </div>
     )
     }

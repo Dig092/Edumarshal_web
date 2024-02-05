@@ -12,7 +12,7 @@ export default function FeeStructure() {
     }
   };
   const imageAnimation = useSpring({
-    opacity: visibleImage ? 1 : 0, 
+    opacity: visibleImage ? 1 : 0,
     transform: `scale(${visibleImage ? 1 : 0})`,
   });
 

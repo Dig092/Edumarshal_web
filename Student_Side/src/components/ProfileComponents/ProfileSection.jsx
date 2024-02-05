@@ -8,7 +8,7 @@ export default function ProfileSection() {
     return (
         <div className="bg-[#ffffff] h-[72vh] rounded-3xl mx-4 mt-4 overflow-y-auto">
             {/*select option profile*/}
-            <div className="h-[9.6vh] sticky top-0 bg-white mr-4  flex flex-wrap items-center gap-3">
+            <div className="h-[9.6vh] sticky top-0 bg-white mr-4  flex flex-wrap items-center gap-3 text-lg ml-6">
                 {[
                     "Personal Info",
                     "Contact Details",
