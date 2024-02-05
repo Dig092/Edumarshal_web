@@ -84,7 +84,7 @@ export default function DocumentSection() {
                     <div className="w-[94%]  h-[2px] bg-[#D9D9D9] my-4"></div>
                 </div>
                 {/* Cards Starts */}
-                <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 mx-10">
+                <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 lg:mx-10">
                     {documents.map((document, cardIndex) => (
                         <div
                             key={cardIndex}
