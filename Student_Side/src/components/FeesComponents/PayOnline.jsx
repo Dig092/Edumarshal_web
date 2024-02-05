@@ -15,7 +15,7 @@ export default function PayOnline() {
                 </ul>
             </div>
           </div>
-          <div className="h-[44px] bg-[#004BB8] m-10 rounded-[0.5rem] items-center flex cursor-pointer justify-evenly text-white font-semibold">
+          <div className="h-[44px] bg-[#004BB8] m-10 rounded-[0.5rem] items-center flex justify-evenly text-white font-semibold">
         <div>Collection Name</div>
         <div>Amount</div>
         <div>Pay</div>
