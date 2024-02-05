@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "react-select": "^5.8.0",
-    "react-spring": "^9.7.3",
-    "react-switch": "^7.0.0"
-  }
-}
