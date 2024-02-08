@@ -3,6 +3,7 @@ import { Link,useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import '../App.css';
+// import loginng from "../../public/icons/Loginbg.png"
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
@@ -76,7 +77,7 @@ const LoginPage = () => {
     return (
         <div
             style={{
-                backgroundImage: 'url(../src/assets/Loginbg.png)',
+                backgroundImage: 'url(../icons/Loginbg.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 minHeight: '100vh',
