@@ -1,7 +1,24 @@
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 
 export default function DoughNut() {
+    const [width, setWidth] = useState(window.innerWidth);
+    const [height, setHeight] = useState("250");
+    useEffect(() => {
+        const handleResize = () => {
+            if (width < 780) {
+                setHeight("220");
+            }
+            if (width < 500) {
+                setHeight("250");
+            }
+            setWidth(window.innerWidth);
+        };
+        window.addEventListener("resize", handleResize);
+        window.addEventListener("load", handleResize);
+    });
     // Donut Graph
     const state = {
         series: [10, 30],
@@ -19,7 +36,7 @@ export default function DoughNut() {
                     breakpoint: 480,
                     options: {
                         chart: {
-                            width: 150,
+                            width: 300,
                         },
                     },
                 },
@@ -43,7 +60,7 @@ export default function DoughNut() {
                 options={state.options}
                 series={state.series}
                 type="donut"
-                height="250"
+                height={height}
             />
         </div>
     );
