@@ -45,19 +45,6 @@ export default function SideBarMobile(props) {
                 display: `${menu ? "none" : "flex"}`,
             }}
         >
-            {/* <img
-                className="cursor-pointer p-0 w-[40px]"
-                onClick={() => setMenu(!menu)}
-                src={menu ? "./icons/hamburger.png" : "./icons/close.png"}
-                style={{
-                    padding: `${!menu ? "3px" : "12px"}`,
-                    paddingTop: `${!menu ? "0px" : "9.8px"}`,
-                    marginBottom: "25.9px",
-                    marginLeft: "10px",
-                    width: `${!menu ? "40px" : "45px"}`,
-                }}
-                alt="No image"
-            /> */}
             {sideMenu.map((element, id) => (
                 <div
                     key={id}
