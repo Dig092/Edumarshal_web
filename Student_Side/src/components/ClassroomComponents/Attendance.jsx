@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -6,9 +7,26 @@ const percentage = 66;
 
 const Attendance = () => {
   const [activeoption, setActiveoption] = useState(0);
+  const [attendance, setAttendace] = useState(0);
+
   const handleoptionClick = (index) => {
     setActiveoption(index);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try{
+        const response = await axios.get(
+          "https://akgec-edu.onrender.com/v1/student/attendance",
+          {withCredentials : true}
+        );
+        setAttendace(response.data.Attendance);
+      }catch (error) {
+        console.log(error)
+      }
+    };
+    fetchData();
+  }, [])
 
   return (
     <div className="bg-[#ffffff] h-[72vh] rounded-3xl mx-4 mt-4 overflow-y-auto flex flex-col justify-center items-center">
