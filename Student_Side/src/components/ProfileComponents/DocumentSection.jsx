@@ -47,27 +47,27 @@ export default function DocumentSection() {
         },
     ];
 
+  
     const handleUploadClick = (cardIndex) => {
         if (currentlyUploadingIndex === null) {
             setCurrentlyUploadingIndex(cardIndex);
             if (fileInputRef.current) {
                 fileInputRef.current.click();
             }
+        } else if (currentlyUploadingIndex === cardIndex) {
+            setCurrentlyUploadingIndex(null);
         } else {
-            const a = document.createElement("a");
-            a.href = uploadedFiles[cardIndex];
-            a.download = `downloaded_image_${cardIndex + 1}.jpg`;
-            a.click();
-            setCurrentlyUploadingIndex(null); 
+            setCurrentlyUploadingIndex(cardIndex);
         }
     };
-    
+
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
             const updatedFiles = [...uploadedFiles];
             updatedFiles[currentlyUploadingIndex] = URL.createObjectURL(file);
             setUploadedFiles(updatedFiles);
+            setCurrentlyUploadingIndex(null);
         }
     };
 
@@ -76,15 +76,16 @@ export default function DocumentSection() {
 
     return (
         <div>
-            <div className="bg-[#ffffff] h-[72vh] rounded-3xl mx-4 mt-4 overflow-y-auto">
-            <div className="text-lg ml-10 mt-4 font-medium">
+            <div className="bg-[#ffffff] md:h-[72vh] h-[80vh] rounded-3xl mx-4 mt-4 overflow-y-auto">
+            <div className="text-lg md:ml-10 ml-6 mt-4 font-medium">
                     Upload/Update Document
                 </div>
                 <div className="flex justify-center items-center">
                     <div className="w-[94%]  h-[2px] bg-[#D9D9D9] my-4"></div>
                 </div>
                 {/* Cards Starts */}
-                <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 lg:mx-10">
+                <div className="flex justify-center md:justify-evenly">
+                <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-12 my-5 md:mr-20">
                     {documents.map((document, cardIndex) => (
                         <div
                             key={cardIndex}
@@ -98,14 +99,13 @@ export default function DocumentSection() {
                                     backgroundPosition: "center",
                                 }}
                             ></div>
-                            <div className="absolute bottom-0 left-0 right-0 mb-4 ml-48 cursor-pointer">
+                            <div className="absolute bottom-0 left-0 right-0 mb-5 ml-48 cursor-pointer">
                                 <img
                                     src="./downloadarrow.svg"
                                     style={{
                                         transform: "translate(-35%,-100%)",
                                     }}
                                     onClick={() => handleUploadClick(cardIndex)}
-                                    
                                 />
                             </div>
                             <div
@@ -120,6 +120,7 @@ export default function DocumentSection() {
                             </div>
                         </div>
                     ))}
+                </div>
                 </div>
             </div>
             <input
