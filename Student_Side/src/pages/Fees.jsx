@@ -17,7 +17,7 @@ export default function Fees() {
             <SideBar/>
             <div className="flex flex-col w-full">
                 {/* <FeesNavbar/> */}
-                <div className="bg-[#ffffff] rounded-3xl overflow-y-auto p-3 h-full">
+                <div className="bg-[#ffffff] h-full">
                  {/* Select Option for fees */}
                  <div className=" sticky top-0 w-full bg-white mr-4 flex flex-wrap items-center md:gap-5 gap-1 md:text-lg text-sm md:ml-6 ml-0">
                 {[
