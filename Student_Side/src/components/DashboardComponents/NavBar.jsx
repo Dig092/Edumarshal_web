@@ -17,16 +17,18 @@ export default function NavBar() {
                     dispatch(toggleMenu());
                 }}
             />
-            <h1 className="text-xl font-semibold">Dashboard</h1>
-            <div className="flex max-[500px]:w-[50%] items-center max-[500px]:justify-evenly">
+            <h1 className="text-xl max-[410px]:text-lg font-semibold">
+                Dashboard
+            </h1>
+            <div className="flex max-[500px]:w-[50%] items-center max-[500px]:justify-evenly max-[410px]:w-[40%]">
                 <img
-                    className="w-[30px] h-[30px] mr-7 max-[500px]:m-0"
+                    className="w-[30px] max-[410px]:w-[25px] max-[410px]:h-[25px] h-[30px] mr-7 max-[500px]:m-0"
                     src="./icons/notifications.png"
                     alt="notifications"
                 />
                 <select
                     onChange={(e) => setSem(e.target.value)}
-                    className="outline outline-1 max-[550px]:w-[100px] max-[410px]:w-[40px] outline-black px-4 py-2 rounded-md w-[250px]"
+                    className="outline outline-1 max-[550px]:w-[100px] max-[410px]:w-[40px] max-[410px]:w-[30px] max-[410px]:h-[30px] outline-black px-4 py-2 rounded-md w-[250px]"
                 >
                     <option value={sem}>{sem}</option>
                     <option value={1}>1</option>
@@ -34,7 +36,7 @@ export default function NavBar() {
                     <option value={3}>3</option>
                     <option value={4}>4</option>
                 </select>
-                <div className="w-[40px] ml-5 h-[40px] rounded-md bg-gray-300"></div>
+                <div className="w-[40px] max-[410px]:w-[30px] max-[410px]:h-[30px] ml-5 h-[40px] rounded-md bg-gray-300"></div>
             </div>
         </div>
     );

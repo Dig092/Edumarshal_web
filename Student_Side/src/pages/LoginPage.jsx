@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import axios from 'axios';
-import '../App.css';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
+import "../App.css";
 // import loginng from "../../public/icons/Loginbg.png"
 
 const LoginPage = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [dob, setDob] = useState('');
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [dob, setDob] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const storedUsername = localStorage.getItem('rememberedUsername');
-        const storedPassword = localStorage.getItem('rememberedPassword');
-        const storedDob = localStorage.getItem('rememberedDob');
-        const storedRememberMe = localStorage.getItem('rememberMe');
+        const storedUsername = localStorage.getItem("rememberedUsername");
+        const storedPassword = localStorage.getItem("rememberedPassword");
+        const storedDob = localStorage.getItem("rememberedDob");
+        const storedRememberMe = localStorage.getItem("rememberMe");
 
         if (storedRememberMe && storedUsername && storedPassword && storedDob) {
             setUsername(storedUsername);
@@ -29,44 +29,52 @@ const LoginPage = () => {
     const signIn = async () => {
         try {
             // Format date to "dd-mm-yyyy"
-            const formattedDate = dob.split('-').reverse().join('-');
+            const formattedDate = dob.split("-").reverse().join("-");
 
             let item = { username, password, dob: formattedDate };
-            console.warn(item);
+            console.log(item);
 
-            const response = await axios.post('https://akgec-edu.onrender.com/v1/student/login', item, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                },
-                withCredentials: true,
-            });
-                if (response.status === 200) {
-                    if (rememberMe) {
-                        localStorage.setItem('rememberedUsername', username);
-                        localStorage.setItem('rememberedPassword', password);
-                        localStorage.setItem('rememberedDob', dob);
-                        localStorage.setItem('rememberMe', true);
-                    } else {
-                        localStorage.removeItem('rememberedUsername');
-                        localStorage.removeItem('rememberedPassword');
-                        localStorage.removeItem('rememberedDob');
-                        localStorage.removeItem('rememberMe');
-                    }
-                    // Use the headers in the Axios request
-                    const result2 = await axios.post('https://akgec-edu.onrender.com/v1/student/login', item,{withCredentials:true});
-            
-                    // login();
-                    navigate('/Dashboard');
-                    console.log();
+            const response = await axios.post(
+                "https://akgec-edu.onrender.com/v1/student/login",
+                item,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                    },
+                    withCredentials: true,
+                }
+            );
+            if (response.status === 200) {
+                if (rememberMe) {
+                    localStorage.setItem("rememberedUsername", username);
+                    localStorage.setItem("rememberedPassword", password);
+                    localStorage.setItem("rememberedDob", dob);
+                    localStorage.setItem("rememberMe", true);
+                } else {
+                    localStorage.removeItem("rememberedUsername");
+                    localStorage.removeItem("rememberedPassword");
+                    localStorage.removeItem("rememberedDob");
+                    localStorage.removeItem("rememberMe");
+                }
+                // Use the headers in the Axios request
+                const result2 = await axios.post(
+                    "https://akgec-edu.onrender.com/v1/student/login",
+                    item,
+                    { withCredentials: true }
+                );
 
-                toast.success('Login successful!', { position: 'top-right' });
+                // login();
+                navigate("/Dashboard");
+                console.log();
+
+                toast.success("Login successful!", { position: "top-right" });
             } else {
-                toast.error('Invalid Credentials');
-                console.error('Login failed');
+                toast.error("Invalid Credentials");
+                console.error("Login failed");
             }
         } catch (error) {
-            console.error('An error occurred during login', error);
+            console.error("An error occurred during login", error);
         }
     };
 
@@ -77,23 +85,23 @@ const LoginPage = () => {
     return (
         <div
             style={{
-                backgroundImage: 'url(../icons/Loginbg.png)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                minHeight: '100vh',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                backgroundImage: "url(../icons/Loginbg.png)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                minHeight: "100vh",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
             }}
         >
             <div
                 className="backdrop-blur-md"
                 style={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                    padding: '40px',
-                    borderRadius: '10px',
-                    width: '100%',
-                    maxWidth: '400px',
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    padding: "40px",
+                    borderRadius: "10px",
+                    width: "100%",
+                    maxWidth: "400px",
                 }}
             >
                 <span className="text-center text-4xl font-semibold ">
@@ -141,25 +149,33 @@ const LoginPage = () => {
                                 className="opacity-50 form-checkbox border border-black"
                                 checked={rememberMe}
                                 onChange={() => setRememberMe(!rememberMe)}
-                            />{' '}
+                            />{" "}
                             <span className="opacity-100">Remember me</span>
                         </div>
                     </div>
                     <br />
-                    <button className="bg-[#004BB8] text-white w-full md:w-80 p-2.5 mb-2 rounded-md hover:bg-sky-700 active:bg-sky-900 focus:outline-none focus:ring" onClick={signIn}>
+                    <button
+                        className="bg-[#004BB8] text-white w-full md:w-80 p-2.5 mb-2 rounded-md hover:bg-sky-700 active:bg-sky-900 focus:outline-none focus:ring"
+                        onClick={signIn}
+                    >
                         Login
                     </button>
                 </div>
                 <br />
                 <div className="text-center pt-2 font-normal text-sm ">
-                    <span className="font-semibold">Forgot Your Password?{' '}</span>
-                    <Link to="/register" className="text-[#dae9ff] font-normal underline">
+                    <span className="font-semibold">
+                        Forgot Your Password?{" "}
+                    </span>
+                    <Link
+                        to="/register"
+                        className="text-[#dae9ff] font-normal underline"
+                    >
                         Reset Password
                     </Link>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default LoginPage;
