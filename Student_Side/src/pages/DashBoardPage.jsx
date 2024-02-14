@@ -7,16 +7,36 @@ import SemiCircle from "../components/DashboardComponents/SemiCircle";
 import SideCard from "../components/DashboardComponents/SideCard";
 import { useLocation } from "react-router-dom";
 import SideBarMobile from "../components/SideBarMobile";
+import axios from "axios";
+import totalAtt from "../constants/totalAtt";
 
 export default function DashBoardPage() {
     const [active, setActive] = useState("");
+    const [att, setAtt] = useState(0);
+    const [array, setArray] = useState([]);
     const location = useLocation();
+
+    const getAttendence = () => {
+        axios
+            .get("https://akgec-edu.onrender.com/v1/student/attendance", {
+                withCredentials: true,
+            })
+            .then((res) => {
+                setArray(res.data);
+                setAtt(totalAtt(res.data).attendance);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    };
+
     useEffect(() => {
         try {
             setActive(location.state.active);
         } catch (e) {
             setActive("");
         }
+        getAttendence();
     }, []);
     return (
         <div className="bg-[#ECEBFE] w-full flex">
@@ -44,8 +64,8 @@ export default function DashBoardPage() {
                                         View Details
                                     </a>
                                 </div>
-                                <SemiCircle />
-                                <ColumnGraph />
+                                <SemiCircle att={att} />
+                                <ColumnGraph array={array} />
                             </div>
                             <div className="h-full max-[800px]:w-[48%] flex flex-col justify-between items-center max-[500px]:w-[97%] max-[500px]:mb-3 bg-white rounded-md w-[36.5%]">
                                 <div className="flex my-1 mt-3 justify-between w-[90%] items-center font-semibold text-lg z-50">
