@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PayOnline() {
     return (
-        <div className="bg-[#f2f6ff] h-[68vh] rounded-3xl mx-12 mt-4 overflow-y-auto">
+        <div className="bg-[#f2f6ff] h-[68vh] rounded-3xl ">
           <div className="bg-[#FBFBFB] h-[230px] mx-12 mt-12 rounded-[0.75rem] flex">
             <div className="h-full w-[13px] rounded-l-[0.25rem] bg-[#004BB8]"></div>
             <div className="flex flex-col w-full">
@@ -15,15 +15,15 @@ export default function PayOnline() {
                 </ul>
             </div>
           </div>
-          <div className="h-[44px] bg-[#004BB8] m-10 rounded-[0.5rem] items-center flex justify-evenly text-white font-semibold">
+          <div className="h-[44px] bg-[#004BB8] w-[85vw] m-10 rounded-[0.5rem] items-center flex justify-evenly text-white font-semibold">
         <div>Collection Name</div>
         <div>Amount</div>
         <div>Pay</div>
       </div>
-      <div className="flex items-center justify-center gap-20">
+      <div className="flex items-center justify-evenly gap-20 w-[85vw]">
        <input type="text" className="h-[40px] w-[350px] border-2 border-black rounded-xl p-2 bg-[#f2f6ff]"></input>
         <input type="text" className="h-[40px] w-[284px] border-2 border-black rounded-xl bg-[#f2f6ff] p-2"></input>
-        <div><button className="border-2 py-2 px-5 border-none rounded-2xl bg-[#004BB8] text-white">Pay fee</button></div>
+        <div><button className="border-2 py-2 lg:px-5 px-1 border-none rounded-2xl bg-[#004BB8] text-white">Pay fee</button></div>
          </div>
           </div>
     )
