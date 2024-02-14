@@ -2,12 +2,12 @@ import React from "react";
 
 export default function PayOnline() {
     return (
-        <div className="bg-[#f2f6ff] h-[68vh] rounded-3xl ">
-          <div className="bg-[#FBFBFB] h-[230px] mx-12 mt-12 rounded-[0.75rem] flex">
+        <div className="bg-[#f2f6ff] h-auto  rounded-3xl p-3">
+          <div className="bg-[#FBFBFB] h-auto md:mx-12  rounded-[0.75rem] flex p-2 overflow-y-auto">
             <div className="h-full w-[13px] rounded-l-[0.25rem] bg-[#004BB8]"></div>
             <div className="flex flex-col w-full">
-                <div className="text-base font-semibold ml-10 mt-7">Important Note :</div>
-                <ul className="font-medium mx-10">
+                <div className="text-base font-semibold md:ml-10 ml-2 mt-7">Important Note :</div>
+                <ul className="font-medium md:mx-10 flex flex-col flex-wrap text-sm md:text-lg p-5">
                  <li className="my-2">1.Current Year (2023 - 23) Academic Fee is visible here.</li>
                  <li className="my-2">2.Help Manual is attached for your reference.</li>
                  <li className="my-2">3.Incase you make payment and do not get the receipt due to net connectivity, kindly wait for 24 hours for automatically Re-generation of   receipt.</li>
@@ -15,15 +15,17 @@ export default function PayOnline() {
                 </ul>
             </div>
           </div>
-          <div className="h-[44px] bg-[#004BB8] w-[85vw] m-10 rounded-[0.5rem] items-center flex justify-evenly text-white font-semibold">
-        <div>Collection Name</div>
-        <div>Amount</div>
-        <div>Pay</div>
+          <div className="h-[3rem] hidden md:flex bg-[#004BB8]  m-10 rounded-[0.5rem] items-center justify-evenly text-white font-semibold">
+        <div className="h-[3rem] w-[12rem] lg:w-[16rem] flex justify-center items-center"><p>Collection Name</p></div>
+        <div className="h-[3rem] w-[12rem] lg:w-[16rem] flex justify-center items-center"><p>Amount</p></div>
+        <div className="h-[3rem] w-[12rem] lg:w-[16rem] flex justify-center items-center"><p>Pay</p></div>
       </div>
-      <div className="flex items-center justify-evenly gap-20 w-[85vw]">
-       <input type="text" className="h-[40px] w-[350px] border-2 border-black rounded-xl p-2 bg-[#f2f6ff]"></input>
-        <input type="text" className="h-[40px] w-[284px] border-2 border-black rounded-xl bg-[#f2f6ff] p-2"></input>
-        <div><button className="border-2 py-2 lg:px-5 px-1 border-none rounded-2xl bg-[#004BB8] text-white">Pay fee</button></div>
+      <div className="flex items-center md:justify-evenly md:gap-15 md:flex md:flex-row flex-col gap-5 justify-center md:m-10 mt-10 md:mt-0">
+        <div className="md:hidden flex bg-[#004BB8]  h-[3rem]  w-[12rem] justify-center items-center rounded-xl"><p className=" text-sm font-medium text-white">Collection Name</p></div>
+        <div><input type="text" className="h-[3rem] w-[12rem] lg:w-[16rem]  border-2 border-black rounded-xl  bg-[#f2f6ff] p-2"></input></div>
+        <div className="md:hidden flex bg-[#004BB8] h-[3rem]   w-[12rem] rounded-xl items-center justify-center"><p className=" text-sm font-medium text-white">Amount</p></div>
+        <input type="number" className="h-[3rem] w-[12rem] lg:w-[14rem] border-2 border-black rounded-xl bg-[#f2f6ff] p-2"></input>
+        <div><button className="flex bg-[#004BB8] h-[3rem]  w-[12rem] rounded-xl items-center justify-center text-sm font-medium text-white">Pay fee</button></div>
          </div>
           </div>
     )
