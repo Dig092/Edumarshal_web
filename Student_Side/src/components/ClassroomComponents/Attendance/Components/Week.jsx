@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import WeekSelector from "./WeekSelector";
+import axios from "axios";
 
 const Week = () => {
   const [selectedWeek, setSelectedWeek] = useState(null);
   const [dateRange, setDateRange] = useState([]);
+  const [attendanceData, setAttendanceData] = useState([]);
 
   const handleWeekChange = (week) => {
     setSelectedWeek(week);
@@ -36,7 +38,22 @@ const Week = () => {
     return range;
   };
 
-  
+  useEffect(() => {
+    const fetchAttendanceData = async () => {
+      try {
+        const response = await axios.get(
+          "https://akgec-edu.onrender.com/v1/student/attendance",
+          { withCredentials: true }
+        );
+        setAttendanceData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchAttendanceData();
+  }, []);
+
   useEffect(() => {
     const newDateRange = generateDateRange(selectedWeek);
     setDateRange(newDateRange);
@@ -63,7 +80,7 @@ const Week = () => {
 
   return (
     <div>
-      <div className="w-[70%] flex flex-col items-start h-full rounded-2xl">
+      <div className=" flex flex-col items-start h-full rounded-2xl">
         <div className="flex justify-center items-center px-8 py-2 gap-11">
           <WeekSelector onWeekChange={handleWeekChange} />
           {dateRange.map((date, index) => (
@@ -78,7 +95,7 @@ const Week = () => {
           ))}
         </div>
 
-        <div className="flex ml-8 px-8 py-2 gap-16 bg-[#004BB8] text-white rounded-lg">
+        <div className="flex ml-8 my-2 px-8 py-2 gap-16 bg-[#004BB8] text-white rounded-lg">
           <h1 className="mr-16">SUBJECT</h1>
           {daysOfWeek.map((day, index) => (
             <h1 key={index} className="mr-4">
@@ -86,7 +103,42 @@ const Week = () => {
             </h1>
           ))}
         </div>
+        {/* Display subject-wise attendance data */}
+        {Array.isArray(attendanceData) &&
+          attendanceData.map((subjectData, subjectIndex) => (
+            <div
+              key={subjectIndex}
+              className="flex w-[90%] overflow-y-scroll ml-8 px-8 my-2 py-2 bg-[#F2F6FF] text-black rounded-lg"
+            >
+              <h1 className="mr-16 w-56 font-semibold">
+                {subjectData.subject}
+              </h1>
+              {daysOfWeek.map((day, index) => {
+                const attendanceForDate = subjectData.attendance.find(
+                  (entry) =>
+                    new Date(entry.date).toLocaleDateString("en-US", {
+                      weekday: "short",
+                    }) === daysOfWeek[index]
+                );
 
+                const attendedClass =
+                  attendanceForDate && attendanceForDate.attended
+                    ? "present"
+                    : "";
+
+                return (
+                  <div
+                    key={index}
+                    className={`flex items-center justify-center  bg-${attendedClass} rounded-lg`}
+                  >
+                    <h1 className="font-semibold mr-24">
+                      {attendanceForDate ? "P" : "A"}
+                    </h1>
+                  </div>
+                );
+              })}
+            </div>
+          ))}
       </div>
     </div>
   );

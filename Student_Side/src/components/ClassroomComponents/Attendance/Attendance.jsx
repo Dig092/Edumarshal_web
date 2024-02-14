@@ -39,7 +39,7 @@ const Attendance = () => {
   }, []);
 
   return (
-    <div className="bg-[#ffffff] h-3/4 rounded-3xl mx-4 mt-4 overflow-y-auto flex flex-col justify-center items-center">
+    <div className="bg-[#ffffff] h-3/4 rounded-3xl mx-4 mt-4 overflow-x-hidden flex flex-col justify-center items-center">
       <div className="my-2 w-[95%] sticky flex flex-wrap ml-4 items-center justify-between">
         <div className="py-4 text-black">Overall Attendance</div>
         <div>{monthName}, {year}</div>
@@ -51,7 +51,7 @@ const Attendance = () => {
 
       <div className="w-[94%] opacity-20 h-[2px] bg-[#d9d9d9] rounded"></div>
 
-      <div className="w-[95%] m-auto flex h-3/4 justify-evenly">
+      <div className="w-[95%] m-auto flex h-5/6 justify-evenly">
         <div className="w-[25%] flex flex-col overflow-y-scroll bg-[#F2F6FF] h-full rounded-2xl">
           <div className="pt-6 pb-3 px-6">All Subjects</div>
           <div className="w-[100%] mb-3 h-[1px] bg-[#D9D9D9]"></div>
