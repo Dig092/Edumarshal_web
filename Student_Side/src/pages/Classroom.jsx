@@ -26,7 +26,7 @@ export default function Classroom() {
     <>
       <div className="h-screen bg-[#ECEBFE] w-full flex">
         <SideBar active={active} />
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col flex-wrap w-full">
 
           {/*Navbar Starts*/}
           <div className="h-[84px] w-full bg-[#FBFBFB] rounded-2xl flex justify-between items-center">
