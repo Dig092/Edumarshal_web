@@ -119,7 +119,7 @@ const Attendance = () => {
               <h1 className="mr-2">WED</h1>
               <h1 className="mr-3">THUR</h1>
               <h1 className="mr-5">FRI</h1>
-              <h1 className="mr-3">SAT</h1>
+              <h1 className="mr-3">SA</h1>
               <h1>SUN</h1>
             </div>
           </div>
