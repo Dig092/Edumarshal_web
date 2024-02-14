@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
-export default function SemiCircle() {
+export default function SemiCircle(props) {
     var collection = {
-        series: [60],
+        series: [props.att],
         options: {
             chart: {
                 type: "radialBar",

@@ -76,8 +76,8 @@ export default function DocumentSection() {
 
     return (
         <div>
-            <div className="bg-[#ffffff] md:h-[72vh] h-[80vh] rounded-3xl mx-4 mt-4 overflow-y-auto">
-            <div className="text-lg md:ml-10 ml-6 mt-4 font-medium">
+            <div className="bg-[#ffffff] h-auto md:h-[83vh] rounded-3xl  md:m-6 overflow-y-auto">
+            <div className="md:text-lg  text-md md:ml-10 ml-6 mt-4 font-medium flex items-center justify-center md:justify-start">
                     Upload/Update Document
                 </div>
                 <div className="flex justify-center items-center">
@@ -92,14 +92,15 @@ export default function DocumentSection() {
                             className="md:w-42 w-21 relative md:ml-14 ml-2 my-7"
                         >
                             <div
-                                className="rounded-t-2xl bg-slate-700 h-[214px] w-[214px] relative"
+                                className="rounded-t-2xl bg-slate-700 sm:h-[214px] sm:w-[214px] h-[180px] w-[180px] relative"
                                 style={{
                                     backgroundImage: `url(${uploadedFiles[cardIndex]})`,
                                     backgroundSize: "cover",
                                     backgroundPosition: "center",
                                 }}
                             ></div>
-                            <div className="absolute bottom-0 left-0 right-0 mb-5 ml-48 cursor-pointer">
+                            <div >
+                            <div className="absolute bottom-0 right-0 left-50 mb-5 cursor-pointer">
                                 <img
                                     src="./downloadarrow.svg"
                                     style={{
@@ -109,7 +110,7 @@ export default function DocumentSection() {
                                 />
                             </div>
                             <div
-                                className="absolute bottom-0 left-0 right-0 bg-[#004BB8]  h-[30%] md:w-[13.39rem] w-[13.39rem] flex justify-center items-center rounded-b-2xl"
+                                className="absolute bottom-0 left-0 right-0 bg-[#004BB8]  h-[30%] sm:w-[13.39rem] w-[11.25rem] flex justify-center items-center rounded-b-2xl"
                                 style={{
                                     transform: "translateY(43%)",
                                 }}
@@ -117,6 +118,7 @@ export default function DocumentSection() {
                                 <span className="text-sm text-center text-white">
                                     {document.name}
                                 </span>
+                            </div>
                             </div>
                         </div>
                     ))}

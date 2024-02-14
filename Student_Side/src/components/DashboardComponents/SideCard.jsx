@@ -15,7 +15,7 @@ export default function SideCard() {
             style={{ height: height }}
         >
             {" "}
-            <div className="flex w-[90%] m-auto mt-2 justify-between">
+            <div className="flex max-[500px]:translate-x-[5%] w-[90%] m-auto mt-2 justify-between">
                 <h1 className="font-semibold text-[15px]">Mathematics</h1>
                 <img
                     onClick={openHandler}
@@ -24,7 +24,7 @@ export default function SideCard() {
                     className="w-[20px] h-[20px]"
                 />
             </div>
-            <div className="flex justify-between items-end w-[90%] mt-3 m-auto">
+            <div className="flex max-[500px]:translate-x-[5%] justify-between items-end w-[90%] mt-3 m-auto">
                 <div className="flex justify-evenly">
                     <img
                         className="w-[40px] h-[40px] mr-2"
@@ -42,10 +42,10 @@ export default function SideCard() {
             </div>
             <div>
                 <div
-                    className="flex justify-between items-center w-[90%] m-auto my-3 mt-5 bg-[#F2F6FF] py-1 px-2 rounded-lg"
+                    className="flex max-[500px]:translate-x-[5%] justify-between items-center w-[90%] m-auto my-3 mt-5 bg-[#F2F6FF] py-1 px-2 rounded-lg"
                     style={{ display: `${open ? "flex" : "none"}` }}
                 >
-                    <div className="flex items-center">
+                    <div className="flex  items-center">
                         <img
                             className="w-[30px] h-[30px] mr-2"
                             src="./icons/task.png"
@@ -63,7 +63,7 @@ export default function SideCard() {
                     <h3 className="text-[9px]">4:30pm</h3>
                 </div>
                 <div
-                    className="flex justify-between items-center w-[90%] m-auto my-3 bg-[#F2F6FF] py-1 px-2 rounded-lg"
+                    className="flex max-[500px]:translate-x-[5%] justify-between items-center w-[90%] m-auto my-3 bg-[#F2F6FF] py-1 px-2 rounded-lg"
                     style={{ display: `${open ? "flex" : "none"}` }}
                 >
                     <div className="flex items-center">

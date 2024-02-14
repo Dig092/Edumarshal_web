@@ -26,7 +26,7 @@ export default function ProfilePage() {
         <SideBar active={active} />
         <div className="flex flex-col w-full">
           {/*Navbar Starts*/}
-          <div className="h-[84px] w-full bg-[#FBFBFB] rounded-2xl flex justify-between items-center">
+          {/* <div className="h-[84px] w-full bg-[#FBFBFB] rounded-2xl flex justify-between items-center">
             <div className="text-2xl font-semibold ml-8">Profile</div>
             <div className="flex items-center mr-5 gap-8">
               <div>
@@ -34,7 +34,7 @@ export default function ProfilePage() {
               </div>
               <div className="bg-[#C4C4C4] h-[50px] w-[50px] rounded-2xl"></div>
             </div>
-          </div>
+          </div> */}
           {/* Navbar Ends */}
           {/* Select Bar Starts */}
           <div className="h-[70px] bg-[#ffffff] mt-4 mx-4 hidden flex-wrap items-center rounded-3xl md:flex">

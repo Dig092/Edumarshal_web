@@ -4,3 +4,13 @@
     /* outline: 1px solid black; */
     font-family: "poppins";
 }
+
+body{
+    background-color: #ECEBFE;
+}
+
+@media screen and (max-width: 500px) {
+    *{
+        margin-left: 0 !important;
+    }
+}
