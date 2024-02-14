@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import SideBar from "../components/SideBar";
 import SwitchClassroom from "../components/ClassroomComponents/SwitchClassroom";
-import Attendance from "../components/ClassroomComponents/Attendance";
+import Attendance from "../components/ClassroomComponents/Attendance/Attendance";
 import Assignments from "../components/ClassroomComponents/Assignments";
 import ClassNotes from "../components/ClassroomComponents/Classnotes";
 import Exams from "../components/ClassroomComponents/Exams";
@@ -41,7 +41,7 @@ export default function Classroom() {
           {/* Navbar Ends */}
 
           {/* Select Bar Starts */}
-          <div className="h-[9.6vh] bg-[#ffffff] mt-4 mx-4 flex flex-wrap items-center rounded-3xl">
+          <div className="py-3 bg-[#ffffff] mt-4 mx-4 flex flex-wrap items-center rounded-3xl">
             <div className="ml-10 rounded-2xl">
               <SwitchClassroom onSwitchChange={handleSwitchChange} activeIndex={activeItem}/>
             </div>
