@@ -9,6 +9,7 @@ import SwitchProfile from "../components/ProfileComponents/SwitchProfile";
 import DocumentSection from "../components/ProfileComponents/DocumentSection";
 import ProfileSection from "../components/ProfileComponents/ProfileSection";
 import { useLocation } from "react-router-dom";
+
 export default function ProfilePage() {
   const [active, setActive] = useState("");
   const location = useLocation();
