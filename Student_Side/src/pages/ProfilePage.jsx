@@ -10,6 +10,7 @@ import DocumentSection from "../components/ProfileComponents/DocumentSection";
 import ProfileSection from "../components/ProfileComponents/ProfileSection";
 import { useLocation } from "react-router-dom";
 import NavBar from "../components/NavBar";
+
 export default function ProfilePage() {
     const [active, setActive] = useState("");
     const location = useLocation();
