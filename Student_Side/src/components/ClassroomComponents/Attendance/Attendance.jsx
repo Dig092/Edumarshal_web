@@ -39,7 +39,7 @@ const Attendance = () => {
   }, []);
 
   return (
-    <div className="bg-[#ffffff] h-3/4 rounded-3xl mx-4 mt-4 overflow-x-hidden flex flex-col justify-center items-center">
+    <div className="bg-[#ffffff] h-3/4 rounded-3xl mx-4 mt-4 overflow-hidden flex flex-col justify-center items-center">
       <div className="my-2 w-[95%] sticky flex flex-wrap ml-4 items-center justify-between">
         <div className="py-4 text-black">Overall Attendance</div>
         <div>{monthName}, {year}</div>

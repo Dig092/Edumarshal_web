@@ -45,7 +45,16 @@ const Week = () => {
           "https://akgec-edu.onrender.com/v1/student/attendance",
           { withCredentials: true }
         );
-        setAttendanceData(response.data);
+
+        // Sort attendance data by date
+        const sortedAttendance = response.data.map((subjectData) => ({
+          ...subjectData,
+          attendance: subjectData.attendance.sort(
+            (a, b) => new Date(a.date) - new Date(b.date)
+          ),
+        }));
+
+        setAttendanceData(sortedAttendance);
       } catch (error) {
         console.log(error);
       }
@@ -103,42 +112,52 @@ const Week = () => {
             </h1>
           ))}
         </div>
-        {/* Display subject-wise attendance data */}
-        {Array.isArray(attendanceData) &&
-          attendanceData.map((subjectData, subjectIndex) => (
-            <div
-              key={subjectIndex}
-              className="flex w-[90%] overflow-y-scroll ml-8 px-8 my-2 py-2 bg-[#F2F6FF] text-black rounded-lg"
-            >
-              <h1 className="mr-16 w-56 font-semibold">
-                {subjectData.subject}
-              </h1>
-              {daysOfWeek.map((day, index) => {
-                const attendanceForDate = subjectData.attendance.find(
-                  (entry) =>
-                    new Date(entry.date).toLocaleDateString("en-US", {
-                      weekday: "short",
-                    }) === daysOfWeek[index]
-                );
 
-                const attendedClass =
-                  attendanceForDate && attendanceForDate.attended
-                    ? "present"
-                    : "";
+        <div className="grid grid-flow-row overflow-y-scroll">
+          {/* Display subject-wise attendance data */}
+          {Array.isArray(attendanceData) &&
+            attendanceData.map((subjectData, subjectIndex) => (
+              <div
+                key={subjectIndex}
+                className="flex ml-8 px-8 my-2 py-2 bg-[#F2F6FF] text-black rounded-lg"
+              >
+                <h1 className="w-52 font-semibold">{subjectData.subject}</h1>
+                <div className="grid grid-flow-row-dense grid-cols-7 gap-24">
+                  {dateRange.map((date, index) => {
+                    const attendanceForDate = subjectData.attendance.find(
+                      (entry) =>
+                        new Date(entry.date).toLocaleDateString("en-US") ===
+                        date.toLocaleDateString("en-US")
+                    );
 
-                return (
-                  <div
-                    key={index}
-                    className={`flex items-center justify-center  bg-${attendedClass} rounded-lg`}
-                  >
-                    <h1 className="font-semibold mr-24">
-                      {attendanceForDate ? "P" : "A"}
-                    </h1>
-                  </div>
-                );
-              })}
-            </div>
-          ))}
+                    // Define classes for different attendance statuses
+                    let textClass = "text-[#D9D9D9]"; // Default NC text color
+
+                    if (attendanceForDate) {
+                      textClass = attendanceForDate.attended
+                        ? "text-green-500" // Green for Present
+                        : "text-red-500"; // Red for Absent
+                    }
+
+                    const displayContent = attendanceForDate
+                      ? attendanceForDate.attended
+                        ? "P"
+                        : "A"
+                      : "NC";
+
+                    return (
+                      <div
+                        key={index}
+                        className={`flex items-center justify-center ${textClass} rounded-lg`}
+                      >
+                        <h1 className="font-semibold">{displayContent}</h1>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );
