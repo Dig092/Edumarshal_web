@@ -24,12 +24,12 @@ export default function Classroom() {
 
   return (
     <>
-      <div className="h-screen bg-[#ECEBFE] w-full flex">
-        <SideBar active={active} />
+      <div className="min-h-screen bg-[#ECEBFE] w-full flex">
+        <SideBar active={active}/>
         <div className="flex flex-col flex-wrap w-full">
 
           {/*Navbar Starts*/}
-          <div className="h-[84px] w-full bg-[#FBFBFB] rounded-2xl flex justify-between items-center">
+          <div className="h-[84px] w-auto max-[768px]:ml-[4.25rem] bg-[#FBFBFB] rounded-2xl flex justify-between items-center">
             <div className="text-2xl font-semibold ml-8">Classroom</div>
             <div className="flex items-center mr-5 gap-8">
               <div>
@@ -41,19 +41,20 @@ export default function Classroom() {
           {/* Navbar Ends */}
 
           {/* Select Bar Starts */}
-          <div className="h-[9.6vh] bg-[#ffffff] mt-4 mx-4 flex flex-wrap items-center rounded-3xl">
-            <div className="ml-10 rounded-2xl">
+          <div className="h-[9.6vh] bg-[#ffffff] max-[768px]:ml-[4.75rem] mt-4 mx-4 flex flex-wrap  items-center rounded-3xl">
+            <div className="ml-10 max-[768px]:px-3 max-[768px]:pl-7 rounded-2xl">
               <SwitchClassroom onSwitchChange={handleSwitchChange} activeIndex={activeItem}/>
             </div>
           </div>
           {/* Select Bar Ends */}
-
+          <div className=" flex-grow">
           {activeItem === 0 && <Attendance />}
           {activeItem === 1 && <Assignments />}
           {activeItem === 2 && <ClassNotes />}
           {activeItem === 3 && <Exams />}
           {activeItem === 4 && <Syllabus />}
           {activeItem === 5 && <Feedback />}
+          </div>
         </div>
       </div>
     </>

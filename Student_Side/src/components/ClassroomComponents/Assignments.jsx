@@ -29,7 +29,7 @@ const Assignments = () => {
 
 
   return (
-    <div className="bg-[#ffffff] h-[72vh] rounded-3xl mx-4 mt-4 overflow-y-auto">
+    <div className="bg-[#ffffff] h-[95%] max-[768px]:h-[100%] max-[768px]:ml-[4.75rem] rounded-3xl mx-4 mt-4 overflow-y-auto">
         <div className="h-[9.6vh] sticky top-0 bg-white mr-4  flex flex-wrap items-center gap-3 text-lg ml-6">
                 {[
                     "All Assignment",
@@ -51,13 +51,15 @@ const Assignments = () => {
                     <div className="w-[94%]  h-[1.5px] bg-[#D9D9D9] my-0"></div>
             </div>
             <div className='flex flex-wrap justify-center '>
-  {data.length > 0 ? (
-    data.map(item => (
-      <AssignmentCard key={item.id} sub={item.subject.name} description={item.description} deadline={item.deadline} status="Pending" question={item.assignment}  />
-    ))
-  ) : (
-    <div className='mt-10  font-medium text-xl text-[#1A1A1A]'>No assignments available.</div>
-  )}
+    
+      {data.length > 0 ? (
+        data.map(item => (
+          <AssignmentCard key={item.id} sub={item.subject.name} description={item.description} deadline={item.deadline} status="Pending" question={item.assignment}  />
+          ))
+          ) : (
+          <div className='mt-10  font-medium text-xl text-[#1A1A1A]'>No assignments available.</div>
+          )}
+
 </div>
 
     </div>
