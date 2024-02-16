@@ -8,7 +8,7 @@ export default function NavBar(props) {
     const [toggle, setToggle] = useState(false);
     const dispatch = useDispatch();
     return (
-        <div className="flex h-[60px] max-[780px]:ml-[70px] z-50 bg-white w-full px-4 justify-between items-center">
+        <div className="flex h-20 max-[780px]:ml-[70px] z-50 bg-white w-full px-4 justify-between items-center">
             <img
                 className="max-[500px]:block hidden w-[30px]"
                 src={toggle ? "./hamburgerDark.png" : "./closeDark.png"}
@@ -18,7 +18,7 @@ export default function NavBar(props) {
                     dispatch(toggleMenu());
                 }}
             />
-            <h1 className="text-xl max-[410px]:text-lg font-semibold">
+            <h1 className="text-2xl max-[410px]:text-lg font-semibold px-6">
                 {props.title}
             </h1>
             <div className="flex max-[500px]:w-[50%] items-center max-[500px]:justify-evenly max-[410px]:w-[40%]">

@@ -15,6 +15,7 @@ const Attendance = () => {
   const year = currentDate.getFullYear();
   const monthNumber = currentDate.getMonth();
   const monthName = monthNames[monthNumber];
+  const date = currentDate.getDate();
 
   const [activeItem, setActiveItem] = useState(1);
   const handleSwitchChange = (value) => {
@@ -40,9 +41,11 @@ const Attendance = () => {
 
   return (
     <div className="bg-[#ffffff] h-3/4 rounded-3xl mx-4 mt-4 overflow-hidden flex flex-col justify-center items-center">
-      <div className="my-2 w-[95%] sticky flex flex-wrap ml-4 items-center justify-between">
+      <div className="my-2 w-[95%] sticky flex ml-4 items-center justify-between">
         <div className="py-4 text-black">Overall Attendance</div>
-        <div>{monthName}, {year}</div>
+        <div>
+          `{date} {monthName}, {year}`
+        </div>
         <SwitchTimePeriod
           onSwitchChange={handleSwitchChange}
           activeIndex={activeItem}
@@ -72,9 +75,10 @@ const Attendance = () => {
                 <div style={{ width: 60, height: 60 }} className="my-4 mx-4 ">
                   <CircularProgressbar
                     value={(subject.totalPresent / subject.totalClasses) * 100}
-                    text={`${
-                      (subject.totalPresent / subject.totalClasses) * 100
-                    }%`}
+                    text={`${(
+                      (subject.totalPresent / subject.totalClasses) *
+                      100
+                    ).toFixed(0)}%`}
                   />
                 </div>
               </div>
