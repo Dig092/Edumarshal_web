@@ -113,37 +113,39 @@ const Week = () => {
           ))}
         </div>
 
-        <div className="grid grid-flow-row overflow-y-scroll">
+        <div className="grid  h-[65%] overflow-y-auto">
           {/* Display subject-wise attendance data */}
           {Array.isArray(attendanceData) &&
             attendanceData.map((subjectData, subjectIndex) => (
               <div
-                key={subjectIndex}
+                key={`${subjectData.subject}-${subjectData.totalClasses}`}
                 className="flex ml-8 px-8 my-2 py-2 bg-[#F2F6FF] text-black rounded-lg"
               >
                 <h1 className="w-52 font-semibold">{subjectData.subject}</h1>
                 <div className="grid grid-flow-row-dense grid-cols-7 gap-24">
                   {dateRange.map((date, index) => {
-                    const attendanceForDate = subjectData.attendance.find(
-                      (entry) =>
-                        new Date(entry.date).toLocaleDateString("en-US") ===
-                        date.toLocaleDateString("en-US")
-                    );
+                    const attendanceForDate =
+                      subjectData.attendance &&
+                      subjectData.attendance.filter(
+                        (entry) =>
+                          new Date(entry.date).toLocaleDateString("en-US") ===
+                          date.toLocaleDateString("en-US")
+                      );
 
-                    // Define classes for different attendance statuses
                     let textClass = "text-[#D9D9D9]"; // Default NC text color
+                    let displayContent = "NC";
 
-                    if (attendanceForDate) {
-                      textClass = attendanceForDate.attended
-                        ? "text-green-500" // Green for Present
-                        : "text-red-500"; // Red for Absent
+                    if (attendanceForDate && attendanceForDate.length > 0) {
+                      const isAbsent = attendanceForDate.every(
+                        (entry) => !entry.attended && !entry.isAc
+                      );
+
+                      const repeatContent = isAbsent ? "A" : "P";
+                      textClass = isAbsent ? "text-red-500" : "text-green-500";
+                      displayContent = repeatContent.repeat(
+                        attendanceForDate.length
+                      );
                     }
-
-                    const displayContent = attendanceForDate
-                      ? attendanceForDate.attended
-                        ? "P"
-                        : "A"
-                      : "NC";
 
                     return (
                       <div
