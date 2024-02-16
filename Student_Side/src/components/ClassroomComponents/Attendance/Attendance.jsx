@@ -44,7 +44,7 @@ const Attendance = () => {
       <div className="my-2 w-[95%] sticky flex ml-4 items-center justify-between">
         <div className="py-4 text-black">Overall Attendance</div>
         <div>
-          `{date}  {monthName}, {year}`
+          `{date} {monthName}, {year}`
         </div>
         <SwitchTimePeriod
           onSwitchChange={handleSwitchChange}
@@ -75,9 +75,10 @@ const Attendance = () => {
                 <div style={{ width: 60, height: 60 }} className="my-4 mx-4 ">
                   <CircularProgressbar
                     value={(subject.totalPresent / subject.totalClasses) * 100}
-                    text={`${
-                      (subject.totalPresent / subject.totalClasses) * 100
-                    }%`}
+                    text={`${(
+                      (subject.totalPresent / subject.totalClasses) *
+                      100
+                    ).toFixed(0)}%`}
                   />
                 </div>
               </div>
