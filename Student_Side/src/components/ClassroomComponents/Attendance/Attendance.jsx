@@ -44,7 +44,7 @@ const Attendance = () => {
       <div className="my-2 w-[95%] sticky flex ml-4 items-center justify-between">
         <div className="py-4 text-black">Overall Attendance</div>
         <div>
-          `{date} {monthName}, {year}`
+          {date} {monthName}, {year}
         </div>
         <SwitchTimePeriod
           onSwitchChange={handleSwitchChange}
