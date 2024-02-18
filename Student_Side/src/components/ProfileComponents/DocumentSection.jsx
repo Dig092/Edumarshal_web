@@ -7,6 +7,7 @@ import DocumentCard from "./Documentcard";
 
 export default function DocumentSection() {
     const [uploadDocumentType, setUploadDocumentType] = useState("");
+    const [documentUrls, setDocumentUrls] = useState({});
     const fileInputRef = useRef(null);
 
     const handleUploadClick = (document) => {
@@ -15,15 +16,36 @@ export default function DocumentSection() {
             setUploadDocumentType(document.query);
         }
     };
-
     useEffect(() => {
         console.log(uploadDocumentType);
     }, [uploadDocumentType]);
 
-    const handleDownloadClick = () => {
-        console.log("Download Karega");
+    useEffect(() => {
+        async function fetchDocuments() {
+            try {
+                const response = await axios.get(
+                    "https://akgec-edu.onrender.com/v1/student/profile/documents",
+                    {
+                        withCredentials: true,
+                    }
+                );
+                setDocumentUrls(response.data.documents);
+                console.log(response.data.documents);
+            } catch (error) {
+                console.error("Error fetching documents:", error);
+                toast.error("Error fetching documents");
+            }
+        }
+        fetchDocuments();
+    }, []);
+    const handleDownloadClick = (document) => {
+        const selectedDocument = documentUrls[document.query];
+        if (selectedDocument) {
+            window.open(selectedDocument, '_blank');
+        } else {
+            toast.error("Document not available");
+        }
     };
-
     const handleFileChange = async (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -64,7 +86,7 @@ export default function DocumentSection() {
                                 document={document}
                                 cardIndex={cardIndex}
                                 handleUploadClick={() => handleUploadClick(document)}
-                                handleDownloadClick={handleDownloadClick}
+                                handleDownloadClick={() => handleDownloadClick(document)}
                             />
                         ))}
                     </div>

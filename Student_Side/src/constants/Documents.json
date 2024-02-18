@@ -20,7 +20,8 @@
         "query": "domicileCertificate"
     },
     {
-        "name": "Allotment Letter"
+        "name": "Allotment Letter",
+        "query":"seatAllotmentLetter"
     },
     {
         "name": "Covid 19 certificate",
