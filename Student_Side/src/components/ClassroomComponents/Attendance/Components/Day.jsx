@@ -65,7 +65,7 @@ const Day = () => {
             <li className="px-7 py-3 rounded-xl flex bg-[#F2F6FF] w-full justify-between">
               <h2 className="text-lg font-semibold">{subjectData.subject}</h2>
               <div className="flex gap-4">
-                {subjectData.attendance.map((item) => {
+                {subjectData.attendance.map((item, dateIndex) => {
                   const attendanceDate = new Date(item.date).toDateString();
 
                   if (attendanceDate === selectedDate.toDateString()) {
@@ -75,7 +75,7 @@ const Day = () => {
 
                     return (
                       <li
-                        key={item.date}
+                        key={dateIndex}
                         className={`list-none mx-2 ${backgroundColor} px-3 py-1 text-white font-semibold rounded-lg`}
                       >
                         {status}
