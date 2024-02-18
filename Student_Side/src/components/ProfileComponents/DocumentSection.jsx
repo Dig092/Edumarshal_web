@@ -47,27 +47,27 @@ export default function DocumentSection() {
         },
     ];
 
+  
     const handleUploadClick = (cardIndex) => {
         if (currentlyUploadingIndex === null) {
             setCurrentlyUploadingIndex(cardIndex);
             if (fileInputRef.current) {
                 fileInputRef.current.click();
             }
+        } else if (currentlyUploadingIndex === cardIndex) {
+            setCurrentlyUploadingIndex(null);
         } else {
-            const a = document.createElement("a");
-            a.href = uploadedFiles[cardIndex];
-            a.download = `downloaded_image_${cardIndex + 1}.jpg`;
-            a.click();
-            setCurrentlyUploadingIndex(null); 
+            setCurrentlyUploadingIndex(cardIndex);
         }
     };
-    
+
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
             const updatedFiles = [...uploadedFiles];
             updatedFiles[currentlyUploadingIndex] = URL.createObjectURL(file);
             setUploadedFiles(updatedFiles);
+            setCurrentlyUploadingIndex(null);
         }
     };
 
@@ -76,40 +76,41 @@ export default function DocumentSection() {
 
     return (
         <div>
-            <div className="bg-[#ffffff] h-[72vh] rounded-3xl mx-4 mt-4 overflow-y-auto">
-            <div className="text-lg ml-10 mt-4 font-medium">
+            <div className="bg-[#ffffff] h-auto md:h-[83vh] rounded-3xl  md:m-6 overflow-y-auto">
+            <div className="md:text-lg  text-md md:ml-10 ml-6 mt-4 font-medium flex items-center justify-center md:justify-start">
                     Upload/Update Document
                 </div>
                 <div className="flex justify-center items-center">
                     <div className="w-[94%]  h-[2px] bg-[#D9D9D9] my-4"></div>
                 </div>
                 {/* Cards Starts */}
-                <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 lg:mx-10">
+                <div className="flex justify-center md:justify-evenly">
+                <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-12 my-5 md:mr-20">
                     {documents.map((document, cardIndex) => (
                         <div
                             key={cardIndex}
                             className="md:w-42 w-21 relative md:ml-14 ml-2 my-7"
                         >
                             <div
-                                className="rounded-t-2xl bg-slate-700 h-[214px] w-[214px] relative"
+                                className="rounded-t-2xl bg-slate-700 sm:h-[214px] sm:w-[214px] h-[180px] w-[180px] relative"
                                 style={{
                                     backgroundImage: `url(${uploadedFiles[cardIndex]})`,
                                     backgroundSize: "cover",
                                     backgroundPosition: "center",
                                 }}
                             ></div>
-                            <div className="absolute bottom-0 left-0 right-0 mb-4 ml-48 cursor-pointer">
+                            <div >
+                            <div className="absolute bottom-0 right-0 left-50 mb-5 cursor-pointer">
                                 <img
                                     src="./downloadarrow.svg"
                                     style={{
                                         transform: "translate(-35%,-100%)",
                                     }}
                                     onClick={() => handleUploadClick(cardIndex)}
-                                    
                                 />
                             </div>
                             <div
-                                className="absolute bottom-0 left-0 right-0 bg-[#004BB8]  h-[30%] md:w-[13.39rem] w-[13.39rem] flex justify-center items-center rounded-b-2xl"
+                                className="absolute bottom-0 left-0 right-0 bg-[#004BB8]  h-[30%] sm:w-[13.39rem] w-[11.25rem] flex justify-center items-center rounded-b-2xl"
                                 style={{
                                     transform: "translateY(43%)",
                                 }}
@@ -118,8 +119,10 @@ export default function DocumentSection() {
                                     {document.name}
                                 </span>
                             </div>
+                            </div>
                         </div>
                     ))}
+                </div>
                 </div>
             </div>
             <input
