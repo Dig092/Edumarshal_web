@@ -8,7 +8,7 @@ export default function NavBar(props) {
     const [toggle, setToggle] = useState(false);
     const dispatch = useDispatch();
     return (
-        <div className="flex h-[60px] max-[780px]:ml-[70px] z-50 bg-white w-full px-4 justify-between items-center">
+        <div className="flex h-[60px]  z-50 bg-white w-full px-4 justify-between items-center">
             <img
                 className="max-[500px]:block hidden w-[30px]"
                 src={toggle ? "./hamburgerDark.png" : "./closeDark.png"}
