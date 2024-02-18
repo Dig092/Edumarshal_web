@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
 import SwitchClassroom from "../components/ClassroomComponents/SwitchClassroom";
 import Attendance from "../components/ClassroomComponents/Attendance/Attendance";
@@ -26,18 +27,10 @@ export default function Classroom() {
     <>
       <div className="h-screen bg-[#ECEBFE] w-full flex">
         <SideBar active={active} />
-        <div className="flex flex-col flex-wrap w-full">
+        <div className="flex flex-col w-full">
 
           {/*Navbar Starts*/}
-          <div className="h-[84px] w-full bg-[#FBFBFB] rounded-2xl flex justify-between items-center">
-            <div className="text-2xl font-semibold ml-8">Classroom</div>
-            <div className="flex items-center mr-5 gap-8">
-              <div>
-                <img src="./icons/notifications.png" />
-              </div>
-              <div className="bg-[#C4C4C4] h-[50px] w-[50px] rounded-2xl"></div>
-            </div>
-          </div>
+          <NavBar title="Classroom" />
           {/* Navbar Ends */}
 
           {/* Select Bar Starts */}
