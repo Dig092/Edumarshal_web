@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function DocumentCard({ document, handleUploadClick, handleDownloadClick,}) {
+export default function DocumentCard({ document, handleUploadClick, handleDownloadClick}) {
     return (
         <div className="md:w-42 w-21 relative md:ml-14 ml-2 my-7">
             <div
@@ -18,7 +18,7 @@ export default function DocumentCard({ document, handleUploadClick, handleDownlo
                         style={{
                             transform: "translate(-35%,-100%)",
                         }}
-                        onClick={() => handleUploadClick(document.query)}
+                        onClick={() => handleUploadClick(document)}
                     />
                 </div>
                 <div className="absolute bottom-0 right-0 left-50 mb-5 cursor-pointer flex">
@@ -27,7 +27,7 @@ export default function DocumentCard({ document, handleUploadClick, handleDownlo
                         style={{
                             transform: "translate(-35%,-100%)",
                         }}
-                        onClick={() => handleDownloadClick(document.name)}
+                        onClick={() => handleDownloadClick(document)}
                     />
                 </div>
                 <div

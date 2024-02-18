@@ -38,7 +38,7 @@ export default function SideBar(props) {
 
     return (
         <div
-            className="transition-all sticky max-[780px]:fixed z-[99] left-0 top-0 h-screen max-[780px]:h-full flex-col py-5 px-1 items-start bg-[#004BB8]"
+            className="transition-all hidden md:block sticky max-[780px]:fixed z-[99] left-0 top-0 h-screen max-[780px]:h-full flex-col py-5 px-1 items-start bg-[#004BB8]"
             style={{
                 width: `${menu ? "70px" : "230px"}`,
             }}
