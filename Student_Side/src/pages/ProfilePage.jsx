@@ -25,13 +25,15 @@ export default function ProfilePage() {
     return (
         <>
             <div className="h-screen bg-[#ECEBFE] w-full flex">
-                <SideBar active={active} />
+                
+                <SideBar active={active}/>
+                
                 <div className="flex flex-col w-full">
                     {/*Navbar Starts*/}
                     <NavBar title="Profile" />
                     {/* Navbar Ends */}
                     {/* Select Bar Starts */}
-                    <div className="h-[70px] bg-[#ffffff] mt-4 mx-4 flex flex-wrap items-center rounded-3xl">
+                    <div className=" bg-[#ffffff] mt-4 mx-4 flex flex-wrap items-center rounded-3xl">
                         <div className="ml-10">
                             <SwitchProfile
                                 onSwitchChange={handleSwitchChange}

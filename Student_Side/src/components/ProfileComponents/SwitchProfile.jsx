@@ -4,7 +4,7 @@ const ProfileSections = ["My profile", "My document", "Registration Form"];
 
 function SwitchProfile({ activeIndex, onSwitchChange }) {
   return (
-    <div className="flex gap-6 cursor-pointer">
+    <div className="hidden md:flex gap-6 cursor-pointe h-[4rem] items-center justify-center">
       {ProfileSections.map((item, index) => (
         <div
           key={index}
