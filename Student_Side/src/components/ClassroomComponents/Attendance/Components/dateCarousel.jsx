@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const DateCarousel = ({ onDateSelect }) => {
   const sliderRef = useRef(null);
-  const [selectedDate, setSelectedDate] = useState(null);
+  const selectedDateRef = useRef(null);
 
   const settings = {
     infinite: true,
@@ -33,7 +33,7 @@ const DateCarousel = ({ onDateSelect }) => {
   };
 
   const handleDateClick = (date) => {
-    setSelectedDate(date);
+    selectedDateRef.current = date;
     onDateSelect(date); // Call the function from the parent component
   };
 
@@ -67,8 +67,8 @@ const DateCarousel = ({ onDateSelect }) => {
               key={dateIndex}
               className="flex flex-col px-6 py-1 items-center justify-center cursor-pointer transition duration-300"
               style={{
-                backgroundColor: selectedDate === date ? "#004BB8" : "#F2F6FF",
-                color: selectedDate === date ? "white" : "black",
+                backgroundColor: selectedDateRef.current === date ? "#004BB8" : "#F2F6FF",
+                color: selectedDateRef.current === date ? "white" : "black",
                 borderRadius: "8px",
               }}
               onClick={() => handleDateClick(date)}

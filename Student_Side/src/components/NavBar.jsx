@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { toggleMenu } from "../store/store";
 import { useDispatch } from "react-redux";
 import semester from "../constants/semester.json";
-
 export default function NavBar(props) {
     const [sem, setSem] = useState("Select Semester");
     const [toggle, setToggle] = useState(false);

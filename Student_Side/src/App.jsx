@@ -5,8 +5,6 @@ import ProfilePage from "./pages/ProfilePage";
 import Classroom from "./pages/Classroom";
 import Fees from "./pages/Fees";
 import LoginPage from "./pages/LoginPage";
-// import HostelPage from "./pages/HostelPage";
-
 export default function App() {
     return (
         <Router>

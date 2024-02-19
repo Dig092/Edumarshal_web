@@ -6,6 +6,7 @@ import FeeStructure from "../components/FeesComponents/FeeStructure";
 import PayOnline from "../components/FeesComponents/PayOnline";
 import PaymentHistory from "../components/FeesComponents/PaymentHistory";
 import OfflinePaymentHistory from "../components/FeesComponents/OfflinePaymentHistory";
+import NavBar from "../components/NavBar";
 
 export default function Fees() {
     const [activefees, setActivefees] = useState(0);
@@ -16,7 +17,7 @@ export default function Fees() {
         <div className="h-screen bg-[#ECEBFE] w-full flex">
             <SideBar/>
             <div className="flex flex-col w-full">
-                {/* <FeesNavbar/> */}
+               <NavBar title="Fees"/>
                 <div className="bg-[#ffffff] h-full overflow-y-auto">
                  {/* Select Option for fees */}
                  <div className=" sticky top-0 w-full bg-white flex flex-wrap items-center md:gap-5 gap-1 md:text-lg text-sm  p-4  px-8 ml-0">
