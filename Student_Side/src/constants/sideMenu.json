@@ -34,8 +34,9 @@
     },
     {
         "title": "Fees",
-        "focus": "feesUnfocus",
-        "unfocus": "feesUnfocus"
+        "focus": "Fees",
+        "unfocus": "feesUnfocus",
+        "link" : "Fees"
     },
     {
         "title": "Events",

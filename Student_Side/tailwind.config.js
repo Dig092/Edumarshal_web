@@ -9,7 +9,8 @@ export default {
       screens: {
         'xl': '1440px',    // Custom breakpoint for 1440px
         'lg': '1024px',    
-        'md': '768px',     
+        'md': '768px',
+        'sm': '400px'
       },
     },
   },
