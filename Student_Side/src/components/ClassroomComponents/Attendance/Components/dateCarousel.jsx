@@ -1,11 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useEffect, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { createSelector } from "reselect";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { selectDate } from "../../../../store/store";
+import { memoizedSelectDate } from "../../../../store/store";
 
-const DateCarousel = ({ onDateSelect }) => {
+const DateCarousel = () => {
   const sliderRef = useRef(null);
-  const selectedDateRef = useRef(null);
+  const dispatch = useDispatch();
+  const selectedDate = useSelector((state) => memoizedSelectDate(state));
+
 
   const settings = {
     infinite: true,
@@ -32,16 +38,29 @@ const DateCarousel = ({ onDateSelect }) => {
     return dates;
   };
 
+  useEffect(() => {
+    if (selectedDate instanceof Date && !isNaN(selectedDate)) {
+      dispatch(
+        selectDate({
+          timestamp: selectedDate.getTime(),
+          backgroundColor: "#004BBB",
+          textColor: "white",
+        })
+      );
+    }
+  }, [selectedDate, dispatch]);
+
   const handleDateClick = (date) => {
-    selectedDateRef.current = date;
-    onDateSelect(date); // Call the function from the parent component
+    dispatch(selectDate({ timestamp: date.getTime(), date: date.toISOString() }));
   };
+  
 
   const getWeeks = () => {
-    const startDate = new Date();
+    const currentDate = new Date();
+    const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
     const weeks = [];
-
-    for (let i = 0; i < 4; i++) {
+  
+    for (let i = 0; i < 5; i++) {
       const endDate = new Date(
         startDate.getFullYear(),
         startDate.getMonth(),
@@ -53,7 +72,7 @@ const DateCarousel = ({ onDateSelect }) => {
         dates: getDatesInWeek(startDate),
       };
       weeks.push(week);
-
+  
       startDate.setDate(endDate.getDate() + 1); // Move to the next week
     }
 
@@ -65,16 +84,16 @@ const DateCarousel = ({ onDateSelect }) => {
           {week.dates.map((date, dateIndex) => (
             <div
               key={dateIndex}
-              className="flex flex-col px-6 py-1 items-center justify-center cursor-pointer transition duration-300"
+              className="flex flex-col px-6 py-1 items-center justify-center cursor-pointer transition duration-200"
               style={{
-                backgroundColor: selectedDateRef.current === date ? "#004BB8" : "#F2F6FF",
-                color: selectedDateRef.current === date ? "white" : "black",
+                backgroundColor: selectedDate.getTime() === date.getTime() ? "#004BB8" : "#F2F6FF",
+                color: selectedDate.getTime() === date.getTime() ? "white" : "black",
                 borderRadius: "8px",
               }}
               onClick={() => handleDateClick(date)}
             >
               <div className="text-md font-semibold">{date.getDate()}</div>
-              <div className="text-sm text-gray-500">
+              <div className="text-sm ">
                 {dayNames[date.getDay()]}
               </div>
             </div>
@@ -92,6 +111,8 @@ const DateCarousel = ({ onDateSelect }) => {
     sliderRef.current.slickPrev();
   };
 
+  const memoizedWeeks = useMemo(() => getWeeks(), [selectedDate]);
+
   return (
     <div className="grid grid-cols-9 items-center my-4">
       <button onClick={handlePrev} className="col-span-1 justify-self-center">
@@ -99,7 +120,7 @@ const DateCarousel = ({ onDateSelect }) => {
       </button>
 
       <Slider ref={sliderRef} {...settings} className="col-span-7">
-        {getWeeks()}
+        {memoizedWeeks}
       </Slider>
 
       <button onClick={handleNext} className="col-span-1 justify-self-center">
