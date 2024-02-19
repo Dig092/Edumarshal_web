@@ -1,5 +1,5 @@
 import React from "react";
-export default function EventCard ({event}) {
+export default function EventCard ({ event, handleViewDetails }) {
     return(
         <div className="w-[21rem] h-[19rem] justify-evenly  flex flex-col bg-[#FBFBFB] my-3 ml-8 rounded-3xl ">
             <div className="ml-4">
@@ -27,7 +27,7 @@ export default function EventCard ({event}) {
                 </div>
             </div>
             <div className="mx-4">
-            <div className="bg-[#004BB8] rounded-xl flex justify-center items-center px-8"><p className="text-base p-2 px-4 text-white">View Details</p></div>
+            <div className="bg-[#004BB8] rounded-xl flex justify-center items-center px-8 cursor-pointer" onClick={handleViewDetails}><p className="text-base p-2 px-4 text-white">View Details</p></div>
             </div>
         </div>
     )
