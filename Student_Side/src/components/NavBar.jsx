@@ -29,7 +29,7 @@ export default function NavBar(props) {
                 />
                 <select
                     onChange={(e) => setSem(e.target.value)}
-                    className="outline outline-1 max-[550px]:w-[100px] max-[410px]:w-[40px] max-[410px]:w-[30px] max-[410px]:h-[30px] outline-black px-4 py-2 rounded-md w-[250px]"
+                    className="outline outline-1 max-[550px]:w-[100px] max-[410px]:w-[30px] max-[410px]:h-[30px] outline-black px-4 py-2 rounded-md w-[250px]"
                 >
                     {semester?.map((sem, id) => (
                         <option key={id} value={sem.value}>
