@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 
-export default function DoughNut() {
+export default function DoughNut(props) {
     const [width, setWidth] = useState(window.innerWidth);
     const [height, setHeight] = useState("250");
     useEffect(() => {
@@ -21,7 +21,7 @@ export default function DoughNut() {
     });
     // Donut Graph
     const state = {
-        series: [10, 30],
+        series: props.pdp,
         options: {
             chart: {
                 type: "donut",
@@ -54,7 +54,9 @@ export default function DoughNut() {
             }}
         >
             <h1 className="font-bold text-5xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                75%
+                {`${Math.round(
+                    (props.pdp[1] * 100) / (props.pdp[0] + props.pdp[1])
+                )}%`}
             </h1>
             <ReactApexChart
                 options={state.options}
