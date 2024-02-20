@@ -10,6 +10,7 @@ import DocumentSection from "../components/ProfileComponents/DocumentSection";
 import ProfileSection from "../components/ProfileComponents/ProfileSection";
 import { useLocation } from "react-router-dom";
 import NavBar from "../components/NavBar";
+
 export default function ProfilePage() {
     const [active, setActive] = useState("");
     const location = useLocation();
@@ -24,13 +25,15 @@ export default function ProfilePage() {
     return (
         <>
             <div className="h-screen bg-[#ECEBFE] w-full flex">
-                <SideBar active={active} />
+                
+                <SideBar active={active}/>
+                
                 <div className="flex flex-col w-full">
                     {/*Navbar Starts*/}
                     <NavBar title="Profile" />
                     {/* Navbar Ends */}
                     {/* Select Bar Starts */}
-                    <div className="h-[70px] bg-[#ffffff] mt-4 mx-4 flex flex-wrap items-center rounded-3xl">
+                    <div className=" bg-[#ffffff] mt-4 mx-4 flex flex-wrap items-center rounded-3xl">
                         <div className="ml-10">
                             <SwitchProfile
                                 onSwitchChange={handleSwitchChange}

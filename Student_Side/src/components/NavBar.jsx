@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { toggleMenu } from "../store/store";
 import { useDispatch } from "react-redux";
 import semester from "../constants/semester.json";
-
 export default function NavBar(props) {
     const [sem, setSem] = useState("Select Semester");
     const [toggle, setToggle] = useState(false);
@@ -18,7 +17,7 @@ export default function NavBar(props) {
                     dispatch(toggleMenu());
                 }}
             />
-            <h1 className="text-xl max-[410px]:text-lg font-semibold">
+            <h1 className="text-2xl max-[410px]:text-lg font-semibold px-6">
                 {props.title}
             </h1>
             <div className="flex max-[500px]:w-[50%] items-center max-[500px]:justify-evenly max-[410px]:w-[40%]">

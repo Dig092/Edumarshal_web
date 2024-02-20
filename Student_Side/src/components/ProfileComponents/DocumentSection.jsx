@@ -1,125 +1,92 @@
 import React, { useRef, useState } from "react";
+import axios from "axios";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import documents from "../../constants/Documents.json";
+import DocumentCard from "./Documentcard";
 
 export default function DocumentSection() {
-    const [uploadedFiles, setUploadedFiles] = useState(Array(14).fill(null));
-    const documents = [
-        {
-            name: "Student Photo",
-        },
-        {
-            name: "Aadhaar Card",
-        },
-        {
-            name: "10th Marksheet",
-        },
-        {
-            name: "12th Marksheet",
-        },
-        {
-            name: "Domicile Certificate",
-        },
-        {
-            name: "Allotment Letter",
-        },
-        {
-            name: "Covid 19 certificate",
-        },
-        {
-            name: "TC or Migration Certificate",
-        },
-        {
-            name: "10th Pass Certificate",
-        },
-        {
-            name: "Caste Certificate",
-        },
-        {
-            name: "Income Certificate(TFW)",
-        },
-        {
-            name: "EWS Certificate(EWS)",
-        },
-        {
-            name: "Medical Fitness Certificate",
-        },
-        {
-            name: "Affidavit for the gap period After Qualifying exam",
-        },
-    ];
+    const [uploadDocumentType, setUploadDocumentType] = useState("");
+    const [documentUrls, setDocumentUrls] = useState({});
+    const fileInputRef = useRef(null);
 
-    const handleUploadClick = (cardIndex) => {
-        if (currentlyUploadingIndex === null) {
-            setCurrentlyUploadingIndex(cardIndex);
-            if (fileInputRef.current) {
-                fileInputRef.current.click();
-            }
-        } else {
-            const a = document.createElement("a");
-            a.href = uploadedFiles[cardIndex];
-            a.download = `downloaded_image_${cardIndex + 1}.jpg`;
-            a.click();
-            setCurrentlyUploadingIndex(null); 
+    const fetchDocuments = async () => {
+        try {
+            const response = await axios.get(
+                "https://akgec-edu.onrender.com/v1/student/profile/documents",
+                {
+                    withCredentials: true,
+                }
+            );
+            setDocumentUrls(response.data.documents);
+            console.log(response.data.documents);
+        } catch (error) {
+            console.error("Error fetching documents:", error);
+            toast.error("Error fetching documents");
         }
     };
-    
-    const handleFileChange = (event) => {
+
+    const handleUploadClick = (document) => {
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+            setUploadDocumentType(document.query);
+        }
+    };
+
+    const handleDownloadClick = async (document) => {
+        await fetchDocuments();
+        const selectedDocument = documentUrls[document.query];
+        if (selectedDocument) {
+            window.open(selectedDocument, '_blank');
+        } else {
+            toast.error("Document not available");
+        }
+    };
+
+    const handleFileChange = async (event) => {
         const file = event.target.files[0];
         if (file) {
-            const updatedFiles = [...uploadedFiles];
-            updatedFiles[currentlyUploadingIndex] = URL.createObjectURL(file);
-            setUploadedFiles(updatedFiles);
+            const formData = new FormData();
+            formData.append("document", file);
+            console.log(uploadDocumentType);
+            try {
+                const response = await axios.post(
+                    `https://akgec-edu.onrender.com/v1/student/profile/document?documentType=${uploadDocumentType}`,
+                    formData,
+                    {
+                        withCredentials: true,
+                    }
+                );
+                toast.success("Document uploaded successfully");
+            } catch (error) {
+                console.error("Error uploading document:", error);
+                toast.error("Error uploading document");
+            }
         }
     };
-
-    const fileInputRef = useRef(null);
-    const [currentlyUploadingIndex, setCurrentlyUploadingIndex] = useState(null);
 
     return (
         <div>
-            <div className="bg-[#ffffff] h-[72vh] rounded-3xl mx-4 mt-4 overflow-y-auto">
-            <div className="text-lg ml-10 mt-4 font-medium">
+            <ToastContainer />
+            <div className="bg-[#ffffff] md:h-[73vh] h-[90vh] rounded-3xl md:m-6 overflow-y-auto">
+                <div className="md:text-lg text-md md:ml-10 ml-6 mt-4 font-medium flex items-center justify-center md:justify-start">
                     Upload/Update Document
                 </div>
                 <div className="flex justify-center items-center">
                     <div className="w-[94%]  h-[2px] bg-[#D9D9D9] my-4"></div>
                 </div>
-                {/* Cards Starts */}
-                <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 lg:mx-10">
-                    {documents.map((document, cardIndex) => (
-                        <div
-                            key={cardIndex}
-                            className="md:w-42 w-21 relative md:ml-14 ml-2 my-7"
-                        >
-                            <div
-                                className="rounded-t-2xl bg-slate-700 h-[214px] w-[214px] relative"
-                                style={{
-                                    backgroundImage: `url(${uploadedFiles[cardIndex]})`,
-                                    backgroundSize: "cover",
-                                    backgroundPosition: "center",
-                                }}
-                            ></div>
-                            <div className="absolute bottom-0 left-0 right-0 mb-4 ml-48 cursor-pointer">
-                                <img
-                                    src="./downloadarrow.svg"
-                                    style={{
-                                        transform: "translate(-35%,-100%)",
-                                    }}
-                                    onClick={() => handleUploadClick(cardIndex)}
-                                    
-                                />
-                            </div>
-                            <div
-                                className="absolute bottom-0 left-0 right-0 bg-[#004BB8]  h-[30%] md:w-[13.39rem] w-[13.39rem] flex justify-center items-center rounded-b-2xl"
-                                style={{
-                                    transform: "translateY(43%)",
-                                }}
-                            >
-                                <span className="text-sm text-center text-white">
-                                    {document.name}
-                                </span>
-                            </div>
-                        </div>
-                    ))}
+                <div className="flex justify-center md:justify-evenly">
+                    <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-12 my-5 md:mr-8 items-center">
+                        {documents.map((document, cardIndex) => (
+                            <DocumentCard
+                                key={cardIndex}
+                                document={document}
+                                cardIndex={cardIndex}
+                                handleUploadClick={() => handleUploadClick(document)}
+                                handleDownloadClick={() => handleDownloadClick(document)}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
             <input
