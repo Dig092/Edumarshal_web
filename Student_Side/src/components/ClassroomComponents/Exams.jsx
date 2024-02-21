@@ -5,7 +5,7 @@ import axios from "axios";
 const Exams = () => {
   const [activeOption, setActiveOption] = useState(0);
   const [examData, setExamData] = useState([]);
-  const [selectedExam, setSelectedExam] = useState(''); // State for the selected exam
+  const [selectedExam, setSelectedExam] = useState(''); 
 
   useEffect(() => {
     getExam();
@@ -34,7 +34,6 @@ const Exams = () => {
     setSelectedExam(event.target.value);
   };
 
-  // Filtered exam data based on the selected exam
   const filteredExamData = selectedExam
     ? examData.filter(exam => exam.exam === selectedExam)
     : examData;
