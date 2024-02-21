@@ -39,7 +39,7 @@ export default function SideBarMobile(props) {
 
     return (
         <div
-            className="flex transition-all mt-[60px] pl-5 sticky max-[780px]:fixed z-[99] left-0 top-0 h-screen max-[780px]:h-full flex-col py-5 px-1 items-start bg-[#004BB8]"
+            className="flex sticky top-0 transition-all mt-[60px] pl-5 max-[780px]:fixed z-[99] h-screen max-[780px]:h-full flex-col py-5 px-1 items-start bg-[#004BB8]"
             style={{
                 width: `${menu ? "0px" : "100%"}`,
                 display: `${menu ? "none" : "flex"}`,

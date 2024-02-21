@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { useSelector } from "react-redux";
 import DateCarousel from "./dateCarousel";
+import { memoizedSelectDate } from "../../../../store/store";
 
 const Day = () => {
   const [attendanceData, setAttendanceData] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date());
   const [filteredAttendance, setFilteredAttendance] = useState([]);
+
+  const selectedDate = useSelector((state) => memoizedSelectDate(state));
 
   useEffect(() => {
     const fetchAttendanceData = async () => {
@@ -16,7 +18,6 @@ const Day = () => {
           { withCredentials: true }
         );
 
-        // Sort attendance data by date
         const sortedAttendance = response.data.map((subjectData) => ({
           ...subjectData,
           attendance: subjectData.attendance.sort(
@@ -25,21 +26,21 @@ const Day = () => {
         }));
 
         setAttendanceData(sortedAttendance);
-        filterAttendanceData(new Date());
+        filterAttendanceData(selectedDate);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchAttendanceData();
-  }, []);
+  }, [selectedDate]);
 
   const handleDateSelect = (date) => {
-    setSelectedDate(date);
     filterAttendanceData(date);
   };
 
   const filterAttendanceData = (date) => {
+    console.log(date);
     const filteredData = attendanceData.filter((subjectData) =>
       subjectData.attendance.some(
         (item) =>
