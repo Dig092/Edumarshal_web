@@ -17,14 +17,19 @@ export default function Events() {
         const fetchData = async () => {
             try {
                 const response = await axios.get("https://akgec-edu.onrender.com/v1/student/event");
-                setEvents(response.data.event);
+                const processedEvents = response.data.event.map(event => {
+                    const eventDate = new Date(event.date);
+                    const localDate = new Date(eventDate.getTime() - eventDate.getTimezoneOffset() * 60000);
+                    return { ...event, date: localDate.toISOString().split('T')[0] };
+                });
+                setEvents(processedEvents);
             } catch (error) {
                 console.error("Error fetching data: ", error);
             }
         };
         fetchData();
     }, []);
-
+    
     const handleViewDetails = (eventId) => {
         const selected = events.find(event => event._id === eventId);
         setSelectedEvent(selected);
@@ -33,6 +38,21 @@ export default function Events() {
     const handleEventDetails = () => {
         setSelectedEvent(null);
     };
+    const eventDates = events.map(event => event.date); 
+
+    const renderEventIndicator = ({ date, view }) => {
+        if (view === 'month') {
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+    
+            if (eventDates.includes(formattedDate)) {
+                return <div style={{ color: 'red' }}>●</div>;
+            }
+        }
+    };
+
 
     return (
         <div className="h-screen bg-[#ECEBFE] w-full flex">
@@ -42,17 +62,17 @@ export default function Events() {
             <div className="min-[500px]:hidden">
                 <SideBarMobile active={active} />
             </div>
-            <div className="text-black flex flex-col max-[500px]:items-center w-full">
+            <div className="text-black flex flex-col  w-full">
                 <NavBar title="Events" />
-                <div className="bg-[#ffffff] mt-4 flex rounded-2xl w-[97%] md:h-[4rem] md:ml-5 h-[3rem] items-center md:justify-start justify-center">
+                <div className="bg-[#ffffff] mt-4 flex rounded-2xl w-[97%] md:h-[4rem] md:ml-5 ml-2 h-[3rem] items-center md:justify-start justify-center">
                     <div className="my-3 ml-10 bg-[#004BB8] md:p-2 p-1 px-4 rounded-[0.5rem]"><p className="text-white text-sm md:text-base">College Events</p></div>
                 </div>
-                <div className="bg-[#ffffff] md:h-[73vh] h-[90vh] rounded-3xl m-6 overflow-y-auto md:flex md:flex-row flex flex-col">
-                    <div className="m-4 md:w-[30%] flex justify-center items-center">
-                        <Calendar/>
+                <div className="bg-[#ffffff] md:h-[73vh] h-[85vh]  items-center rounded-3xl md:m-6 overflow-y-auto md:flex md:flex-row flex flex-col mt-3">
+                    <div className="md:m-4 md:w-[30%]  flex justify-center items-center">
+                    <Calendar tileContent={renderEventIndicator}/>
                     </div>
                     {selectedEvent ? (
-                        <div className="w-[60%] bg-[#F2F6FF] h-[30rem] mt-10 rounded-[0.5rem] overflow-y-auto flex justify-center items-center">
+                        <div className="md:w-[70%] w-[90%] bg-[#F2F6FF] h-[30rem] mt-10 rounded-[0.5rem] overflow-y-auto flex justify-center items-center">
                             <div className="cursor-pointer" onClick={handleEventDetails}>            
                                 <FaArrowLeft />
                             </div>     
@@ -78,10 +98,12 @@ export default function Events() {
                             </div>
                         </div>
                     ) : (
-                        <div className="w-[60%] bg-[#F2F6FF] h-[30rem] mt-10 rounded-[0.5rem] overflow-y-auto grid xl:grid-cols-2 grid-cols-1 justify-center items-center">
+                        <div className="flex justify-center items-center">
+                        <div className="lg:ml-40 md:ml-32 lg:w-[95%] md:w-[25rem] md:bg-[#F2F6FF] md:h-[30rem] md:overflow-y-auto grid xl:grid-cols-2 grid-cols-1 justify-center items-center rounded-3xl">
                             {events.map(event => (
                                 <EventCard key={event._id} event={event} handleViewDetails={() => handleViewDetails(event._id)} />
                             ))}
+                        </div>
                         </div>
                     )}
                 </div>

@@ -1,7 +1,7 @@
 import React from "react";
 export default function EventCard ({ event, handleViewDetails }) {
     return(
-        <div className="w-[21rem] h-[19rem] justify-evenly  flex flex-col bg-[#FBFBFB] my-3 ml-8 rounded-3xl ">
+        <div className="md:w-[21rem] w-[16rem] md:h-[19rem] h-[13rem] md:mx-7 mt-8 justify-evenly p-2 flex flex-col bg-[#FBFBFB] my-3 rounded-3xl border-y-2 ">
             <div className="ml-4">
             <div className="text-2xl font-medium">{event.eventName}</div>
             <div className="text-lg text-[#4D4D4D]">{event.event}</div>
