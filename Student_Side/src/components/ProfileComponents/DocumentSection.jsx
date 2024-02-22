@@ -34,6 +34,7 @@ export default function DocumentSection() {
     };
 
     const handleDownloadClick = async (document) => {
+        await fetchDocuments();
         const selectedDocument = documentUrls[document.query];
         if (selectedDocument) {
             window.open(selectedDocument, '_blank');
