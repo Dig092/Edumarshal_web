@@ -34,7 +34,6 @@ export default function DocumentSection() {
     };
 
     const handleDownloadClick = async (document) => {
-        await fetchDocuments();
         const selectedDocument = documentUrls[document.query];
         if (selectedDocument) {
             window.open(selectedDocument, '_blank');
@@ -58,13 +57,15 @@ export default function DocumentSection() {
                     }
                 );
                 toast.success("Document uploaded successfully");
+                await fetchDocuments();
+
             } catch (error) {
                 console.error("Error uploading document:", error);
                 toast.error("Error uploading document");
             }
         }
     };
-
+    
     return (
         <div>
             <ToastContainer />
