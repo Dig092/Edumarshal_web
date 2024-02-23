@@ -1,4 +1,5 @@
 import React from "react";
+import { useRef } from "react";
 
 const Labels = [
   { name: "Payment Mode", smallWidth: "w-[16rem]" },
@@ -10,6 +11,16 @@ const Labels = [
 ];
 
 export default function OfflinePaymentHistory() {
+  const fileInputRef = useRef(null);
+  const handleupload = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+  }
+  }
+  const handleselect = (event) => {
+    const selectedFile = event.target.files[0];
+    console.log("Selected file:", selectedFile);
+  }
   return (
     <div>
       <div className="h-[3rem] bg-[#004BB8] my-5 rounded-[0.5rem] items-center md:justify-between justify-center md:px-12 px-6 flex cursor-pointer sm:mx-10 ml-2 text-lg text-[#FFFFFF]">
@@ -73,11 +84,11 @@ export default function OfflinePaymentHistory() {
         <div>
           <div className="flex items-center ml-12 md:gap-5 gap-2 font-medium justify-center flex-wrap">
             <div>Update Bank Receipts(5MB MAX)</div>
-            <div className="bg-[#004BB8] h-[2.5rem] w-[3.5rem] flex items-center justify-center rounded-xl"><img src="./uploadarrow1.svg"/></div>
+            <div className="bg-[#004BB8] h-[2.5rem] w-[3.5rem] flex items-center justify-center rounded-xl cursor-pointer" onClick={handleupload}><img src="./uploadarrow1.svg"/></div>
           </div>
-          <div>
+          {/* <div>
             abhinav
-          </div>
+          </div> */}
         </div>
         <div className="mx-10">
           <ul className="md:mx-10 flex flex-col flex-wrap text-base p-5">
@@ -88,6 +99,15 @@ export default function OfflinePaymentHistory() {
           </ul>
         </div>
       </div>
+      <input
+                type="file"
+                id="fileInput"
+                name="fileInput"
+                accept=".jpg,.jpeg,.png,.heic"
+                ref={fileInputRef}
+                style={{ display: "none" }}
+                onChange={handleselect}
+            />
     </div>
   );
 }
