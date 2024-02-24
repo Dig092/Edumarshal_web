@@ -132,27 +132,39 @@ const Week = () => {
                           date.toLocaleDateString("en-US")
                       );
 
-                    let textClass = "text-[#D9D9D9]"; // Default NC text color
-                    let displayContent = "NC";
-
-                    if (attendanceForDate && attendanceForDate.length > 0) {
-                      const isAbsent = attendanceForDate.every(
-                        (entry) => !entry.attended && !entry.isAc
-                      );
-
-                      const repeatContent = isAbsent ? "A" : "P";
-                      textClass = isAbsent ? "text-red-500" : "text-green-500";
-                      displayContent = repeatContent.repeat(
-                        attendanceForDate.length
-                      );
-                    }
-
                     return (
                       <div
                         key={index}
-                        className={`flex items-center justify-center ${textClass} rounded-lg`}
+                        className={`flex items-center justify-center ${
+                          attendanceForDate.length > 0
+                            ? "text-[#D9D9D9]"
+                            : "text-green-500"
+                        } rounded-lg`}
                       >
-                        <h1 className="font-semibold">{displayContent}</h1>
+                        {attendanceForDate.length > 0 ? (
+                          attendanceForDate.map((entry, entryIndex) => {
+                            const status =
+                              entry.attended || entry.isAc ? "P" : "A";
+                            const textClass =
+                              status === "P"
+                                ? "text-green-500"
+                                : "text-red-500";
+
+                            return (
+                              <h1
+                                key={entryIndex}
+                                className={`font-semibold mx-1 ${textClass}`}
+                              >
+                                {status}
+                              </h1>
+                            );
+                          })
+                        ) : (
+                          // Display "NC" for days with no class
+                          <h1 className="font-semibold mx-1 text-gray-500">
+                            NC
+                          </h1>
+                        )}
                       </div>
                     );
                   })}
