@@ -23,6 +23,14 @@ const Attendance = () => {
   };
 
   const [attendance, setAttendace] = useState([]);
+  
+  const [selectedSubject, setSelectedSubject] = useState(
+    attendance.length > 0 ? attendance[0].subject : null
+  );
+
+  const handleSubjectClick = (subjectName) => {
+    setSelectedSubject(subjectName);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,8 +69,11 @@ const Attendance = () => {
           <div className="flex flex-col items-center">
             {attendance.map((subject) => (
               <div
-                key={subject.subject}
-                className="flex my-3 justify-center shadow-md rounded-2xl bg-white"
+              key={subject.subject}
+              className={`flex my-3 justify-center shadow-md rounded-2xl bg-white cursor-pointer ${
+                selectedSubject === subject.subject ? "border-2 border-blue-500" : ""
+              }`}
+              onClick={() => handleSubjectClick(subject.subject)}
               >
                 <div className="flex flex-col">
                   <h1 className="px-6 pt-4 font-medium text-lg">
@@ -87,9 +98,9 @@ const Attendance = () => {
         </div>
 
         <div className="w-[70%] flex flex-col items-start h-full rounded-2xl">
-          {activeItem === 0 && <Day />}
-          {activeItem === 1 && <Week />}
-          {activeItem === 2 && <Month />}
+          {activeItem === 0 && <Day attendanceData={attendance} />}
+          {activeItem === 1 && <Week attendanceData={attendance} />}
+          {activeItem === 2 && <Month attendanceData={attendance} subjectName={selectedSubject} />}
         </div>
       </div>
     </div>
