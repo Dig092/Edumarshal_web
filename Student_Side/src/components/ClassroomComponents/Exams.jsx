@@ -6,9 +6,11 @@ const Exams = () => {
   const [activeOption, setActiveOption] = useState(0);
   const [examData, setExamData] = useState([]);
   const [selectedExam, setSelectedExam] = useState(''); 
+  const [Timetable, setTimetable] = useState();
 
   useEffect(() => {
     getExam();
+    getTimetable();
   }, []); 
 
   const getExam = () => {
@@ -20,6 +22,20 @@ const Exams = () => {
         const responseData = res.data;
         console.log(responseData);
         setExamData(responseData);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+  const getTimetable = () => {
+    axios
+      .get("https://akgec-edu.onrender.com/v1/student/timetable", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        const timetable = res.data.timetable;
+        console.log(timetable);
+        setTimetable(timetable);
       })
       .catch((e) => {
         console.log(e);
@@ -39,9 +55,9 @@ const Exams = () => {
     : examData;
 
     return (
-        <div className="bg-[#ffffff] h-[95%] max-[768px]:h-[100%] max-[768px]:ml-[4.75rem] rounded-3xl mx-4 mt-4 overflow-hidden">
+        <div className="bg-[#ffffff] h-[95%] max-[768px]:h-[100%] max-[768px]:ml-[4.75rem] rounded-3xl mx-4 mt-4 overflow-auto">
           <div className="sticky top-0 bg-white mr-4 flex flex-wrap items-center gap-3 text-lg ml-6 z-10">
-  {["Your Result", "Recent Assignment"].map((item, index) => (
+  {["Your Result", "Time Table"].map((item, index) => (
     <div
       key={index}
       onClick={() => handleOptionClick(index)}
@@ -90,6 +106,16 @@ const Exams = () => {
     </div>
   </div>
 )}
+{activeOption === 1 && (
+<div className='flex h-5/6 justify-center my-3'>
+<img src={Timetable}  alt="" />
+
+
+
+</div>)}
+
+
+
         </div>
       );
                     }      

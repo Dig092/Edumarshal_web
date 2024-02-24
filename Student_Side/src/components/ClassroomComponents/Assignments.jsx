@@ -29,7 +29,7 @@ const Assignments = () => {
 
 
   return (
-    <div className="bg-[#ffffff] h-[95%] max-[768px]:h-[100%] max-[768px]:ml-[4.75rem] rounded-3xl mx-4 mt-4 overflow-hidden">
+    <div className="bg-[#ffffff] h-[95%] max-[768px]:h-[100%] max-[768px]:ml-[4.75rem] rounded-3xl mx-4 mt-4 overflow-auto">
         <div className="h-[9.6vh] sticky top-0 bg-white mr-4 flex flex-wrap items-center gap-3 text-lg ml-6 z-10">
   {[
       "All Assignment",
