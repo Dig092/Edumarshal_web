@@ -30,32 +30,23 @@ export default function Classroom() {
         <div className="flex flex-col w-full">
 
           {/*Navbar Starts*/}
-          <div className="h-[84px] w-full bg-[#FBFBFB] rounded-2xl flex justify-between items-center">
-            <div className="text-2xl font-semibold ml-8">Classroom</div>
-            <div className="flex items-center mr-5 gap-8">
-              <div>
-                <img src="./icons/notifications.png" />
-              </div>
-              <div className="bg-[#C4C4C4] h-[50px] w-[50px] rounded-2xl"></div>
-            </div>
-          </div>
+          <NavBar title="Classroom" />
           {/* Navbar Ends */}
 
           {/* Select Bar Starts */}
-          <div className="h-[9.6vh] bg-[#ffffff] mt-4 mx-4 flex flex-wrap items-center rounded-3xl">
+          <div className="py-3 bg-[#ffffff] mt-4 mx-4 flex flex-wrap items-center rounded-3xl">
             <div className="ml-10 rounded-2xl">
               <SwitchClassroom onSwitchChange={handleSwitchChange} activeIndex={activeItem}/>
             </div>
           </div>
           {/* Select Bar Ends */}
-          <div className=" flex-grow">
+
           {activeItem === 0 && <Attendance />}
           {activeItem === 1 && <Assignments />}
           {activeItem === 2 && <ClassNotes />}
           {activeItem === 3 && <Exams />}
           {activeItem === 4 && <Syllabus />}
           {activeItem === 5 && <Feedback />}
-          </div>
         </div>
       </div>
     </>
