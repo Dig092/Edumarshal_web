@@ -5,8 +5,7 @@ import ProfilePage from "./pages/ProfilePage";
 import Classroom from "./pages/Classroom";
 import Fees from "./pages/Fees";
 import LoginPage from "./pages/LoginPage";
-// import HostelPage from "./pages/HostelPage";
-
+import Events from "./pages/Events";
 export default function App() {
     return (
         <Router>
@@ -17,6 +16,7 @@ export default function App() {
                 {/* <Route exact path="/hostelpage" element={<HostelPage />} /> */}
                 <Route exact path="/Classroom" element={<Classroom/>}/>
                 <Route exact path="/Fees" element={<Fees/>}/>
+                <Route exact path="/events" element={<Events/>}/>
             </Routes>
         </Router>
     );

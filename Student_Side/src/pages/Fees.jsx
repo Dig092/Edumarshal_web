@@ -6,6 +6,7 @@ import FeeStructure from "../components/FeesComponents/FeeStructure";
 import PayOnline from "../components/FeesComponents/PayOnline";
 import PaymentHistory from "../components/FeesComponents/PaymentHistory";
 import OfflinePaymentHistory from "../components/FeesComponents/OfflinePaymentHistory";
+import NavBar from "../components/NavBar";
 
 export default function Fees() {
     const [activefees, setActivefees] = useState(0);
@@ -16,10 +17,10 @@ export default function Fees() {
         <div className="h-screen bg-[#ECEBFE] w-full flex">
             <SideBar/>
             <div className="flex flex-col w-full">
-                <FeesNavbar/>
-                <div className="bg-[#ffffff] h-[84vh] rounded-3xl mx-4 mt-4 overflow-y-auto">
+               <NavBar title="Fees"/>
+                <div className="bg-[#ffffff] h-full overflow-y-auto">
                  {/* Select Option for fees */}
-                 <div className="h-[9.6vh] sticky top-0 bg-white mr-4  flex flex-wrap items-center gap-3 text-lg ml-6">
+                 <div className=" sticky top-0 w-full bg-white flex flex-wrap items-center md:gap-5 gap-1 md:text-lg text-sm  p-4  px-8 ml-0">
                 {[
                     "Fee Structure",
                     "Pay Online",
@@ -30,9 +31,9 @@ export default function Fees() {
                         key={index}
                         onClick={() => handleoptionfees(index)}
                         className={`${
-                            activefees === index ? "border-b-4" : "border-b-0"
+                            activefees === index ? "md:border-b-4 border-b-2":"md:border-b-0"
                         }
-                     flex items-center p-1 font-medium gap-2 cursor-pointer ml-8 border-[#004BB8]`}
+                     flex items-center p-1  font-medium cursor-pointer border-[#004BB8]`}
                     >
                         <span>{item}</span>
                     </div>

@@ -2,9 +2,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
 import SwitchClassroom from "../components/ClassroomComponents/SwitchClassroom";
-import Attendance from "../components/ClassroomComponents/Attendance";
+import Attendance from "../components/ClassroomComponents/Attendance/Attendance";
 import Assignments from "../components/ClassroomComponents/Assignments";
 import ClassNotes from "../components/ClassroomComponents/Classnotes";
 import Exams from "../components/ClassroomComponents/Exams";
@@ -24,12 +25,12 @@ export default function Classroom() {
 
   return (
     <>
-      <div className="min-h-screen bg-[#ECEBFE] w-full flex">
-        <SideBar active={active}/>
-        <div className="flex flex-col flex-wrap w-full">
+      <div className="h-screen bg-[#ECEBFE] w-full flex">
+        <SideBar active={active} />
+        <div className="flex flex-col w-full">
 
           {/*Navbar Starts*/}
-          <div className="h-[84px] w-auto max-[768px]:ml-[4.25rem] bg-[#FBFBFB] rounded-2xl flex justify-between items-center">
+          <div className="h-[84px] w-full bg-[#FBFBFB] rounded-2xl flex justify-between items-center">
             <div className="text-2xl font-semibold ml-8">Classroom</div>
             <div className="flex items-center mr-5 gap-8">
               <div>
@@ -41,8 +42,8 @@ export default function Classroom() {
           {/* Navbar Ends */}
 
           {/* Select Bar Starts */}
-          <div className="h-[9.6vh] bg-[#ffffff] max-[768px]:ml-[4.75rem] mt-4 mx-4 flex flex-wrap  items-center rounded-3xl">
-            <div className="ml-10 max-[768px]:px-3 max-[768px]:pl-7 rounded-2xl">
+          <div className="h-[9.6vh] bg-[#ffffff] mt-4 mx-4 flex flex-wrap items-center rounded-3xl">
+            <div className="ml-10 rounded-2xl">
               <SwitchClassroom onSwitchChange={handleSwitchChange} activeIndex={activeItem}/>
             </div>
           </div>
