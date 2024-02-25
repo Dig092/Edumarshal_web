@@ -1,12 +1,12 @@
 import React from "react";
 
-export default function DocumentCard({ document, handleUploadClick, handleDownloadClick}) {
+export default function DocumentCard({ document, handleUploadClick, handleDownloadClick, uploadedFile }) {
     return (
         <div className="md:w-42 w-21 relative md:ml-14 ml-2 my-7">
             <div
                 className="rounded-t-2xl bg-slate-700 sm:h-[214px] sm:w-[214px] h-[180px] w-[180px] relative"
                 style={{
-                    // backgroundImage: `url(${uploadedFile})`,
+                    backgroundImage: `url(${uploadedFile})`, // Set the background image
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                 }}
