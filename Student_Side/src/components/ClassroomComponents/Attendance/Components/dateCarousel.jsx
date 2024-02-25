@@ -7,11 +7,10 @@ import "slick-carousel/slick/slick-theme.css";
 import { selectDate } from "../../../../store/store";
 import { memoizedSelectDate } from "../../../../store/store";
 
-const DateCarousel = () => {
+const DateCarousel = ({onDateSelect, defualtDate}) => {
   const sliderRef = useRef(null);
   const dispatch = useDispatch();
   const selectedDate = useSelector((state) => memoizedSelectDate(state));
-
 
   const settings = {
     infinite: true,
@@ -50,10 +49,22 @@ const DateCarousel = () => {
     }
   }, [selectedDate, dispatch]);
 
+  useEffect(() => {
+    // Initialize selected date to the current date when the component mounts
+    const currentDate = new Date();
+    dispatch(
+      selectDate({
+        timestamp: currentDate.getTime(),
+        backgroundColor: "#004BBB",
+        textColor: "white",
+      })
+    );
+  }, [dispatch]);
+
   const handleDateClick = (date) => {
     dispatch(selectDate({ timestamp: date.getTime(), date: date.toISOString() }));
+    onDateSelect(date); // Make sure this line is present
   };
-  
 
   const getWeeks = () => {
     const currentDate = new Date();

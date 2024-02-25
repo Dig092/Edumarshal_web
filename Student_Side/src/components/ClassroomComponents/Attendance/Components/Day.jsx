@@ -1,46 +1,27 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useSelector } from "react-redux";
 import DateCarousel from "./dateCarousel";
+import { useSelector } from "react-redux";
 import { memoizedSelectDate } from "../../../../store/store";
 
-const Day = () => {
-  const [attendanceData, setAttendanceData] = useState([]);
+const Day = ({ attendanceData }) => {
   const [filteredAttendance, setFilteredAttendance] = useState([]);
+  const [initialRender, setInitialRender] = useState(true);
 
   const selectedDate = useSelector((state) => memoizedSelectDate(state));
 
   useEffect(() => {
-    const fetchAttendanceData = async () => {
-      try {
-        const response = await axios.get(
-          "https://akgec-edu.onrender.com/v1/student/attendance",
-          { withCredentials: true }
-        );
-
-        const sortedAttendance = response.data.map((subjectData) => ({
-          ...subjectData,
-          attendance: subjectData.attendance.sort(
-            (a, b) => new Date(a.date) - new Date(b.date)
-          ),
-        }));
-
-        setAttendanceData(sortedAttendance);
-        filterAttendanceData(selectedDate);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchAttendanceData();
-  }, [selectedDate]);
+    if (initialRender) {
+      // Filter attendance data for the initial selected date (current date)
+      filterAttendanceData(selectedDate);
+      setInitialRender(false);
+    }
+  }, [selectedDate, initialRender]);
 
   const handleDateSelect = (date) => {
     filterAttendanceData(date);
   };
 
   const filterAttendanceData = (date) => {
-    console.log(date);
     const filteredData = attendanceData.filter((subjectData) =>
       subjectData.attendance.some(
         (item) =>
@@ -54,10 +35,7 @@ const Day = () => {
   return (
     <div className="w-full">
       <div className="mb-4">
-        <DateCarousel
-          onDateSelect={handleDateSelect}
-          defaultDate={selectedDate}
-        />
+        <DateCarousel onDateSelect={handleDateSelect} defaultDate={selectedDate} />
       </div>
 
       {filteredAttendance.map((subjectData) => (
