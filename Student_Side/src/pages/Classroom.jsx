@@ -25,9 +25,9 @@ export default function Classroom() {
 
   return (
     <>
-      <div className="h-screen bg-[#ECEBFE] w-full flex">
+      <div className="h-screen overflow-hidden bg-[#ECEBFE] w-full flex">
         <SideBar active={active} />
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-3/4 md:w-full">
 
           {/*Navbar Starts*/}
           <NavBar title="Classroom" />

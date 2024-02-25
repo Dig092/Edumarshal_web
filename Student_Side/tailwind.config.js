@@ -7,11 +7,14 @@ export default {
   theme: {
     extend: {
       screens: {
-        'xl': '1440px',    // Custom breakpoint for 1440px
+        'xl': '1440px',    
         'lg': '1024px',    
         'md': '768px',
         'sm': '400px'
       },
+      colors:{
+        'bg-color': '#F2F6FF'
+      }
     },
   },
   plugins: [],
