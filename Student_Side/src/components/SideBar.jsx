@@ -38,7 +38,7 @@ export default function SideBar(props) {
 
     return (
         <div
-            className="flex transition-all sticky left-0 top-0 h-screen flex-col py-5 px-1 items-start bg-[#004BB8]"
+            className="transition-all hidden md:block sticky max-[780px]:fixed z-[99] left-0 top-0 h-screen max-[780px]:h-full flex-col py-5 px-1 items-start bg-[#004BB8]"
             style={{
                 width: `${menu ? "70px" : "230px"}`,
             }}
@@ -61,7 +61,11 @@ export default function SideBar(props) {
                     key={id}
                     className={`flex relative bg-${
                         element.focus == props.active ? "white" : "transparent"
-                    } items-center w-[87%] rounded-lg text-white my-1 mx-1 px-1 mr-3 hover:bg-white hover:text-blue-600`}
+                    } items-center w-[${
+                        menu ? "87%" : "95%"
+                    }] rounded-lg text-${
+                        element.focus == props.active ? "blue-600" : "white"
+                    } my-1 ml-1 hover:bg-white hover:text-blue-600`}
                 >
                     <div
                         className="absolute cursor-pointer top-0 w-full h-full bg-transparent"
@@ -73,24 +77,25 @@ export default function SideBar(props) {
                             });
                         }}
                     ></div>
-                    <img
-                        className={`px-6 py-5 rounded-lg  cursor-pointer`}
-                        alt=""
+                    <div
+                        className={`px-6 py-5 rounded-lg bg-no-repeat bg-center cursor-pointer`}
+                        // alt=""
+                        // src={element.focus}
                         style={{
-                            background: `url('./icons/${
+                            backgroundImage: `url('./icons/${
                                 flag && props.active == element.focus
                                     ? element.focus
                                     : element.unfocus
-                            }.png') no-repeat center`,
+                            }.png')`,
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "50%",
                             backgroundPosition: "center",
                         }}
                     />
                     <h1
-                        className="ml-2"
+                        className="ml-2 text-[15px] transition-all"
                         style={{
-                            fontSize: `${!menu ? "15px" : "0px"}`,
+                            display: `${!menu ? "block" : "none"}`,
                         }}
                     >
                         {element.title}
