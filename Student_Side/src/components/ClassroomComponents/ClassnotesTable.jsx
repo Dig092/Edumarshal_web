@@ -27,10 +27,10 @@ function ClassnotesTable({ setPageName }) {
 <table className="w-full border-collapse">
   <thead>
     <tr className="text-lg">
-      <th className="px-5 py-4">File Name</th>
-      <th className="px-5 py-4">Last Modified</th>
-      <th className="px-5 py-4">File Size</th>
-      <th className="px-5 py-4">Download</th>
+      <th className="px-5 py-4 text-center">File Name</th>
+      <th className="px-5 py-4 text-center">Last Modified</th>
+      <th className="px-5 py-4 text-center">File Size</th>
+      <th className="px-5 py-4 text-center">Download</th>
     </tr>
     <tr>
       <td colSpan="4">
@@ -40,19 +40,19 @@ function ClassnotesTable({ setPageName }) {
   </thead>
   <tbody>
     <tr>
-      <td className="px-5 py-4 ml-2">
-        <div className="flex items-center">
-          <img src={folderIcon} className="mr-1" alt="" />
-          <span>Stack & Queue</span>
-        </div>
+      <td className="px-5 py-4 ">
+      <div className="flex items-center justify-center">
+    <img src={folderIcon} className="mr-1" alt="" />
+    <span>Stack & Queue</span>
+  </div>
       </td>
-      <td className="px-5 py-4 ml-3">
-        <span className='ml-5'>21/07/2004</span>
+      <td className="px-5 py-4 text-center">
+        <span className=''>21/07/2004</span>
       </td>
-      <td className="px-5 py-4">
+      <td className="px-5 py-4 text-center">
         <span>12 MB</span>
       </td>
-      <td className="px-5 py-4">
+      <td className="px-5 py-4 text-center">
         <span>Download</span>
       </td>
     </tr>
@@ -63,6 +63,7 @@ function ClassnotesTable({ setPageName }) {
     </tr>
   </tbody>
 </table>
+
 
 
     </div>
