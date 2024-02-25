@@ -91,6 +91,7 @@ export default function DocumentSection() {
                                 cardIndex={cardIndex}
                                 handleUploadClick={() => handleUploadClick(document)}
                                 handleDownloadClick={() => handleDownloadClick(document)}
+                                uploadedFile={documentUrls[document.query]}
                             />
                         ))}
                     </div>
