@@ -23,14 +23,14 @@ const Attendance = () => {
   };
 
   const [attendance, setAttendace] = useState([]);
-  
+
   const [selectedSubject, setSelectedSubject] = useState(
     attendance.length > 0 ? attendance[0].subject : null
   );
 
   const handleSubjectClick = (subjectName) => {
     setSelectedSubject(subjectName);
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,27 +63,29 @@ const Attendance = () => {
       <div className="w-[94%] opacity-20 h-[2px] bg-[#d9d9d9] rounded"></div>
 
       <div className="w-[95%] m-auto flex h-5/6 justify-evenly">
-        <div className="w-[25%] flex flex-col overflow-y-scroll bg-[#F2F6FF] h-full rounded-2xl">
+        <div className="w-full md:w-1/4 flex flex-col overflow-y-scroll bg-[#F2F6FF] h-full rounded-2xl">
           <div className="pt-6 pb-3 px-6">All Subjects</div>
           <div className="w-[100%] mb-3 h-[1px] bg-[#D9D9D9]"></div>
           <div className="flex flex-col items-center">
             {attendance.map((subject) => (
               <div
-              key={subject.subject}
-              className={`flex my-3 justify-center shadow-md rounded-2xl bg-white cursor-pointer ${
-                selectedSubject === subject.subject ? "border-2 border-blue-500" : ""
-              }`}
-              onClick={() => handleSubjectClick(subject.subject)}
+                key={subject.subject}
+                className={`w-5/6 flex my-3 justify-center shadow-md rounded-2xl bg-white cursor-pointer ${
+                  selectedSubject === subject.subject
+                    ? "border-2 border-blue-500"
+                    : ""
+                }`}
+                onClick={() => handleSubjectClick(subject.subject)}
               >
                 <div className="flex flex-col">
-                  <h1 className="px-6 pt-4 font-medium text-lg">
+                  <h1 className="px-6 pt-4 font-medium text-lg lg:text-base">
                     {subject.subject}
                   </h1>
-                  <h1 className="px-6 pb-4">
+                  <h1 className="px-6 pb-4 lg:text-sm">
                     Attendance - {subject.totalPresent}/{subject.totalClasses}
                   </h1>
                 </div>
-                <div style={{ width: 60, height: 60 }} className="my-4 mx-4 ">
+                <div  className="w-16 my-4 mx-4 ">
                   <CircularProgressbar
                     value={(subject.totalPresent / subject.totalClasses) * 100}
                     text={`${(
@@ -100,7 +102,9 @@ const Attendance = () => {
         <div className="w-[70%] flex flex-col items-start h-full rounded-2xl">
           {activeItem === 0 && <Day attendanceData={attendance} />}
           {activeItem === 1 && <Week attendanceData={attendance} />}
-          {activeItem === 2 && <Month attendanceData={attendance} subjectName={selectedSubject} />}
+          {activeItem === 2 && (
+            <Month attendanceData={attendance} subjectName={selectedSubject} />
+          )}
         </div>
       </div>
     </div>
