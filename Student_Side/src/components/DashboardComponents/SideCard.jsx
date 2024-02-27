@@ -5,7 +5,9 @@ export default function SideCard(props) {
     const [open, setOpen] = useState(false);
     const [height, setHeight] = useState("100px");
     const openHandler = () => {
-        setHeight(!open ? "220px" : "100px");
+        setHeight(
+            !open ? `${100 + props.array.assignment.length * 80}px` : "100px"
+        );
         setOpen(!open);
         console.log(height);
         console.log(open);
