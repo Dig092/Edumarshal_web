@@ -15,37 +15,37 @@
         "title": "Classroom",
         "focus": "classroom",
         "unfocus": "classroomUnfocus",
-        "link" : "classroom"
+        "link": "classroom"
     },
     {
         "title": "Hostel",
-        "focus": "hostelUnfocus",
+        "focus": "hostel",
         "unfocus": "hostelUnfocus"
     },
     {
         "title": "Placement",
-        "focus": "placementUnfocus",
+        "focus": "placement",
         "unfocus": "placementUnfocus"
     },
     {
         "title": "PYQ's Papers",
-        "focus": "pyqUnfocus",
+        "focus": "pyq",
         "unfocus": "pyqUnfocus"
     },
     {
         "title": "Fees",
-        "focus": "Fees",
+        "focus": "fees",
         "unfocus": "feesUnfocus",
-        "link" : "Fees"
+        "link": "Fees"
     },
     {
         "title": "Events",
-        "focus": "eventsUnfocus",
+        "focus": "events",
         "unfocus": "eventsUnfocus"
     },
     {
-        "title": "Settings",
-        "focus": "settingUnfocus",
-        "unfocus": "settingUnfocus"
+        "title": "Customer Care",
+        "focus": "care",
+        "unfocus": "careUnfocus"
     }
 ]

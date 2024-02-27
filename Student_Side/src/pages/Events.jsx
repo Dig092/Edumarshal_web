@@ -67,15 +67,12 @@ export default function Events() {
                 <div className="bg-[#ffffff] mt-4 flex rounded-2xl w-[97%] md:h-[4rem] md:ml-5 ml-2 h-[3rem] items-center md:justify-start justify-center">
                     <div className="my-3 ml-10 bg-[#004BB8] md:p-2 p-1 px-4 rounded-[0.5rem]"><p className="text-white text-sm md:text-base">College Events</p></div>
                 </div>
-                <div className="bg-[#ffffff] md:h-[73vh] h-[85vh]  items-center rounded-3xl md:m-6 overflow-y-auto md:flex md:flex-row flex flex-col mt-3">
-                    <div className="md:m-4 md:w-[30%]  flex justify-center items-center">
+                <div className="bg-[#ffffff] md:h-[73vh] h-[85vh]  items-center md:justify-evenly rounded-3xl md:m-6 overflow-y-auto md:flex md:flex-row flex flex-col mt-3">
+                    <div className="md:m-4 w-[250px] md:w-[350px]  border-2 border-double mt-4 border-[#004BB8] flex justify-center items-center">
                     <Calendar tileContent={renderEventIndicator}/>
                     </div>
                     {selectedEvent ? (
-                        <div className="md:w-[70%] w-[90%] bg-[#F2F6FF] h-[30rem] mt-10 rounded-[0.5rem] overflow-y-auto flex justify-center items-center">
-                            <div className="cursor-pointer" onClick={handleEventDetails}>            
-                                <FaArrowLeft />
-                            </div>     
+                        <div className="md:w-[70%] w-[90%] bg-[#F2F6FF] h-[30rem] mt-10 rounded-[0.5rem] overflow-y-auto flex justify-center items-center">   
                             <div className="w-[33rem] h-[25rem] justify-evenly ml-12 flex flex-col bg-[#FBFBFB] rounded-3xl">
                                 <div className="flex justify-between">
                                     <div className="ml-10">
@@ -95,11 +92,14 @@ export default function Events() {
                                     <div className="flex"><p className="text-base font-medium">Prize : {selectedEvent.prize}</p></div>
                                     <div className="flex"><p className="text-base font-medium">Time Left : {selectedEvent.timeLeft}</p></div>
                                 </div>
+                                <div className="bg-[#004BB8] rounded-xl flex justify-center items-center px-8 cursor-pointer"><p className="text-base p-2 px-4 text-white">Register Now</p></div>
+                                <div className="bg-[#F75757] rounded-xl flex justify-center items-center px-8 cursor-pointer" onClick={handleEventDetails}><p className="text-base p-2 px-4 text-white">Close Details</p></div>
+
                             </div>
                         </div>
                     ) : (
                         <div className="flex justify-center items-center">
-                        <div className="lg:ml-40 md:ml-32 lg:w-[95%] md:w-[25rem] md:bg-[#F2F6FF] md:h-[30rem] md:overflow-y-auto grid xl:grid-cols-2 grid-cols-1 justify-center items-center rounded-3xl">
+                        <div className="lg:w-[95%] xmd:w-[25rem] md:w-[20rem] md:bg-[#F2F6FF] md:h-[30rem] md:overflow-y-auto grid xl:grid-cols-2 grid-cols-1 justify-center items-center rounded-3xl">
                             {events.map(event => (
                                 <EventCard key={event._id} event={event} handleViewDetails={() => handleViewDetails(event._id)} />
                             ))}
