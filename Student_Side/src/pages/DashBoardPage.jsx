@@ -26,19 +26,20 @@ export default function DashBoardPage() {
 
     const getResponses = () => {
         axios
-            .get("https://akgec-edu.onrender.com/v1/student/attendance", {
+            .get(import.meta.env.VITE_API + "/v1/student/attendance", {
                 withCredentials: true,
             })
             .then((res) => {
                 setArray(res.data);
                 setAtt(totalAtt(res.data).attendance);
                 axios
-                    .get("https://akgec-edu.onrender.com/v1/student/event")
+                    .get(import.meta.env.VITE_API + "/v1/student/event")
                     .then((res) => {
                         setEvents(res.data.event);
                         axios
                             .get(
-                                "https://akgec-edu.onrender.com/v1/student/timetable",
+                                import.meta.env.VITE_API +
+                                    "/v1/student/timetable",
                                 {
                                     withCredentials: true,
                                 }
@@ -47,7 +48,8 @@ export default function DashBoardPage() {
                                 setTimetable(res.data.timetable);
                                 axios
                                     .get(
-                                        "https://akgec-edu.onrender.com/v1/student/assignment",
+                                        import.meta.env.VITE_API +
+                                            "/v1/student/assignment",
                                         {
                                             withCredentials: true,
                                         }
@@ -60,7 +62,8 @@ export default function DashBoardPage() {
                                         );
                                         axios
                                             .get(
-                                                "https://akgec-edu.onrender.com/v1/student/pdpattendance",
+                                                import.meta.env.VITE_API +
+                                                    "/v1/student/pdpattendance",
                                                 { withCredentials: true }
                                             )
                                             .then((res) => {
