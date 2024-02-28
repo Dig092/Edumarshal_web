@@ -120,7 +120,7 @@ export default function DashBoardPage() {
                     <div className="text-black flex flex-col max-[500px]:items-center w-full">
                         <NavBar title="Dashboard" />
 
-                        <div className="flex max-[780px]:w-full max-[500px]:items-center max-[500px]:flex-col max-[780px]:ml-[70px] max-[500px]:ml-0 mb-[1.5vh] mt-[2vh] justify-evenly">
+                        <div className="flex max-[1024px]:w-full max-[500px]:items-center max-[500px]:flex-col max-[1024px]:ml-[70px] max-[500px]:ml-0 mb-[1.5vh] mt-[2vh] justify-evenly">
                             <div className="h-full flex max-[1000px]:w-[95%] flex-col w-[71%]">
                                 <div className="h-full max-[500px]:flex-col max-[500px]:items-center flex justify-between">
                                     <div className="h-full flex flex-col items-center  bg-white rounded-md max-[800px]:w-1/2 max-[500px]:mb-3 max-[500px]:w-[97%] w-[62%]">

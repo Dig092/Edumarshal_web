@@ -1,10 +1,10 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import { createSelector } from "reselect"
+import { createSelector } from "reselect";
 
 const menuSlice = createSlice({
     name: "menu",
     initialState: {
-        isOpen: false,
+        isOpen: true,
     },
     reducers: {
         toggleMenu: (state) => {
@@ -16,23 +16,22 @@ const menuSlice = createSlice({
 const dateSlice = createSlice({
     name: "date",
     initialState: {
-      selectedDate: null,
+        selectedDate: null,
     },
     reducers: {
-      selectDate: (state, action) => {
-        state.selectedDate = action.payload.timestamp;
-      },
+        selectDate: (state, action) => {
+            state.selectedDate = action.payload.timestamp;
+        },
     },
-  });
+});
 
-  const selectDateFromState = (state) => state.date.selectedDate;
-
+const selectDateFromState = (state) => state.date.selectedDate;
 
 export const { toggleMenu } = menuSlice.actions;
 export const { selectDate } = dateSlice.actions;
 export const memoizedSelectDate = createSelector(
-  [selectDateFromState],
-  (selectedDate) => new Date(selectedDate)
+    [selectDateFromState],
+    (selectedDate) => new Date(selectedDate)
 );
 
 export default configureStore({

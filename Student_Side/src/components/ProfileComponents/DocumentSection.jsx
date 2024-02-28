@@ -4,12 +4,17 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import documents from "../../constants/Documents.json";
 import DocumentCard from "./Documentcard";
+import { useEffect } from "react";
 
 export default function DocumentSection() {
     const [uploadDocumentType, setUploadDocumentType] = useState("");
     const [documentUrls, setDocumentUrls] = useState({});
     const fileInputRef = useRef(null);
 
+    useEffect(() => {
+        fetchDocuments();
+    }, []); 
+    
     const fetchDocuments = async () => {
         try {
             const response = await axios.get(
@@ -86,6 +91,7 @@ export default function DocumentSection() {
                                 cardIndex={cardIndex}
                                 handleUploadClick={() => handleUploadClick(document)}
                                 handleDownloadClick={() => handleDownloadClick(document)}
+                                uploadedFile={documentUrls[document.query]}
                             />
                         ))}
                     </div>
