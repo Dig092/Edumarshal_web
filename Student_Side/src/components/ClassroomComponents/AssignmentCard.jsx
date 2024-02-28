@@ -16,12 +16,10 @@ function AssignmentCard({ sub, status, deadline, description, question }) {
     setUploadedFile(file);
     console.log('Selected file:', file);
 
-    // Prepare form data
     const formData = new FormData();
     formData.append('file', file);
 
     try {
-      // Post the file to the API
       const response = await axios.post(
         'https://akgec-edu.onrender.com/v1/student/assignment/uploadSolution?assignmentId=65bd15fc0b2169b2a959de6a',
         formData,
