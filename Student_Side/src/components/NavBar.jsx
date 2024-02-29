@@ -7,10 +7,10 @@ export default function NavBar(props) {
     const [toggle, setToggle] = useState(false);
     const dispatch = useDispatch();
     return (
-        <div className="flex h-20 max-[780px]:ml-[70px] z-50 bg-white w-full px-4 justify-between items-center">
+        <div className="flex h-[60px] sticky top-0 z-[98] max-[1024px]:ml-[70px] bg-white w-full px-4 justify-between items-center">
             <img
                 className="max-[500px]:block hidden w-[30px]"
-                src={toggle ? "./hamburgerDark.png" : "./closeDark.png"}
+                src={!toggle ? "./hamburgerDark.png" : "./closeDark.png"}
                 alt=""
                 onClick={() => {
                     setToggle(!toggle);
@@ -28,7 +28,7 @@ export default function NavBar(props) {
                 />
                 <select
                     onChange={(e) => setSem(e.target.value)}
-                    className="outline outline-1 max-[550px]:w-[100px] max-[410px]:w-[40px] max-[410px]:w-[30px] max-[410px]:h-[30px] outline-black px-4 py-2 rounded-md w-[250px]"
+                    className="outline outline-1 max-[550px]:w-[100px] max-[410px]:w-[30px] max-[410px]:h-[30px] outline-black px-4 py-2 rounded-md w-[250px]"
                 >
                     {semester?.map((sem, id) => (
                         <option key={id} value={sem.value}>

@@ -29,37 +29,40 @@ const Assignments = () => {
 
 
   return (
-    <div className="bg-[#ffffff] h-[72vh] rounded-3xl mx-4 mt-4 overflow-y-auto">
-        <div className="h-[9.6vh] sticky top-0 bg-white mr-4  flex flex-wrap items-center gap-3 text-lg ml-6">
-                {[
-                    "All Assignment",
-                    "Recent Assignment",
-                ].map((item, index) => (
-                    <div
-                        key={index}
-                        onClick={() => handleoptionClick(index)}
-                        className={`${
-                            activeoption === index ? "border-b-4" : "border-b-0"
-                        }
-                     flex items-center p-3 font-medium gap-2 cursor-pointer ml-8 mt-5  border-[#004BB8]`}
-                    >
-                        <span>{item}</span>
-                    </div>
-                ))}
-            </div>
-            <div className="flex justify-center items-center">
-                    <div className="w-[94%]  h-[1.5px] bg-[#D9D9D9] my-0"></div>
-            </div>
-            <div className='flex flex-wrap justify-center '>
-  {data.length > 0 ? (
-    data.map(item => (
-      <AssignmentCard key={item.id} sub={item.subject.name} description={item.description} deadline={item.deadline} status="Pending" question={item.assignment}  />
-    ))
-  ) : (
-    <div className='mt-10  font-medium text-xl text-[#1A1A1A]'>No assignments available.</div>
-  )}
+    <div className="bg-[#ffffff] h-[95%] max-[768px]:h-[100%] max-[1024px]:ml-[80px] max-[1024px]:w-[98%]  max-[768px]:ml-[4.75rem] rounded-3xl mx-4 mt-4 overflow-auto">
+        <div className="h-[9.6vh] max-[768px]:h-  sticky top-0 bg-white mr-4 max-[768px]: flex flex-wrap items-center gap-3 text-lg  ml-6 z-10">
+  {[
+      "All Assignment",
+      "Recent Assignment",
+  ].map((item, index) => (
+      <div
+          key={index}
+          onClick={() => handleoptionClick(index)}
+          className={`${
+              activeoption === index ? "border-b-4" : "border-b-0"
+          }
+       flex items-center p-3 font-medium gap-2 cursor-pointer ml-8 mt-5 max-[768px]:mt-2  border-[#004BB8]`}
+      >
+          <span>{item}</span>
+      </div>
+  ))}
 </div>
+<div className="sticky top-[9.6vh] max-[1024px]: bg-white flex justify-center items-center z-10">
+  <div className="w-[96%] h-[1.5px] bg-[#D9D9D9] my-0 "></div>
+</div>
+<div className='max-[500px]:flex max-[500px]:justify-center max-[500px]:items-center'>
+     <div className='max-[1024px]:w-[98%] grid grid-cols-4 max-[500px]:w-[70%] gap-1 max-[1024px]:grid-cols-3 max-[768px]:grid-cols-2  max-[500px]:grid-cols-1'>
 
+      {data.length > 0 ? (
+        data.map(item => (
+          <AssignmentCard key={item.id} sub={item.subject.name} description={item.description} deadline={item.deadline} status="Pending" question={item.assignment}  />
+          ))
+          ) : (
+          <div className='mt-10 ml-10 font-medium text-xl text-[#1A1A1A]'>No assignments available.</div>
+          )}
+
+        </div>
+        </div>
     </div>
   )
 }

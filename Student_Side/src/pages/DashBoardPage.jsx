@@ -11,6 +11,7 @@ import axios from "axios";
 import totalAtt from "../constants/totalAtt";
 import { separateAssignment } from "../constants/separateAssignments";
 import Loader from "../components/Loader";
+import EventsCard from "../components/DashboardComponents/EventsCard";
 
 export default function DashBoardPage() {
     const [active, setActive] = useState("");
@@ -19,6 +20,8 @@ export default function DashBoardPage() {
     const [timetable, setTimetable] = useState("");
     const [assignment, setAssignment] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [pdp, setPdp] = useState([0, 0]);
+    const [events, setEvents] = useState([]);
     const location = useLocation();
 
     const getResponses = () => {
@@ -32,6 +35,7 @@ export default function DashBoardPage() {
                 axios
                     .get("https://akgec-edu.onrender.com/v1/student/event")
                     .then((res) => {
+                        setEvents(res.data.event);
                         axios
                             .get(
                                 "https://akgec-edu.onrender.com/v1/student/timetable",
@@ -40,7 +44,6 @@ export default function DashBoardPage() {
                                 }
                             )
                             .then((res) => {
-                                // console.log(res.data.timetable);
                                 setTimetable(res.data.timetable);
                                 axios
                                     .get(
@@ -55,6 +58,21 @@ export default function DashBoardPage() {
                                                 res.data.assignment
                                             )
                                         );
+                                        axios
+                                            .get(
+                                                "https://akgec-edu.onrender.com/v1/student/pdpattendance",
+                                                { withCredentials: true }
+                                            )
+                                            .then((res) => {
+                                                setPdp([
+                                                    res.data.totalClasses -
+                                                        res.data.totalPresent,
+                                                    res.data.totalPresent,
+                                                ]);
+                                            })
+                                            .catch((err) => {
+                                                console.log(err);
+                                            });
                                         setLoading(false);
                                     })
                                     .catch((e) => {
@@ -102,7 +120,7 @@ export default function DashBoardPage() {
                     <div className="text-black flex flex-col max-[500px]:items-center w-full">
                         <NavBar title="Dashboard" />
 
-                        <div className="flex max-[780px]:w-full max-[500px]:items-center max-[500px]:flex-col max-[780px]:ml-[70px] max-[500px]:ml-0 mb-[1.5vh] mt-[2vh] justify-evenly">
+                        <div className="flex max-[1024px]:w-full max-[500px]:items-center max-[500px]:flex-col max-[1024px]:ml-[70px] max-[500px]:ml-0 mb-[1.5vh] mt-[2vh] justify-evenly">
                             <div className="h-full flex max-[1000px]:w-[95%] flex-col w-[71%]">
                                 <div className="h-full max-[500px]:flex-col max-[500px]:items-center flex justify-between">
                                     <div className="h-full flex flex-col items-center  bg-white rounded-md max-[800px]:w-1/2 max-[500px]:mb-3 max-[500px]:w-[97%] w-[62%]">
@@ -130,9 +148,10 @@ export default function DashBoardPage() {
                                                 View Details
                                             </a>
                                         </div>
-                                        <DoughNut />
+                                        <DoughNut pdp={pdp} />
                                         <h1 className="font-bold text-lg mt-10 mb-1">
-                                            Total Lectures - <span>40</span>
+                                            Total Lectures -{" "}
+                                            <span>{`${pdp[0] + pdp[1]}`}</span>
                                         </h1>
                                         <div className="flex w-[90%] mt-3 mb-4 bg-white z-50  justify-evenly">
                                             <div className="flex items-center">
@@ -163,7 +182,7 @@ export default function DashBoardPage() {
                                         <SideCard key={id} array={assignment} />
                                     ))}
                                 </div>
-                                <div className="bg-white flex flex-col mt-4 pb-5 rounded-md h-fit">
+                                <div className="bg-white flex flex-col mt-4 pb-5 rounded-md h-[400px] overflow-y-scroll">
                                     <h1 className="text-2xl font-semibold p-4">
                                         Current Events
                                     </h1>
@@ -176,53 +195,13 @@ export default function DashBoardPage() {
                                                 view all
                                             </h2>
                                         </div>
-                                        <div className="bg-[#F2F6FF] w-full pb-2 rounded-lg">
-                                            <div className="flex p-2 justify-between">
-                                                <div className="flex w-[60%] justify-evenly">
-                                                    <img
-                                                        src="./icons/event.png"
-                                                        alt=""
-                                                        className="w-[30px] h-[30px]"
-                                                    />
-                                                    <div>
-                                                        <h1 className="text-[13px]">
-                                                            Codeshell 5.0
-                                                        </h1>
-                                                        <h3 className="text-[9px]">
-                                                            Event Organizer -
-                                                            CSI
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                                <h1 className="text-[7px]">
-                                                    1 Day ago
-                                                </h1>
-                                            </div>
-                                            <div className="w-[90%] m-auto max-[500px]:translate-x-5 mb-1">
-                                                <h1 className="text-xs font-medium">
-                                                    About Event:
-                                                </h1>
-                                                <p className="text-[8px] text-gray-600">
-                                                    Coding event Organised by{" "}
-                                                    <span className="text-gray-600 font-semibold">
-                                                        Computer Society Of
-                                                        India.
-                                                    </span>{" "}
-                                                    This is a coding event for
-                                                    2nd, 3rd, 4th year students.
-                                                    The Prize money of this
-                                                    event is 3000 rupees.{" "}
-                                                </p>
-                                            </div>
-                                            <div className="w-[90%] m-auto max-[500px]:translate-x-5">
-                                                <h1 className="text-[9px] text-gray-600">
-                                                    <span className="font-medium text-black">
-                                                        Event Date:
-                                                    </span>{" "}
-                                                    21/9/2024{" "}
-                                                </h1>
-                                            </div>
-                                        </div>
+                                        {events != [] &&
+                                            events.map((event, id) => (
+                                                <EventsCard
+                                                    event={event}
+                                                    key={id}
+                                                />
+                                            ))}
                                     </div>
                                 </div>
                             </div>
