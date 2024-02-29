@@ -50,8 +50,8 @@ const Assignments = () => {
 <div className="sticky top-[9.6vh] max-[1024px]: bg-white flex justify-center items-center z-10">
   <div className="w-[96%] h-[1.5px] bg-[#D9D9D9] my-0 "></div>
 </div>
-<div className='max-[500px]:flex max-[500px]:justify-center max-[500px]:items-center'>
-     <div className='max-[1024px]:w-[98%] grid grid-cols-4 max-[500px]:w-[70%] gap-1 max-[1024px]:grid-cols-3 max-[768px]:grid-cols-2  max-[500px]:grid-cols-1'>
+<div className='flex justify bg-center md:justify-evenly'>
+     <div className=' grid grid-cols-1  gap-1 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2'>
 
       {data.length > 0 ? (
         data.map(item => (
