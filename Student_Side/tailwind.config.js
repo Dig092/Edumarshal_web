@@ -13,6 +13,9 @@ export default {
         'sm': '400px',
         'xmd':'900px'
       },
+      colors:{
+        'bg-color': '#F2F6FF'
+      }
     },
   },
   plugins: [],
