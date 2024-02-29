@@ -12,6 +12,8 @@ import totalAtt from "../constants/totalAtt";
 import { separateAssignment } from "../constants/separateAssignments";
 import Loader from "../components/Loader";
 import EventsCard from "../components/DashboardComponents/EventsCard";
+import {Snackbar} from '@mui/material';
+import MuiAlert from '@mui/lab/Alert';
 
 export default function DashBoardPage() {
     const [active, setActive] = useState("");
@@ -23,6 +25,9 @@ export default function DashBoardPage() {
     const [pdp, setPdp] = useState([0, 0]);
     const [events, setEvents] = useState([]);
     const location = useLocation();
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+
 
     const getResponses = () => {
         axios
@@ -104,17 +109,25 @@ export default function DashBoardPage() {
         }
         setLoading(true);
         getResponses();
-    }, []);
+
+        // Check if there's a success message from the login page
+        const successMessage = location.state?.successMessage;
+        if (successMessage) {
+            setSnackbarMessage(successMessage);
+            setSnackbarOpen(true);
+        }
+    }, [location.state]);
+
     return (
         <div>
             {loading ? (
                 <Loader />
             ) : (
                 <div className="bg-[#ECEBFE] w-full flex">
-                    <div className="max-[500px]:hidden">
+                    <div className="max-[767px]:hidden">
                         <SideBar active={active} />
                     </div>
-                    <div className="min-[500px]:hidden">
+                    <div className="min-[767px]:hidden">
                         <SideBarMobile active={active} />
                     </div>
                     <div className="text-black flex flex-col max-[500px]:items-center w-full">
@@ -207,6 +220,20 @@ export default function DashBoardPage() {
                             </div>
                         </div>
                     </div>
+                    <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={3000}
+                onClose={() => setSnackbarOpen(false)}
+            >
+                <MuiAlert
+                    onClose={() => setSnackbarOpen(false)}
+                    severity="success"
+                    elevation={6}
+                    variant="filled"
+                >
+                    {snackbarMessage}
+                </MuiAlert>
+            </Snackbar>
                 </div>
             )}
         </div>
