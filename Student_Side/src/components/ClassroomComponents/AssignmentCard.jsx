@@ -23,10 +23,12 @@ function AssignmentCard({ sub, status, deadline, description, question }) {
       const response = await axios.post(
         'https://akgec-edu.onrender.com/v1/student/assignment/uploadSolution?assignmentId=65bd15fc0b2169b2a959de6a',
         formData,
+        
         {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
+          withCredentials:true,
         }
       );
 
