@@ -74,7 +74,7 @@ const Month = ({ attendanceData, subjectName }) => {
             return (
               <div key={day} className="text-center">
                 {/* Display date */}
-                <div className="p-1 font-semibold">
+                <div className="p-1 lg:p-0.5 xl:p-1 font-semibold">
                   {day === new Date().getDate() &&
                   selectedMonth === new Date().getMonth() + 1 &&
                   selectedYear === new Date().getFullYear() ? (

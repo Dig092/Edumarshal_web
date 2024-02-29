@@ -89,40 +89,42 @@ const Week = () => {
 
   return (
     <div>
-      <div className=" flex flex-col items-start h-full rounded-2xl">
-        <div className="flex justify-center items-center px-8 py-2 gap-11">
+      <div className="w-full grid grid-flow-row items-start justify-center h-full rounded-2xl">
+        <div className="w-full grid grid-flow-col grid-cols-9 justify-center items-center px-8 py-2 gap-11">
+          <div className="col-span-2">
           <WeekSelector onWeekChange={handleWeekChange} />
+          </div>
           {dateRange.map((date, index) => (
             <div
               key={index}
               className="flex items-center justify-center w-[65px] h-[49px] bg-[#F2F6FF] rounded-lg"
             >
-              <h1 className="font-semibold text-[#004BB8]">
+              <h1 className="font-semibold text-[#004BB8] col-span-1">
                 {date.toLocaleDateString("en-US", { day: "numeric" })}
               </h1>
             </div>
           ))}
         </div>
 
-        <div className="flex ml-8 my-2 px-8 py-2 gap-16 bg-[#004BB8] text-white rounded-lg">
-          <h1 className="mr-16">SUBJECT</h1>
+        <div className="grid grid-flow-col grid-cols-9 ml-8 my-2 px-8 py-2 gap-16 lg:gap-12 xl:gap-10 bg-[#004BB8] text-white rounded-lg">
+          <h1 className="col-span-2">SUBJECT</h1>
           {daysOfWeek.map((day, index) => (
-            <h1 key={index} className="mr-4">
+            <h1 key={index} className="col-span-1">
               {day}
             </h1>
           ))}
         </div>
 
-        <div className="grid  h-[65%] overflow-y-auto">
+        <div className="w-[100%] h-[65%] lg:h-[60%] xl:h-3/4 overflow-y-auto">
           {/* Display subject-wise attendance data */}
           {Array.isArray(attendanceData) &&
             attendanceData.map((subjectData, subjectIndex) => (
               <div
                 key={`${subjectData.subject}-${subjectData.totalClasses}`}
-                className="flex ml-8 px-8 my-2 py-2 bg-[#F2F6FF] text-black rounded-lg"
+                className="grid grid-flow-col grid-cols-9 gap-20 xl:gap-6 ml-8 px-8 my-4 py-2 bg-[#F2F6FF] text-black rounded-lg"
               >
-                <h1 className="w-52 font-semibold">{subjectData.subject}</h1>
-                <div className="grid grid-flow-row-dense grid-cols-7 gap-24">
+                <h1 className=" font-semibold col-span-2">{subjectData.subject}</h1>
+                <div className="grid grid-flow-col gap-[52px] xl:gap-[68px] col-span-1">
                   {dateRange.map((date, index) => {
                     const attendanceForDate =
                       subjectData.attendance &&
@@ -135,7 +137,7 @@ const Week = () => {
                     return (
                       <div
                         key={index}
-                        className={`flex items-center justify-center ${
+                        className={`flex  w-[34px] items-center justify-center ${
                           attendanceForDate.length > 0
                             ? "text-[#D9D9D9]"
                             : "text-green-500"
