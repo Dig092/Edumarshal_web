@@ -6,7 +6,7 @@ export default function DocumentCard({ document, handleUploadClick, handleDownlo
             <div
                 className="rounded-t-2xl bg-slate-700 sm:h-[214px] sm:w-[214px] h-[180px] w-[180px] relative"
                 style={{
-                    backgroundImage: `url(${uploadedFile})`, // Set the background image
+                    backgroundImage: `url(${uploadedFile})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                 }}
