@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import documents from "../../constants/Documents.json";
 import DocumentCard from "./Documentcard";
 import { useEffect } from "react";
@@ -13,8 +13,8 @@ export default function DocumentSection() {
 
     useEffect(() => {
         fetchDocuments();
-    }, []); 
-    
+    }, []);
+
     const fetchDocuments = async () => {
         try {
             const response = await axios.get(
@@ -42,7 +42,7 @@ export default function DocumentSection() {
         await fetchDocuments();
         const selectedDocument = documentUrls[document.query];
         if (selectedDocument) {
-            window.open(selectedDocument, '_blank');
+            window.open(selectedDocument, "_blank");
         } else {
             toast.error("Document not available");
         }
@@ -64,14 +64,13 @@ export default function DocumentSection() {
                 );
                 toast.success("Document uploaded successfully");
                 await fetchDocuments();
-
             } catch (error) {
                 console.error("Error uploading document:", error);
                 toast.error("Error uploading document");
             }
         }
     };
-    
+
     return (
         <div>
             <ToastContainer />
@@ -89,8 +88,12 @@ export default function DocumentSection() {
                                 key={cardIndex}
                                 document={document}
                                 cardIndex={cardIndex}
-                                handleUploadClick={() => handleUploadClick(document)}
-                                handleDownloadClick={() => handleDownloadClick(document)}
+                                handleUploadClick={() =>
+                                    handleUploadClick(document)
+                                }
+                                handleDownloadClick={() =>
+                                    handleDownloadClick(document)
+                                }
                                 uploadedFile={documentUrls[document.query]}
                             />
                         ))}
