@@ -10,7 +10,8 @@ export default {
         'xl': '1440px',    
         'lg': '1024px',    
         'md': '768px',
-        'sm': '400px'
+        'sm': '400px',
+        'xmd':'900px'
       },
       colors:{
         'bg-color': '#F2F6FF'

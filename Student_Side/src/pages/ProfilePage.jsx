@@ -10,6 +10,7 @@ import DocumentSection from "../components/ProfileComponents/DocumentSection";
 import ProfileSection from "../components/ProfileComponents/ProfileSection";
 import { useLocation } from "react-router-dom";
 import NavBar from "../components/NavBar";
+import SideBarMobile from "../components/SideBarMobile";
 
 export default function ProfilePage() {
     const [active, setActive] = useState("");
@@ -24,16 +25,21 @@ export default function ProfilePage() {
 
     return (
         <>
-            <div className="h-screen bg-[#ECEBFE] w-full flex">
-                
-                <SideBar active={active}/>
-                
+            <div className="h-screen  bg-[#ECEBFE] w-full flex">
+                {/* <SideBar active={active} /> */}
+                <div className="max-[767px]:hidden">
+                    <SideBar active={active} />
+                </div>
+                <div className="min-[767px]:hidden">
+                    <SideBarMobile active={active} />
+                </div>
+
                 <div className="flex flex-col w-full">
                     {/*Navbar Starts*/}
                     <NavBar title="Profile" />
                     {/* Navbar Ends */}
                     {/* Select Bar Starts */}
-                    <div className=" bg-[#ffffff] mt-4 mx-4 flex flex-wrap items-center rounded-3xl">
+                    <div className=" max-[1024px]:w-[94%] max-[1024px]:ml-[100px] max-[1024px]:mx-0  bg-[#ffffff] mt-4 mx-4 flex flex-wrap items-center rounded-3xl">
                         <div className="ml-10">
                             <SwitchProfile
                                 onSwitchChange={handleSwitchChange}
