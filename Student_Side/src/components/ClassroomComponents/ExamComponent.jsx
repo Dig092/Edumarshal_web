@@ -5,7 +5,7 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 function ExamComponent({subject,maximumMarks,marksObtained}) {
 const value= (marksObtained/maximumMarks)*100;
   return (
-    <div className="m-8 flex flex-col justify-center w-[25rem] rounded-[15px] overflow-hidden shadow-lg  bg-[#F2F6FF] border border-[#C4C4C4]">
+    <div className="m-8 max-[500px]:ml-0 flex flex-col justify-center w-[25rem] rounded-[15px] overflow-hidden shadow-lg  bg-[#F2F6FF] border border-[#C4C4C4]">
         <div className='flex ml-4 mt-3'>
         <img src={Examlogo} className='w-1/6' alt="" />
       <div className='flex flex-col mt-1 '>

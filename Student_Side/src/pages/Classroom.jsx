@@ -11,6 +11,7 @@ import ClassNotes from "../components/ClassroomComponents/Classnotes";
 import Exams from "../components/ClassroomComponents/Exams";
 import Syllabus from "../components/ClassroomComponents/Syllabus";
 import Feedback from "../components/ClassroomComponents/Feedback";
+import SideBarMobile from "../components/SideBarMobile";
 
 export default function Classroom() {
   const [active, setActive] = useState("");
@@ -25,17 +26,22 @@ export default function Classroom() {
 
   return (
     <>
-      <div className="h-screen bg-[#ECEBFE] w-full flex">
-        <SideBar active={active} />
-        <div className="flex flex-col w-full">
+      <div className="h-screen bg-[#ECEBFE] w-full max-[768px]:h-[108vh] max-[1024px]:h-[105vh] flex">
+      <div className="max-[500px]:hidden">
+                        <SideBar active={active} />
+                    </div>
+                    <div className="min-[500px]:hidden">
+                        <SideBarMobile active={active} />
+                    </div>
+        <div className="flex flex-col max-[768px]:w-[100vw] w-full">
 
           {/*Navbar Starts*/}
-          <NavBar title="Classroom" />
+          <NavBar title="Classroom"  />
           {/* Navbar Ends */}
 
           {/* Select Bar Starts */}
-          <div className="py-3 bg-[#ffffff] mt-4 mx-4 flex flex-wrap items-center rounded-3xl">
-            <div className="ml-10 rounded-2xl">
+          <div className="py-3 bg-[#ffffff] max-[1024px]:ml-[80px] max-[768px]:w-[98%] max-[500px]:hidden max-[1024px]:w-[98%] mt-4 mx-4 flex flex-wrap items-center rounded-3xl">
+            <div className="ml-10 max-[768px]:ml-1 rounded-2xl">
               <SwitchClassroom onSwitchChange={handleSwitchChange} activeIndex={activeItem}/>
             </div>
           </div>

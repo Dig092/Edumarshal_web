@@ -55,7 +55,7 @@ const Exams = () => {
         : examData;
 
     return (
-        <div className="bg-[#ffffff] h-[95%] max-[768px]:h-[100%] max-[768px]:ml-[4.75rem] rounded-3xl mx-4 mt-4 overflow-auto">
+        <div className="bg-[#ffffff]  max-[1024px]:ml-[80px] max-[1024px]:w-[98%]  h-[95%] max-[768px]:h-[100%] max-[768px]:ml-[4.75rem] rounded-3xl mx-4 mt-4 overflow-auto">
             <div className="sticky top-0 bg-white mr-4 flex flex-wrap items-center gap-3 text-lg ml-6 z-10">
                 {["Your Result", "Time Table"].map((item, index) => (
                     <div
@@ -76,10 +76,10 @@ const Exams = () => {
 
             {activeOption === 0 && (
                 <div className="flex flex-col  mx-auto">
-                    <div className=" mt-5 ml-8 flex-col">
+                    <div className=" mt-5 ml-8  flex-col">
                         <select
                             id="examSelect"
-                            className="w-[40rem] border border-gray-300 rounded-[12px] p-2 "
+                            className="w-[40rem] max-[500px]:w-5/6 max-[500px]:ml-1 border border-gray-300 rounded-[12px] p-2 "
                             value={selectedExam}
                             onChange={handleExamChange}
                         >
@@ -91,7 +91,8 @@ const Exams = () => {
                             ))}
                         </select>
                     </div>
-                    <div className="w-full grid grid-cols-3 gap-4">
+                    <div className="max-[768px]:flex max-[768px]:justify-center max-[768px]:items-center">
+                    <div className="w-full max-[768px]:w-[65%] max-[500px]:w-full grid grid-cols-3 max-[1024px]:grid-cols-2 max-[768px]:grid-cols-1 gap-4">
                         {filteredExamData.map((exam, index) =>
                             exam.result.map((result, resultIndex) => (
                                 <div key={resultIndex} className="w-full">
@@ -103,6 +104,7 @@ const Exams = () => {
                                 </div>
                             ))
                         )}
+                    </div>
                     </div>
                 </div>
             )}
