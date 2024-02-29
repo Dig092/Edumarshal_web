@@ -18,7 +18,8 @@ export default function DocumentSection() {
     const fetchDocuments = async () => {
         try {
             const response = await axios.get(
-                "https://akgec-edu.onrender.com/v1/student/profile/documents",
+                import.meta.env.VITE_BACKEND_API +
+                    "/v1/student/profile/documents",
                 {
                     withCredentials: true,
                 }
@@ -56,7 +57,8 @@ export default function DocumentSection() {
             console.log(uploadDocumentType);
             try {
                 const response = await axios.post(
-                    `https://akgec-edu.onrender.com/v1/student/profile/document?documentType=${uploadDocumentType}`,
+                    import.meta.env.VITE_BACKEND_API +
+                        `/v1/student/profile/document?documentType=${uploadDocumentType}`,
                     formData,
                     {
                         withCredentials: true,

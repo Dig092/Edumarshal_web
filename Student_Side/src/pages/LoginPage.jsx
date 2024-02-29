@@ -1,208 +1,233 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
-  TextField,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Paper,
-  IconButton,
-  InputAdornment,
-  CircularProgress,
-  Snackbar,
-} from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import MuiAlert from '@mui/lab/Alert';
-import axios from 'axios';
-import Cookies from 'js-cookie';
-
-
+    TextField,
+    Button,
+    Checkbox,
+    FormControlLabel,
+    Paper,
+    IconButton,
+    InputAdornment,
+    CircularProgress,
+    Snackbar,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import MuiAlert from "@mui/lab/Alert";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [dob, setDob] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState(''); 
-  const navigate = useNavigate();
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [dob, setDob] = useState("");
+    const [rememberMe, setRememberMe] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    const storedUsername = Cookies.get('rememberedUsername');
-    const storedPassword = Cookies.get('rememberedPassword');
-    const storedDob = Cookies.get('rememberedDob');
-    const storedRememberMe = Cookies.get('rememberMe');
-  
-    if (storedRememberMe && storedUsername && storedPassword && storedDob) {
-      setUsername(storedUsername);
-      setPassword(storedPassword);
-      setDob(storedDob);
-      setRememberMe(true);
-    }
-  }, []);
-  
+    useEffect(() => {
+        const storedUsername = Cookies.get("rememberedUsername");
+        const storedPassword = Cookies.get("rememberedPassword");
+        const storedDob = Cookies.get("rememberedDob");
+        const storedRememberMe = Cookies.get("rememberMe");
 
-  const signIn = async () => {
-    try {
-      setLoading(true);
-  
-      const formattedDate = dob.split('-').reverse().join('-');
-      const item = { username, password, dob: formattedDate };
-  
-      const response = await axios.post(
-        'https://akgec-edu.onrender.com/v1/student/login',
-        item,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          withCredentials: true,
+        if (storedRememberMe && storedUsername && storedPassword && storedDob) {
+            setUsername(storedUsername);
+            setPassword(storedPassword);
+            setDob(storedDob);
+            setRememberMe(true);
         }
-      );
-  
-      if (response.status === 200) {
-        if (rememberMe) {
-          // Store information in cookies
-          Cookies.set('rememberedUsername', username);
-          Cookies.set('rememberedPassword', password);
-          Cookies.set('rememberedDob', dob);
-          Cookies.set('rememberMe', true);
-        } else {
-          // Remove cookies if "Remember me" is not checked
-          Cookies.remove('rememberedUsername');
-          Cookies.remove('rememberedPassword');
-          Cookies.remove('rememberedDob');
-          Cookies.remove('rememberMe');
-        }
-  
-        setSnackbarOpen(true);
-        navigate('/dashboard', { state: { successMessage: 'Successfully logged in!' } });
-      } else {
-        console.error('Login failed');
-      }
-    } catch (error) {
+    }, []);
+
+    const signIn = async () => {
+        try {
+            setLoading(true);
+
+            const formattedDate = dob.split("-").reverse().join("-");
+            const item = { username, password, dob: formattedDate };
+
+            const response = await axios.post(
+                import.meta.env.VITE_BACKEND_API + "/v1/student/login",
+                item,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                    },
+                    withCredentials: true,
+                }
+            );
+
+            if (response.status === 200) {
+                if (rememberMe) {
+                    // Store information in cookies
+                    Cookies.set("rememberedUsername", username);
+                    Cookies.set("rememberedPassword", password);
+                    Cookies.set("rememberedDob", dob);
+                    Cookies.set("rememberMe", true);
+                } else {
+                    // Remove cookies if "Remember me" is not checked
+                    Cookies.remove("rememberedUsername");
+                    Cookies.remove("rememberedPassword");
+                    Cookies.remove("rememberedDob");
+                    Cookies.remove("rememberMe");
+                }
+
+                setSnackbarOpen(true);
+                navigate("/dashboard", {
+                    state: { successMessage: "Successfully logged in!" },
+                });
+            } else {
+                console.error("Login failed");
+            }
+        } catch (error) {
             // Handle any error and display a Snackbar
             // setSnackbarMessage('An error occurred during login. Please try again later.');
-            setSnackbarMessage('Invalid Credentials! Please try again later.');
+            setSnackbarMessage("Invalid Credentials! Please try again later.");
             setSnackbarOpen(true);
-            console.error('An error occurred during login', error);
-      
-    } finally {
-      setLoading(false);
-    }
-  };
-  
+            console.error("An error occurred during login", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-  const handleDateChange = (e) => {
-    setDob(e.target.value);
-  };
+    const handleDateChange = (e) => {
+        setDob(e.target.value);
+    };
 
-  const handleShowPasswordToggle = () => {
-    setShowPassword((prevShowPassword) => !prevShowPassword);
-  };
+    const handleShowPasswordToggle = () => {
+        setShowPassword((prevShowPassword) => !prevShowPassword);
+    };
 
-  const handleSnackbarClose = () => {
-    setSnackbarOpen(false);
-  };
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
 
-  return (
-    <div
-      style={{
-        backgroundImage: `url(./Loginbg.png)`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-      }}
-    >
-      {loading && <CircularProgress style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />}
-      <Paper
-        style={{
-          backgroundColor: 'rgba(255, 255, 255, 0.1)',
-          paddingTop: 60,
-          paddingBottom: 60,
-          paddingLeft: 40,
-          paddingRight: 40,
-          borderRadius: '10px',
-          width: '100%',
-          maxWidth: '400px',
-          backdropFilter: 'blur(10px)',
-        }}
-      >
+    return (
         <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <h1 style={{ fontSize: '2.0rem', fontWeight: '550', marginBottom: '16px' }}>Login</h1>
-
-          <TextField
-            variant="outlined"
-            style={{ width: '100%', marginBottom: '24px' }}
-            label="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter Your Username"
-            autoComplete="username"
-          />
-
-          <TextField
-            variant="outlined"
-            style={{ width: '100%', marginBottom: '24px' }}
-            label="Password"
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter Your password"
-            autoComplete="current-password"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleShowPasswordToggle}
-                    style={{ color: '#004BB8'}}
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
+            style={{
+                backgroundImage: `url(./Loginbg.png)`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                minHeight: "100vh",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                position: "relative",
             }}
-          />
-
-          <TextField
-            variant="outlined"
-            style={{ width: '100%', marginBottom: '0.8rem' }}
-            label=""
-            type="date"
-            value={dob}
-            onChange={handleDateChange}
-            placeholder="Enter Your Date Of Birth"
-          />
-
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: '0.8rem' }}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  color="primary"
-                  checked={rememberMe}
-                  onChange={() => setRememberMe(!rememberMe)}
+        >
+            {loading && (
+                <CircularProgress
+                    style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                    }}
                 />
-              }
-              label="Remember me"
-            />
-          </div>
+            )}
+            <Paper
+                style={{
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    paddingTop: 60,
+                    paddingBottom: 60,
+                    paddingLeft: 40,
+                    paddingRight: 40,
+                    borderRadius: "10px",
+                    width: "100%",
+                    maxWidth: "400px",
+                    backdropFilter: "blur(10px)",
+                }}
+            >
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                    }}
+                >
+                    <h1
+                        style={{
+                            fontSize: "2.0rem",
+                            fontWeight: "550",
+                            marginBottom: "16px",
+                        }}
+                    >
+                        Login
+                    </h1>
 
-          {/* <Button
+                    <TextField
+                        variant="outlined"
+                        style={{ width: "100%", marginBottom: "24px" }}
+                        label="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="Enter Your Username"
+                        autoComplete="username"
+                    />
+
+                    <TextField
+                        variant="outlined"
+                        style={{ width: "100%", marginBottom: "24px" }}
+                        label="Password"
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter Your password"
+                        autoComplete="current-password"
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleShowPasswordToggle}
+                                        style={{ color: "#004BB8" }}
+                                    >
+                                        {showPassword ? (
+                                            <VisibilityOff />
+                                        ) : (
+                                            <Visibility />
+                                        )}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+
+                    <TextField
+                        variant="outlined"
+                        style={{ width: "100%", marginBottom: "0.8rem" }}
+                        label=""
+                        type="date"
+                        value={dob}
+                        onChange={handleDateChange}
+                        placeholder="Enter Your Date Of Birth"
+                    />
+
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "flex-start",
+                            marginBottom: "0.8rem",
+                        }}
+                    >
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    color="primary"
+                                    checked={rememberMe}
+                                    onChange={() => setRememberMe(!rememberMe)}
+                                />
+                            }
+                            label="Remember me"
+                        />
+                    </div>
+
+                    {/* <Button
             style={{
               backgroundColor: '#004BB8',
               color: 'white',
@@ -220,52 +245,74 @@ const LoginPage = () => {
           >
             Login
           </Button> */}
-           <Button
-            style={{
-              backgroundColor: '#004BB8',
-              color: 'white',
-              width: '100%',
-              maxWidth: '400px',
-              padding: '12px',
-              borderRadius: '5px',
-              '&:hover': {
-                backgroundColor: 'skyblue',
-              },
-            }}
-            onClick={signIn}
-            disabled={loading}
-          >
-              {loading ? <CircularProgress size={20} style={{ color: 'white' }} /> : 'Login'}
-            {/* {loading ? 'Logging in...' : 'Login'} */}
-          </Button>
+                    <Button
+                        style={{
+                            backgroundColor: "#004BB8",
+                            color: "white",
+                            width: "100%",
+                            maxWidth: "400px",
+                            padding: "12px",
+                            borderRadius: "5px",
+                            "&:hover": {
+                                backgroundColor: "skyblue",
+                            },
+                        }}
+                        onClick={signIn}
+                        disabled={loading}
+                    >
+                        {loading ? (
+                            <CircularProgress
+                                size={20}
+                                style={{ color: "white" }}
+                            />
+                        ) : (
+                            "Login"
+                        )}
+                        {/* {loading ? 'Logging in...' : 'Login'} */}
+                    </Button>
 
-          <div className="text-center pt-4 font-normal text-sm ">
-            <span className="font-semibold">Forgot Your Password?{' '}</span>
-            <Link to="/register" className="text-[#dae9ff] font-normal underline">
-              Reset Password
-            </Link>
-          </div>
-        </div>
-      </Paper>
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={3000}
-        onClose={handleSnackbarClose}
-      >
-        <MuiAlert onClose={handleSnackbarClose} severity="success" elevation={6} variant="filled">
-          Successfully logged in!
-        </MuiAlert>
-      </Snackbar>
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={3000}
-        onClose={handleSnackbarClose}
-      >
-        <MuiAlert onClose={handleSnackbarClose} severity="error" elevation={6} variant="filled">
-          {snackbarMessage}
-        </MuiAlert>
-      </Snackbar>
-      {/* <Snackbar
+                    <div className="text-center pt-4 font-normal text-sm ">
+                        <span className="font-semibold">
+                            Forgot Your Password?{" "}
+                        </span>
+                        <Link
+                            to="/register"
+                            className="text-[#dae9ff] font-normal underline"
+                        >
+                            Reset Password
+                        </Link>
+                    </div>
+                </div>
+            </Paper>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={3000}
+                onClose={handleSnackbarClose}
+            >
+                <MuiAlert
+                    onClose={handleSnackbarClose}
+                    severity="success"
+                    elevation={6}
+                    variant="filled"
+                >
+                    Successfully logged in!
+                </MuiAlert>
+            </Snackbar>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={3000}
+                onClose={handleSnackbarClose}
+            >
+                <MuiAlert
+                    onClose={handleSnackbarClose}
+                    severity="error"
+                    elevation={6}
+                    variant="filled"
+                >
+                    {snackbarMessage}
+                </MuiAlert>
+            </Snackbar>
+            {/* <Snackbar
         open={snackbarOpen}
         autoHideDuration={3000}
         onClose={handleSnackbarClose}
@@ -274,10 +321,8 @@ const LoginPage = () => {
           Successfully logged in!
         </MuiAlert>
       </Snackbar> */}
-    </div>
-  );
+        </div>
+    );
 };
 
 export default LoginPage;
-
-

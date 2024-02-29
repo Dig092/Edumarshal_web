@@ -20,7 +20,8 @@ export default function ProfileSection() {
     useEffect(() => {
         axios
             .get(
-                "https://akgec-edu.onrender.com/v1/student/profile/personalInfo",
+                import.meta.env.VITE_BACKEND_API +
+                    "/v1/student/profile/personalInfo",
                 { withCredentials: true }
             )
             .then((res) => {
@@ -31,7 +32,8 @@ export default function ProfileSection() {
             });
         axios
             .get(
-                "https://akgec-edu.onrender.com/v1/student/profile/contactdetails",
+                import.meta.env.VITE_BACKEND_API +
+                    "/v1/student/profile/contactdetails",
                 { withCredentials: true }
             )
             .then((res) => {
@@ -42,7 +44,8 @@ export default function ProfileSection() {
             });
         axios
             .get(
-                "https://akgec-edu.onrender.com/v1/student/profile/parentinfo",
+                import.meta.env.VITE_BACKEND_API +
+                    "/v1/student/profile/parentinfo",
                 { withCredentials: true }
             )
             .then((res) => {
@@ -52,7 +55,7 @@ export default function ProfileSection() {
                 console.log(err);
             });
         axios
-            .get("https://akgec-edu.onrender.com/v1/student/subject", {
+            .get(import.meta.env.VITE_BACKEND_API + "/v1/student/subject", {
                 withCredentials: true,
             })
             .then((res) => {
