@@ -3,11 +3,11 @@ import React from "react";
 
 export default function PersonalInfo(props) {
     return (
-        <div className="w-[95%] pb-10 m-auto flex h-fit justify-evenly">
-            <div className="w-[25%] pb-6 items-center rounded-xl flex flex-col bg-[#F2F6FF] h-full">
+        <div className="w-[95%] pb-10 m-auto max-[768px]:items-center flex max-[768px]:flex-col h-fit justify-evenly">
+            <div className="w-[25%] max-[768px]:w-[90%] max-[768px]:mb-5 max-[1148px]:w-[35%] pb-6 items-center rounded-xl flex flex-col bg-[#F2F6FF] h-full">
                 <img
                     src="./displayPicture.png"
-                    className="w-[80%] mt-6"
+                    className="w-[80%] max-[768px]:w-[200px] mt-6"
                     alt=""
                 />
                 {props.personalData != null &&
@@ -16,7 +16,9 @@ export default function PersonalInfo(props) {
                             <TextField
                                 style={{
                                     margin: `${
-                                        id == 0 ? "30px 0 10px 0" : "10px 0"
+                                        id == 0
+                                            ? "30px 5px 10px 5px"
+                                            : "10px 5px"
                                     }`,
                                     width: "88%",
                                 }}
@@ -35,15 +37,18 @@ export default function PersonalInfo(props) {
                         )
                     )}
             </div>
-            <div className="w-[70%] py-5 rounded-xl flex flex-wrap justify-evenly bg-[#F2F6FF] h-full">
+            <div className="w-[70%] max-[1148px]:w-[60%] max-[768px]:w-[90%] py-5 rounded-xl flex flex-wrap justify-evenly bg-[#F2F6FF] h-full">
                 {props.personalData != null &&
                     props.personalData.map(([key, value], id) =>
                         id < 6 ? null : (
                             <TextField
                                 style={{
                                     margin: `${
-                                        id == 0 ? "30px 0 10px 0" : "10px 0"
+                                        id == 0
+                                            ? "30px 5px 10px 5px"
+                                            : "10px 5px"
                                     }`,
+                                    width: "45%",
                                 }}
                                 key={id}
                                 id="outlined-disabled"
