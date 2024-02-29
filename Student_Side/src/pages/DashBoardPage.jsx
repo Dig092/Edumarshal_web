@@ -28,78 +28,66 @@ export default function DashBoardPage() {
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
 
-
-    const getResponses = () => {
+  const getResponses = () => {
+    axios
+      .get("https://akgec-edu.onrender.com/v1/student/attendance", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setArray(res.data);
+        setAtt(totalAtt(res.data).attendance);
         axios
-            .get("https://akgec-edu.onrender.com/v1/student/attendance", {
+          .get("https://akgec-edu.onrender.com/v1/student/event")
+          .then((res) => {
+            setEvents(res.data.event);
+            axios
+              .get("https://akgec-edu.onrender.com/v1/student/timetable", {
                 withCredentials: true,
-            })
-            .then((res) => {
-                setArray(res.data);
-                setAtt(totalAtt(res.data).attendance);
+              })
+              .then((res) => {
+                setTimetable(res.data.timetable);
                 axios
-                    .get("https://akgec-edu.onrender.com/v1/student/event")
-                    .then((res) => {
-                        setEvents(res.data.event);
-                        axios
-                            .get(
-                                "https://akgec-edu.onrender.com/v1/student/timetable",
-                                {
-                                    withCredentials: true,
-                                }
-                            )
-                            .then((res) => {
-                                setTimetable(res.data.timetable);
-                                axios
-                                    .get(
-                                        "https://akgec-edu.onrender.com/v1/student/assignment",
-                                        {
-                                            withCredentials: true,
-                                        }
-                                    )
-                                    .then((res) => {
-                                        setAssignment(
-                                            separateAssignment(
-                                                res.data.assignment
-                                            )
-                                        );
-                                        axios
-                                            .get(
-                                                "https://akgec-edu.onrender.com/v1/student/pdpattendance",
-                                                { withCredentials: true }
-                                            )
-                                            .then((res) => {
-                                                setPdp([
-                                                    res.data.totalClasses -
-                                                        res.data.totalPresent,
-                                                    res.data.totalPresent,
-                                                ]);
-                                            })
-                                            .catch((err) => {
-                                                console.log(err);
-                                            });
-                                        setLoading(false);
-                                    })
-                                    .catch((e) => {
-                                        console.log(e);
-                                        setLoading(false);
-                                    });
-                            })
-                            .catch((e) => {
-                                console.log(e);
-                                setLoading(false);
-                            });
-                    })
-                    .catch((e) => {
-                        console.log(e);
-                        setLoading(false);
-                    });
-            })
-            .catch((e) => {
+                  .get("https://akgec-edu.onrender.com/v1/student/assignment", {
+                    withCredentials: true,
+                  })
+                  .then((res) => {
+                    setAssignment(separateAssignment(res.data.assignment));
+                    axios
+                      .get(
+                        "https://akgec-edu.onrender.com/v1/student/pdpattendance",
+                        { withCredentials: true }
+                      )
+                      .then((res) => {
+                        setPdp([
+                          res.data.totalClasses - res.data.totalPresent,
+                          res.data.totalPresent,
+                        ]);
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                    setLoading(false);
+                  })
+                  .catch((e) => {
+                    console.log(e);
+                    setLoading(false);
+                  });
+              })
+              .catch((e) => {
                 console.log(e);
                 setLoading(false);
-            });
-    };
+              });
+          })
+          .catch((e) => {
+            console.log(e);
+            setLoading(false);
+          });
+      })
+      .catch((e) => {
+        console.log(e);
+        setLoading(false);
+      });
+  };
 
     useEffect(() => {
         try {
