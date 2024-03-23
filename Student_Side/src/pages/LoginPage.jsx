@@ -15,6 +15,9 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import MuiAlert from "@mui/lab/Alert";
 import axios from "axios";
 import Cookies from "js-cookie";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const LoginPage = () => {
     const [username, setUsername] = useState("");
