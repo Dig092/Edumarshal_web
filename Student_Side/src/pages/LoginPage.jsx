@@ -52,7 +52,7 @@ const LoginPage = () => {
             const item = { username, password, dob: formattedDate };
 
             const response = await axios.post(
-                import.meta.env.VITE_BACKEND_API + "/v1/student/login",
+                process.env.VITE_BACKEND_API + "/v1/student/login",
                 item,
                 {
                     headers: {
