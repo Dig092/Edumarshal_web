@@ -15,9 +15,6 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import MuiAlert from "@mui/lab/Alert";
 import axios from "axios";
 import Cookies from "js-cookie";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const LoginPage = () => {
     const [username, setUsername] = useState("");
@@ -52,7 +49,7 @@ const LoginPage = () => {
             const item = { username, password, dob: formattedDate };
 
             const response = await axios.post(
-                process.env.VITE_BACKEND_API + "/v1/student/login",
+                import.meta.env.VITE_BACKEND_API + "/v1/student/login",
                 item,
                 {
                     headers: {
