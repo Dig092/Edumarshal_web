@@ -5,8 +5,9 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
     plugins: [react()],
     optimizeDeps: {
-        exclude: ["react-redux"],
+        // exclude: ["react-redux"],
         include: [
+            "react-redux",
             "@mui/material",
             "@mui/icons-material",
             "axios",
@@ -14,4 +15,14 @@ export default defineConfig({
             "@mui/system",
         ],
     },
+
+    // optimizeDeps: {
+    //     include: [
+    //         "@mui/material",
+    //         "@mui/icons-material",
+    //         "axios",
+    //         "react-router-dom",
+    //         "@mui/system",
+    //     ],
+    // },
 });
