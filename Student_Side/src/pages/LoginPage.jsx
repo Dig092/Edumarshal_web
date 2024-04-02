@@ -52,10 +52,6 @@ const LoginPage = () => {
                 `${import.meta.env.VITE_BACKEND_API}/v1/student/login`,
                 item,
                 {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json",
-                    },
                     withCredentials: true,
                 }
             );

@@ -6,9 +6,6 @@ export default defineConfig({
     plugins: [react()],
     optimizeDeps: {
         exclude: ["react-redux"],
-    },
-
-    optimizeDeps: {
         include: [
             "@mui/material",
             "@mui/icons-material",
