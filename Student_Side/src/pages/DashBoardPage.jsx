@@ -12,8 +12,8 @@ import totalAtt from "../constants/totalAtt";
 import { separateAssignment } from "../constants/separateAssignments";
 import Loader from "../components/Loader";
 import EventsCard from "../components/DashboardComponents/EventsCard";
-import {Snackbar} from '@mui/material';
-import MuiAlert from '@mui/lab/Alert';
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/lab/Alert";
 
 export default function DashBoardPage() {
     const [active, setActive] = useState("");
@@ -26,68 +26,83 @@ export default function DashBoardPage() {
     const [events, setEvents] = useState([]);
     const location = useLocation();
     const [snackbarOpen, setSnackbarOpen] = useState(false);
-    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarMessage, setSnackbarMessage] = useState("");
 
-  const getResponses = () => {
-    axios
-      .get("https://akgec-edu.onrender.com/v1/student/attendance", {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setArray(res.data);
-        setAtt(totalAtt(res.data).attendance);
+    const getResponses = () => {
         axios
-          .get("https://akgec-edu.onrender.com/v1/student/event")
-          .then((res) => {
-            setEvents(res.data.event);
-            axios
-              .get("https://akgec-edu.onrender.com/v1/student/timetable", {
+            .get(import.meta.env.VITE_BACKEND_API + "/v1/student/attendance", {
                 withCredentials: true,
-              })
-              .then((res) => {
-                setTimetable(res.data.timetable);
+            })
+            .then((res) => {
+                setArray(res.data);
+                setAtt(totalAtt(res.data).attendance);
                 axios
-                  .get("https://akgec-edu.onrender.com/v1/student/assignment", {
-                    withCredentials: true,
-                  })
-                  .then((res) => {
-                    setAssignment(separateAssignment(res.data.assignment));
-                    axios
-                      .get(
-                        "https://akgec-edu.onrender.com/v1/student/pdpattendance",
-                        { withCredentials: true }
-                      )
-                      .then((res) => {
-                        setPdp([
-                          res.data.totalClasses - res.data.totalPresent,
-                          res.data.totalPresent,
-                        ]);
-                      })
-                      .catch((err) => {
-                        console.log(err);
-                      });
-                    setLoading(false);
-                  })
-                  .catch((e) => {
-                    console.log(e);
-                    setLoading(false);
-                  });
-              })
-              .catch((e) => {
+                    .get(import.meta.env.VITE_BACKEND_API + "/v1/student/event")
+                    .then((res) => {
+                        setEvents(res.data.event);
+                        axios
+                            .get(
+                                import.meta.env.VITE_BACKEND_API +
+                                    "/v1/student/timetable",
+                                {
+                                    withCredentials: true,
+                                }
+                            )
+                            .then((res) => {
+                                setTimetable(res.data.timetable);
+                                axios
+                                    .get(
+                                        import.meta.env.VITE_BACKEND_API +
+                                            "/v1/student/assignment",
+                                        {
+                                            withCredentials: true,
+                                        }
+                                    )
+                                    .then((res) => {
+                                        setAssignment(
+                                            separateAssignment(
+                                                res.data.assignment
+                                            )
+                                        );
+                                        axios
+                                            .get(
+                                                import.meta.env
+                                                    .VITE_BACKEND_API +
+                                                    "/v1/student/pdpattendance",
+                                                { withCredentials: true }
+                                            )
+                                            .then((res) => {
+                                                setPdp([
+                                                    res.data.totalClasses -
+                                                        res.data.totalPresent,
+                                                    res.data.totalPresent,
+                                                ]);
+                                            })
+                                            .catch((err) => {
+                                                console.log(err);
+                                            });
+                                        setLoading(false);
+                                    })
+                                    .catch((e) => {
+                                        console.log(e);
+                                        setLoading(false);
+                                    });
+                            })
+                            .catch((e) => {
+                                console.log(e);
+                                setLoading(false);
+                            });
+                    })
+                    .catch((e) => {
+                        console.log(e);
+                        setLoading(false);
+                    });
+            })
+            .catch((e) => {
                 console.log(e);
                 setLoading(false);
-              });
-          })
-          .catch((e) => {
-            console.log(e);
-            setLoading(false);
-          });
-      })
-      .catch((e) => {
-        console.log(e);
-        setLoading(false);
-      });
-  };
+            });
+    };
 
     useEffect(() => {
         try {
@@ -209,19 +224,19 @@ export default function DashBoardPage() {
                         </div>
                     </div>
                     <Snackbar
-                open={snackbarOpen}
-                autoHideDuration={3000}
-                onClose={() => setSnackbarOpen(false)}
-            >
-                <MuiAlert
-                    onClose={() => setSnackbarOpen(false)}
-                    severity="success"
-                    elevation={6}
-                    variant="filled"
-                >
-                    {snackbarMessage}
-                </MuiAlert>
-            </Snackbar>
+                        open={snackbarOpen}
+                        autoHideDuration={3000}
+                        onClose={() => setSnackbarOpen(false)}
+                    >
+                        <MuiAlert
+                            onClose={() => setSnackbarOpen(false)}
+                            severity="success"
+                            elevation={6}
+                            variant="filled"
+                        >
+                            {snackbarMessage}
+                        </MuiAlert>
+                    </Snackbar>
                 </div>
             )}
         </div>

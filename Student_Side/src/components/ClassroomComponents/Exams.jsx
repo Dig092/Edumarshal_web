@@ -15,7 +15,7 @@ const Exams = () => {
 
     const getExam = () => {
         axios
-            .get("https://akgec-edu.onrender.com/v1/student/exam/result", {
+            .get(import.meta.env.VITE_BACKEND_API + "/v1/student/exam/result", {
                 withCredentials: true,
             })
             .then((res) => {
@@ -29,9 +29,12 @@ const Exams = () => {
     };
     const getTimetable = () => {
         axios
-            .get("https://akgec-edu.onrender.com/v1/student/exam/timetable", {
-                withCredentials: true,
-            })
+            .get(
+                import.meta.env.VITE_BACKEND_API + "/v1/student/exam/timetable",
+                {
+                    withCredentials: true,
+                }
+            )
             .then((res) => {
                 const timetable = res.data.examTimetable.examTimetableUrl;
                 console.log(timetable);
@@ -92,19 +95,19 @@ const Exams = () => {
                         </select>
                     </div>
                     <div className="max-[768px]:flex max-[768px]:justify-center max-[768px]:items-center">
-                    <div className="w-full max-[768px]:w-[65%] max-[500px]:w-full grid grid-cols-3 max-[1024px]:grid-cols-2 max-[768px]:grid-cols-1 gap-4">
-                        {filteredExamData.map((exam, index) =>
-                            exam.result.map((result, resultIndex) => (
-                                <div key={resultIndex} className="w-full">
-                                    <ExamComponent
-                                        subject={result.subject}
-                                        maximumMarks={result.maximumMarks}
-                                        marksObtained={result.marksObtained}
-                                    />
-                                </div>
-                            ))
-                        )}
-                    </div>
+                        <div className="w-full max-[768px]:w-[65%] max-[500px]:w-full grid grid-cols-3 max-[1024px]:grid-cols-2 max-[768px]:grid-cols-1 gap-4">
+                            {filteredExamData.map((exam, index) =>
+                                exam.result.map((result, resultIndex) => (
+                                    <div key={resultIndex} className="w-full">
+                                        <ExamComponent
+                                            subject={result.subject}
+                                            maximumMarks={result.maximumMarks}
+                                            marksObtained={result.marksObtained}
+                                        />
+                                    </div>
+                                ))
+                            )}
+                        </div>
                     </div>
                 </div>
             )}
