@@ -16,7 +16,7 @@ export default function Events() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("https://akgec-edu.onrender.com/v1/student/event", { withCredentials: true});
+                const response = await axios.get(import.meta.env.VITE_BACKEND_API + "/v1/student/event", { withCredentials: true});
                 const processedEvents = response.data.event.map(event => {
                     const eventDate = new Date(event.date);
                     const localDate = new Date(eventDate.getTime() - eventDate.getTimezoneOffset() * 60000);
