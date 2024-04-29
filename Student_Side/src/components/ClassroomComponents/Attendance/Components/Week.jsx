@@ -89,7 +89,7 @@ const Week = () => {
 
   return (
     <>
-      <div className="w-full flex flex-col items-center justify-start rounded-2xl">
+      <div className="w-full h-svh flex flex-col items-center justify-start rounded-2xl">
         <div className="w-full grid grid-flow-col grid-cols-9 justify-center items-center px-8 py-2">
           <div className="col-span-2">
             <WeekSelector onWeekChange={handleWeekChange} />
@@ -123,7 +123,7 @@ const Week = () => {
           </div>
         </div>
 
-        <div className="w-[94%] h-[65%] my-2 overflow-y-auto">
+        <div className="w-[94%] lg:h-1/2 xl:h-[65%] my-2 overflow-y-auto">
           {/* Display subject-wise attendance data */}
           {Array.isArray(attendanceData) &&
             attendanceData.map((subjectData, subjectIndex) => (
