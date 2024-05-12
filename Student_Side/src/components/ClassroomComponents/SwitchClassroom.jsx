@@ -4,7 +4,7 @@ const ClassroomSections = ["Attendance", "Assignments", "Class Notes", "Exams", 
 
 function SwitchClassroom({ activeIndex, onSwitchChange }) {
   return (
-    <div className="flex lg:ml-4 md:justify-center gap-6 cursor-pointer">
+    <div className="flex gap-12 cursor-pointer">
       {ClassroomSections.map((item, index) => (
         <div
           key={index}
