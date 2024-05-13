@@ -36,7 +36,7 @@ export default function Classroom() {
           <SideBarMobile active={active} />
         </div>
 
-        <div className="flex flex-col w-full h-screen">
+        <div className="flex flex-col w-full">
           {/* Navbar */}
           <NavBar title="Classroom" />
 
@@ -51,7 +51,7 @@ export default function Classroom() {
           </div>
 
           {/* Main Content */}
-          <div className="flex w-full h-[79%] ">
+          <div className="flex w-full ">
             {activeItem === 0 && <Attendance />}
             {activeItem === 1 && <Assignments />}
             {activeItem === 2 && <ClassNotes />}

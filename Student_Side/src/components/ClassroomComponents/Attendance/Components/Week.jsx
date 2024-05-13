@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import { useState, useEffect } from "react";
 import WeekSelector from "./WeekSelector";
 import axios from "axios";
@@ -89,7 +90,7 @@ const Week = () => {
 
   return (
     <>
-      <div className="w-full h-svh flex flex-col items-center justify-start rounded-2xl">
+      <div className="w-full flex flex-col items-center justify-start rounded-2xl">
         <div className="w-full grid grid-flow-col grid-cols-9 justify-center items-center px-8 py-2">
           <div className="col-span-2">
             <WeekSelector onWeekChange={handleWeekChange} />

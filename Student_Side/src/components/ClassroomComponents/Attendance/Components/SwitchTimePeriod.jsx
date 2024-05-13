@@ -1,7 +1,7 @@
-import React from "react";
 
 const TimePeriod = ["Day", "Week", "Month"];
 
+// eslint-disable-next-line react/prop-types
 function SwitchTimePeriod({ activeIndex, onSwitchChange }) {
   return (
     <div className="flex gap-6 cursor-pointer">

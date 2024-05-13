@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 
 const Month = ({ attendanceData, subjectName }) => {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // Initialize with the current month
@@ -13,7 +14,7 @@ const Month = ({ attendanceData, subjectName }) => {
   }, [attendanceData, subjectName]);
 
   return (
-    <div className="w-full mb-4 justify-center items-center">
+    <div className="w-full ml-6 justify-center items-center">
       {/* Month and Year picker */}
       <div className="flex items-center justify-start mb-6 ">
         <label className="mr-2 font-semibold">Month :</label>
