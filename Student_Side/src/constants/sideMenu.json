@@ -25,7 +25,8 @@
     {
         "title": "Placement",
         "focus": "placement",
-        "unfocus": "placementUnfocus"
+        "unfocus": "placementUnfocus",
+        "link": "placement"
     },
     {
         "title": "PYQ's Papers",
@@ -41,7 +42,8 @@
     {
         "title": "Events",
         "focus": "events",
-        "unfocus": "eventsUnfocus"
+        "unfocus": "eventsUnfocus",
+        "link": "events"
     },
     {
         "title": "Customer Care",
