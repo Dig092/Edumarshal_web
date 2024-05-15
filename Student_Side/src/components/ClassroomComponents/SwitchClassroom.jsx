@@ -1,10 +1,9 @@
-import React from "react";
-
+/* eslint-disable react/prop-types */
 const ClassroomSections = ["Attendance", "Assignments", "Class Notes", "Exams", "Syllabus", "Feedback"];
 
 function SwitchClassroom({ activeIndex, onSwitchChange }) {
   return (
-    <div className="flex max-[936px]:ml-0 gap-6 cursor-pointer">
+    <div className="flex gap-4 lg:gap-10  cursor-pointer">
       {ClassroomSections.map((item, index) => (
         <div
           key={index}

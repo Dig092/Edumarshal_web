@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AssignmentCard from "./AssignmentCard";
 import axios from "axios";
 const Assignments = () => {
@@ -29,7 +29,7 @@ const Assignments = () => {
 
     return (
         <div className="bg-[#ffffff] h-[95%] max-[768px]:h-[100%] max-[1024px]:ml-[80px] max-[1024px]:w-[98%]  max-[768px]:ml-[4.75rem] rounded-3xl mx-4 mt-4 overflow-auto">
-            <div className="h-[9.6vh] max-[768px]:h-  sticky top-0 bg-white mr-4 max-[768px]: flex flex-wrap items-center gap-3 text-lg  ml-6 z-10">
+            <div className="h-[9.6vh] sticky top-0 bg-white mr-4 max-[768px]: flex flex-wrap items-center gap-3 text-lg  ml-6 z-10">
                 {["All Assignment", "Recent Assignment"].map((item, index) => (
                     <div
                         key={index}
