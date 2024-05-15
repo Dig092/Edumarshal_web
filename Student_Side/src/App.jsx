@@ -6,11 +6,15 @@ import Classroom from "./pages/Classroom";
 import Fees from "./pages/Fees";
 import LoginPage from "./pages/LoginPage";
 import Events from "./pages/Events";
+import ResetPassword from "./pages/ResetPassword";
+import VerifyOtp from "./pages/VerifyOtp";
 export default function App() {
     return (
         <Router>
             <Routes>
                 <Route exact path="/" element={<LoginPage />} />
+                <Route exact path="/register" element={<ResetPassword />} />
+                <Route exact path="/VerifyOtp" element={<VerifyOtp />} />
                 <Route exact path="/dashboard" element={<DashBoardPage />} />
                 <Route exact path="/profile" element={<ProfilePage/>}/>
                 {/* <Route exact path="/hostelpage" element={<HostelPage />} /> */}
