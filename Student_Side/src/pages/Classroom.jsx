@@ -27,7 +27,7 @@ export default function Classroom() {
 
   return (
     <>
-      <div className=" bg-[#ECEBFE] w-full  flex">
+      <div className=" bg-[#ECEBFE] w-full flex">
         {/* SideBar */}
         <div className="hidden md:block">
           <SideBar active={active} />

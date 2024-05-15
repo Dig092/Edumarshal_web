@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import { toggleMenu } from "../store/store";
 import { useDispatch } from "react-redux";
 import semester from "../constants/semester.json";
@@ -7,9 +8,9 @@ export default function NavBar(props) {
     const [toggle, setToggle] = useState(false);
     const dispatch = useDispatch();
     return (
-        <div className="flex h-[60px] sticky top-0 z-[98] max-[1024px]:ml-[70px] bg-white w-full px-4 max-[767px]:ml-0 justify-between items-center">
+        <div className="flex h-[60px] sticky top-0 z-[98] bg-white w-full px-4 justify-between items-center">
             <img
-                className="max-[767px]:block hidden w-[30px]"
+                className="max-md:block hidden w-[30px]"
                 src={!toggle ? "./hamburgerDark.png" : "./closeDark.png"}
                 alt=""
                 onClick={() => {
@@ -17,7 +18,7 @@ export default function NavBar(props) {
                     dispatch(toggleMenu());
                 }}
             />
-            <h1 className="text-2xl max-[410px]:text-lg font-semibold px-6">
+            <h1 className="text-lg md:text-xl lg:text-2xl font-semibold px-6">
                 {props.title}
             </h1>
             <div className="flex max-[500px]:w-[50%] items-center max-[500px]:justify-evenly max-[410px]:w-[40%]">

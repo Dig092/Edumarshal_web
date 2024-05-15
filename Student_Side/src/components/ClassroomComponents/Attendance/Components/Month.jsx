@@ -5,53 +5,85 @@ const Month = ({ attendanceData, subjectName }) => {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // Initialize with the current month
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [defaultSubject, setDefaultSubject] = useState("");
+  const [isSmallDevice, setIsSmallDevice] = useState(false);
+  const [dayLabels, setDayLabels] = useState([]);
+  
   const daysInMonth = new Date(selectedYear, selectedMonth, 0).getDate();
+  const firstDayOfMonth = new Date(selectedYear, selectedMonth - 1, 1).getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
 
   useEffect(() => {
     if (attendanceData.length > 0 && !subjectName) {
       setDefaultSubject(attendanceData[0].subject);
     }
+
+    const checkScreenSize = () => {
+      setIsSmallDevice(window.innerWidth < 768); // Change the width according to your breakpoint
+    };
+
+    // Listen for resize events to update screen size state
+    window.addEventListener("resize", checkScreenSize);
+
+    // Call it initially to set the initial state
+    checkScreenSize();
+
+    // Clean up the event listener on component unmount
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, [attendanceData, subjectName]);
 
-  return (
-    <div className="w-full ml-6 justify-center items-center">
-      {/* Month and Year picker */}
-      <div className="flex items-center justify-start mb-6 ">
-        <label className="mr-2 font-semibold">Month :</label>
-        <select
-          className="border p-1 rounded-lg border-blue-500"
-          value={selectedMonth}
-          onChange={(e) => setSelectedMonth(Number(e.target.value))}
-        >
-          {Array.from({ length: 12 }, (_, index) => (
-            <option key={index + 1} value={index + 1}>
-              {index + 1}
-            </option>
-          ))}
-        </select>
+  useEffect(() => {
+    const generateDayLabels = () => {
+      const dayLabels = isSmallDevice
+        ? ["S", "M", "T", "W", "T", "F", "S"]
+        : ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      const startingIndex = firstDayOfMonth === 0 ? 6 : firstDayOfMonth;
+      return dayLabels
+        .slice(startingIndex)
+        .concat(dayLabels.slice(0, startingIndex));
+    };
 
-        <label className="mx-2 ml-7 font-semibold">Year :</label>
-        <input
-          type="number"
-          className="border p-1 rounded-lg border-blue-500"
-          value={selectedYear}
-          onChange={(e) => setSelectedYear(Number(e.target.value))}
-        />
+    setDayLabels(generateDayLabels());
+  }, [isSmallDevice, firstDayOfMonth]);
+
+  return (
+    <div className="w-full md:ml-6 justify-center items-center">
+      {/* Month and Year picker */}
+      <div className="w-full flex items-center justify-start mb-6 ">
+        <div>
+          <label className="mr-2 font-semibold">Month :</label>
+          <select
+            className="border p-1 rounded-lg border-blue-500"
+            value={selectedMonth}
+            onChange={(e) => setSelectedMonth(Number(e.target.value))}
+          >
+            {Array.from({ length: 12 }, (_, index) => (
+              <option key={index + 1} value={index + 1}>
+                {index + 1}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="mx-2 ml-7 font-semibold">Year :</label>
+          <input
+            type="number"
+            className="border p-1 rounded-lg border-blue-500"
+            value={selectedYear}
+            onChange={(e) => setSelectedYear(Number(e.target.value))}
+          />
+        </div>
       </div>
 
       {/* Calendar grid */}
       <div className="grid grid-cols-7 gap-4 rounded-xl bg-[#F2F6FF]">
-        {/* Weekday headers */}
-        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
-          (weekday, index) => (
-            <div
-              key={index}
-              className="text-center p-2 rounded-lg bg-[#004BB8] text-white"
-            >
-              {weekday}
-            </div>
-          )
-        )}
+        {dayLabels.map((weekday, index) => (
+          <div
+            key={index}
+            className="text-center p-2 rounded-lg bg-[#004BB8] text-white"
+          >
+            {weekday}
+          </div>
+        ))}
 
         {/* Calendar days */}
         {Array.from({ length: daysInMonth }, (_, index) => index + 1).map(
@@ -79,7 +111,7 @@ const Month = ({ attendanceData, subjectName }) => {
                   {day === new Date().getDate() &&
                   selectedMonth === new Date().getMonth() + 1 &&
                   selectedYear === new Date().getFullYear() ? (
-                    <span className="bg-[#004BB8] text-white rounded-lg px-4 py-2">
+                    <span className="bg-[#004BB8] text-white rounded-lg px-2 md:px-4 py-2">
                       {day}
                     </span>
                   ) : (
@@ -93,10 +125,10 @@ const Month = ({ attendanceData, subjectName }) => {
                     attendanceDay.map((attendance, index) => (
                       <span
                         key={index}
-                        className={`text-xs ${
+                        className={`text-xs font-semibold rounded-md px-1 ${
                           attendance.attended || attendance.isAc
-                            ? "text-green-500"
-                            : "text-red-500"
+                            ? "bg-green-500 text-white"
+                            : "bg-red-500 text-white"
                         }`}
                       >
                         {attendance.attended || attendance.isAc ? "P" : "A"}
