@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { CircularProgressbar } from "react-circular-progressbar";
-import { useLocation } from "react-router-dom";
 import "react-circular-progressbar/dist/styles.css";
 
 import SwitchTimePeriod from "./Components/SwitchTimePeriod";
@@ -49,8 +48,8 @@ const Attendance = () => {
 
     return (
         <div className="w-full bg-[#ffffff] rounded-3xl mx-4 mt-4 overflow-hidden flex flex-col justify-center items-center">
-            <div className="my-2 w-[95%] sticky flex flex-col md:flex-row ml-4 items-center justify-between">
-                <div className="py-4 text-black">Overall Attendance</div>
+            <div className="my-4 w-[95%] flex flex-col md:flex-row ml-4 items-center justify-between">
+                <div className=" text-black font-semibold mb-4 md:mb-0">Overall Attendance</div>
                 <div className="hidden md:block">
                     {date} {monthName}, {year}
                 </div>
@@ -60,10 +59,10 @@ const Attendance = () => {
                 />
             </div>
 
-            <div className="w-[94%] opacity-80 h-[2px] bg-[#111111] rounded"></div>
+            <div className="w-[94%] opacity-10 h-[2px] bg-[#111111] rounded"></div>
 
-            <div className="w-[95%] h-[90%] flex flex-col-reverse md:flex-row">
-                <div className="w-1/4 mt-4 flex flex-col overflow-y-scroll bg-[#F2F6FF] h-[95%] rounded-2xl">
+            <div className="w-[95%] md:h-[80vh] flex flex-col-reverse md:flex-row">
+                <div className="md:w-1/4 mt-4 flex flex-col overflow-y-scroll bg-[#F2F6FF] h-[95%] rounded-2xl">
                     <div className="pt-6 pb-3 px-6">All Subjects</div>
                     {/* line */}
                     <div className="w-[100%] mb-3 h-[1px] bg-[#D9D9D9]"></div>
@@ -108,7 +107,7 @@ const Attendance = () => {
                     </div>
                 </div>
 
-                <div className="w-3/4 flex flex-col items-start rounded-2xl">
+                <div className="md:w-3/4 pt-6 flex  items-start  rounded-2xl">
                     {activeItem === 0 && <Day attendanceData={attendance} />}
                     {activeItem === 1 && <Week attendanceData={attendance} />}
                     {activeItem === 2 && (
