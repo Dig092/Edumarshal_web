@@ -9,8 +9,3 @@ body{
     background-color: #ECEBFE;
 }
 
-@media screen and (max-width: 767px) {
-    *{
-        margin-left: 0 !important;
-    }
-}

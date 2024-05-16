@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import Select from "react-select";
 
 const WeekSelector = ({ onWeekChange }) => {
@@ -19,8 +20,8 @@ const WeekSelector = ({ onWeekChange }) => {
   };
 
   return (
-    <div className="bg-[#FBFBFB] my-2 rounded-xl flex justify-between items-center">
-      <div className="w-40 h-10">
+    <div className="bg-[#FBFBFB] md:my-2 rounded-xl flex justify-between items-center">
+      <div className="w-[90%] ">
         <Select
           options={options}
           placeholder="Select Week"
@@ -29,10 +30,11 @@ const WeekSelector = ({ onWeekChange }) => {
           isSearchable
           noOptionsMessage={() => "No Week Available"}
           styles={{
-            control: (baseStyles, { isFocused }) => ({
+            control: (baseStyles) => ({
               ...baseStyles,
               borderRadius: "0.75rem",
               border: `2px solid blue`,
+              font: `10px`,
             }),
           }}
         />

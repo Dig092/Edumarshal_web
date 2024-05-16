@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import { useState, useEffect } from "react";
 import WeekSelector from "./WeekSelector";
 import axios from "axios";
@@ -6,6 +7,7 @@ const Week = () => {
   const [selectedWeek, setSelectedWeek] = useState(null);
   const [dateRange, setDateRange] = useState([]);
   const [attendanceData, setAttendanceData] = useState([]);
+  const [isSmallDevice, setIsSmallDevice] = useState(false);
 
   const handleWeekChange = (week) => {
     setSelectedWeek(week);
@@ -81,23 +83,43 @@ const Week = () => {
     const daysIntoMonth = currentDate.getDate() - 2;
     const currentWeek = Math.ceil((daysIntoMonth + offset) / 7);
     setSelectedWeek(currentWeek);
+
+    const checkScreenSize = () => {
+      setIsSmallDevice(window.innerWidth < 768); // Change the width according to your breakpoint
+    };
+
+    // Listen for resize events to update screen size state
+    window.addEventListener("resize", checkScreenSize);
+
+    // Call it initially to set the initial state
+    checkScreenSize();
+
+    // Clean up the event listener on component unmount
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-  const daysOfWeek = dateRange.map((date) =>
-    date.toLocaleDateString("en-US", { weekday: "short" })
+  const weekdays = isSmallDevice
+    ? dateRange.filter((date) => date.getDay() >= 1 && date.getDay() <= 5)
+    : dateRange;
+
+  // Map weekdays to daysOfWeek, extracting the first two letters for small screens
+  const daysOfWeek = weekdays.map((date) =>
+    isSmallDevice
+      ? date.toLocaleDateString("en-US", { weekday: "short" }).slice(0, 2)
+      : date.toLocaleDateString("en-US", { weekday: "short" })
   );
 
   return (
     <>
-      <div className="w-full h-svh flex flex-col items-center justify-start rounded-2xl">
-        <div className="w-full grid grid-flow-col grid-cols-9 justify-center items-center px-8 py-2">
+      <div className="w-full flex flex-col items-center justify-start rounded-2xl">
+        <div className="w-full grid grid-flow-col grid-cols-7 md:grid-cols-9 gap-2 md:gap-0 justify-center items-center px-8 py-2">
           <div className="col-span-2">
             <WeekSelector onWeekChange={handleWeekChange} />
           </div>
-          {dateRange.map((date, index) => (
+          {weekdays.map((date, index) => (
             <div
               key={index}
-              className="flex items-center justify-center col-span-1 w-[65px] h-[49px] bg-[#F2F6FF] rounded-lg"
+              className="flex items-center justify-center col-span-1  md:w-[65px] h-[49px] bg-[#F2F6FF] rounded-lg"
             >
               <h1 className="font-semibold text-[#004BB8] ">
                 {date.toLocaleDateString("en-US", {
@@ -109,12 +131,12 @@ const Week = () => {
         </div>
 
         <div className="w-[94%] flex items-center justify-center">
-          <div className="w-full grid grid-flow-col grid-cols-9 my-2 px-8 py-2 bg-[#004BB8] text-white rounded-lg">
+          <div className="w-full grid grid-flow-col grid-cols-7 md:grid-cols-9 my-2 px-4 md:px-8 py-2 bg-[#004BB8] text-white rounded-lg">
             <div className=" col-span-2">
-              <h1>SUBJECT</h1>
+              {isSmallDevice ? <h1>SUB</h1> : <h1>SUBJECT</h1>}
             </div>
             {daysOfWeek.map((day, index) => (
-              <div className="flex items-center justify-start col-span-1">
+              <div className="flex items-center justify-center md:justify-start col-span-1">
                 <h1 key={index} className="col-span-1">
                   {day}
                 </h1>
@@ -129,12 +151,18 @@ const Week = () => {
             attendanceData.map((subjectData, subjectIndex) => (
               <div
                 key={`${subjectData.subject}-${subjectData.totalClasses}`}
-                className="w-full grid grid-cols-9 grid-flow-row px-8 my-4 py-2 bg-[#F2F6FF] text-black rounded-lg"
+                className="w-full grid grid-flow-row grid-cols-7 md:grid-cols-9 px-4 md:px-8 my-4 py-2 bg-[#F2F6FF] text-black rounded-lg"
               >
-                <h1 className="font-semibold col-span-2 sm:col-span-2">
-                  {subjectData.subject}
-                </h1>
-                {dateRange.map((date, index) => {
+                {isSmallDevice ? (
+                  <h1 className="font-semibold col-span-2">
+                    {subjectData.subject.slice(0, 4)}
+                  </h1>
+                ) : (
+                  <h1 className="font-semibold col-span-2">
+                    {subjectData.subject}
+                  </h1>
+                )}
+                {weekdays.map((date, index) => {
                   const attendanceForDate =
                     subjectData.attendance &&
                     subjectData.attendance.filter(
