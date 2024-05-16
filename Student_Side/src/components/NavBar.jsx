@@ -2,10 +2,34 @@ import React, { useState } from "react";
 import { toggleMenu } from "../store/store";
 import { useDispatch } from "react-redux";
 import semester from "../constants/semester.json";
+import axios from "axios";
+import { useEffect } from "react";
 export default function NavBar(props) {
     const [sem, setSem] = useState("Select Semester");
     const [toggle, setToggle] = useState(false);
+    const [documentUrls, setDocumentUrls] = useState({});
     const dispatch = useDispatch();
+    useEffect(() => {
+        fetchDocuments();
+    }, []);
+
+    const fetchDocuments = async () => {
+        try {
+            const response = await axios.get(
+                import.meta.env.VITE_BACKEND_API +
+                    "/v1/student/profile/documents",
+                {
+                    withCredentials: true,
+                }
+            );
+            setDocumentUrls(response.data.documents.studentPhoto);
+            console.log(response.data.documents.studentPhoto);
+        } catch (error) {
+            console.error("Error fetching documents:", error);
+            toast.error("Error fetching documents");
+        }
+    };
+
     return (
         <div className="flex h-[60px] sticky top-0 z-[98] max-[1024px]:ml-[70px] bg-white w-full px-4 max-[767px]:ml-0 justify-between items-center">
             <img
@@ -36,7 +60,13 @@ export default function NavBar(props) {
                         </option>
                     ))}
                 </select>
-                <div className="w-[40px] max-[410px]:w-[30px] max-[410px]:h-[30px] ml-5 h-[40px] rounded-md bg-gray-300"></div>
+                <div className="w-[40px] max-[410px]:w-[30px] max-[410px]:h-[30px] ml-5 h-[40px] rounded-md"
+                 style={{
+                    backgroundImage: `url(${documentUrls})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                }}>
+                </div>
             </div>
         </div>
     );
