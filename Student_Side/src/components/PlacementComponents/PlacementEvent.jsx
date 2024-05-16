@@ -1,6 +1,5 @@
 import React from "react";
 import { useRef } from "react";
-
 const Labels = [
   { name: "Website", smallWidth: "w-[16rem]" },
   { name: "Appointment Date", smallWidth: "w-[16rem]" },
@@ -22,7 +21,6 @@ export default function PlacementEvent() {
         {Labels.map((label, index) => (
           <div key={index} className={`relative my-5 md:my-3 ${label.smallWidth} `}>
             <input
-              // type={label.name === "Date Of Payment" ? "date" : "text"}
               type="text"
               name={`input_${index}`}
               maxLength="100"
