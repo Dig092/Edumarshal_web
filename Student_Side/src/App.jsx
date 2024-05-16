@@ -8,6 +8,8 @@ import LoginPage from "./pages/LoginPage";
 import Events from "./pages/Events";
 import ResetPassword from "./pages/ResetPassword";
 import VerifyOtp from "./pages/VerifyOtp";
+import { SetMealTwoTone } from "@mui/icons-material";
+import SetNewPassword from "./pages/SetNewPassword";
 export default function App() {
     return (
         <Router>
@@ -15,6 +17,7 @@ export default function App() {
                 <Route exact path="/" element={<LoginPage />} />
                 <Route exact path="/register" element={<ResetPassword />} />
                 <Route exact path="/VerifyOtp" element={<VerifyOtp />} />
+                <Route exact path="/SetNewPassword" element={<SetNewPassword />} />
                 <Route exact path="/dashboard" element={<DashBoardPage />} />
                 <Route exact path="/profile" element={<ProfilePage/>}/>
                 {/* <Route exact path="/hostelpage" element={<HostelPage />} /> */}
