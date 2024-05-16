@@ -19,7 +19,7 @@ export default function Classroom() {
     setActive(location.state.active);
   }, []);
 
-  const [activeItem, setActiveItem] = useState(1);
+  const [activeItem, setActiveItem] = useState(0);
 
   const handleSwitchChange = (value) => {
     setActiveItem(value);
