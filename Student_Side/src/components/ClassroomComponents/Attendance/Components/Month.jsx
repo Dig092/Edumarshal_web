@@ -48,7 +48,7 @@ const Month = ({ attendanceData, subjectName }) => {
     <div className="w-full md:ml-6 justify-center items-center">
       {/* Month and Year picker */}
       <div className="w-full flex items-center justify-start mb-6 ">
-        <div>
+        <div className="max-sm:w-1/4">
           <label className="mr-2 font-semibold">Month :</label>
           <select
             className="border p-1 rounded-lg border-blue-500"
@@ -63,11 +63,11 @@ const Month = ({ attendanceData, subjectName }) => {
           </select>
         </div>
 
-        <div>
+        <div className="max-sm:w-3/4">
           <label className="mx-2 ml-7 font-semibold">Year :</label>
           <input
             type="number"
-            className="border p-1 rounded-lg border-blue-500"
+            className="max-sm:w-full border p-1 rounded-lg border-blue-500"
             value={selectedYear}
             onChange={(e) => setSelectedYear(Number(e.target.value))}
           />
