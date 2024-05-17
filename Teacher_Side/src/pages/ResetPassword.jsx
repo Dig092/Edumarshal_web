@@ -16,7 +16,7 @@ import MuiAlert from "@mui/lab/Alert";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const LoginPage = () => {
+const ResetPassword = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [dob, setDob] = useState("");
@@ -49,7 +49,7 @@ const LoginPage = () => {
             const item = { username, password, dob: formattedDate };
 
             const response = await axios.post(
-                `${import.meta.env.VITE_BACKEND_API}/v1/student/login`,
+                `${import.meta.env.VITE_BACKEND_API}/v1/student/resetPassword`,
                 item,
                 {
                     withCredentials: true,
@@ -72,7 +72,7 @@ const LoginPage = () => {
                 }
 
                 setSnackbarOpen(true);
-                navigate("/dashboard", {
+                navigate("/VerifyOtp", {
                     state: { successMessage: "Successfully logged in!" },
                 });
             } else {
@@ -147,16 +147,15 @@ const LoginPage = () => {
                 >
                     <h1
                         style={{
-                            fontSize: "2.0rem",
+                            fontSize: "1.5rem",
                             fontWeight: "550",
                             marginBottom: "16px",
-                            fontFamily:"sans-serif"
                         }}
                     >
-                        Login
+                        Reset Password
                     </h1>
 
-                    {/* <TextField
+                    <TextField
                         variant="outlined"
                         style={{ width: "100%", marginBottom: "24px" }}
                         label="Username"
@@ -164,29 +163,9 @@ const LoginPage = () => {
                         onChange={(e) => setUsername(e.target.value)}
                         placeholder="Enter Your Username"
                         autoComplete="username"
-                    /> */}
-<TextField
-    variant="outlined"
-    style={{ width: "100%", marginBottom: "24px" }}
-    label="Username"
-    value={username}
-    onChange={(e) => setUsername(e.target.value)}
-    placeholder="Enter Your Username"
-    autoComplete="username"
-    inputProps={{
-        pattern: "[0-9]*", // Allow only numeric input
-    }}
-    error={!/^\d*$/.test(username)} // Apply error style if username is not numeric
-    helperText={
-        !/^\d*$/.test(username) && ( // Display helper text conditionally
-            <span>
-                Enter Valid Username
-            </span>
-        )
-    }
-/>
+                    />
 
-                    <TextField
+                    {/* <TextField
                         variant="outlined"
                         style={{ width: "100%", marginBottom: "24px" }}
                         label="Password"
@@ -222,9 +201,9 @@ const LoginPage = () => {
                         value={dob}
                         onChange={handleDateChange}
                         placeholder="Enter Your Date Of Birth"
-                    />
+                    /> */}
 
-                    <div
+                    {/* <div
                         style={{
                             display: "flex",
                             flexDirection: "column",
@@ -242,7 +221,7 @@ const LoginPage = () => {
                             }
                             label="Remember me"
                         />
-                    </div>
+                    </div> */}
 
                     {/* <Button
             style={{
@@ -283,20 +262,20 @@ const LoginPage = () => {
                                 style={{ color: "white" }}
                             />
                         ) : (
-                            "Login"
+                            "Send Otp"
                         )}
                         {/* {loading ? 'Logging in...' : 'Login'} */}
                     </Button>
 
-                    <div className="text-center pt-4 font-normal text-sm ">
-                        <span className="font-bold font-sans">
-                            Forgot Your Password?{" "}
+                    <div className="text-center pt-4 font-normal text-m ">
+                        <span className="font-semibold">
+                            Return To{" "}
                         </span>
                         <Link
-                            to="/resetPassword"
-                            className="text-white font-normal font-sans"
+                            to="/"
+                            className="text-[#dae9ff] font-semibold font-sans "
                         >
-                            Reset Password
+                            Sign in 
                         </Link>
                     </div>
                 </div>
@@ -342,4 +321,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default ResetPassword;
