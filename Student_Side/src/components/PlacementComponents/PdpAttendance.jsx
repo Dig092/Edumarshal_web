@@ -33,7 +33,7 @@ function PdpAttendance() {
       {data.attendance.map((item, index) => (
         <div className='border-2 h-[6vh] md:w-[28rem] w-[18rem] md:ml-12 ml-2 border-black rounded-2xl flex items-center my-2' key={index}>
           <div className='flex md:ml-10 gap-10'>
-            <div className='font-semibold'>{item.date}</div>
+            <div className='font-semibold px-2'>{item.date}</div>
             <div
               className='ml-7'
               style={{ color: item.attended ? 'green' : 'red' }}
