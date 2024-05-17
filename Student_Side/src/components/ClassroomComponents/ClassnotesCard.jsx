@@ -9,7 +9,7 @@ function ClassnotesCard({ setPageName, subjectName, setSubjectName }) {
   };
 
   return (
-    <div className="m-8  max-[1024px]:m-3 max-[px]:m-3 flex flex-col justify-center w-[19rem] rounded-[15px] overflow-hidden shadow-lg border border-[#7F7F7F]">
+    <div className="my-8 mx-5  max-[1024px]:m-3 flex flex-col justify-center w-[19rem] rounded-[15px] overflow-hidden shadow-lg border border-[#7F7F7F]">
       <div className='bg-[#004BB8]'>
         <div className='flex max-[500px]:pl-3 w-2/3 font-medium text-2xl text-white ml-7 mt-4'>{subjectName}</div>
         <div className='ml-7 max-[500px]:pl-3 font-light text-xs text-white'>2023-24</div>

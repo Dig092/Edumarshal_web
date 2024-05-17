@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Syllabus = () => {
   const getTimetable = () => {
