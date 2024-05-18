@@ -1,5 +1,5 @@
 // Classnotes component
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ClassnotesCard from "./ClassnotesCard";
 import ClassnotesTable from "./ClassnotesTable";
 import axios from "axios";

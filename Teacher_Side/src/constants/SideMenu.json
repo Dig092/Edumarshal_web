@@ -13,9 +13,9 @@
     },
     {
         "title": "Classroom",
-        "focus": "classroom",
+        "focus": "Classroom",
         "unfocus": "classroomUnfocus",
-        "link": "classroom"
+        "link": "Classroom"
     },
 
     {

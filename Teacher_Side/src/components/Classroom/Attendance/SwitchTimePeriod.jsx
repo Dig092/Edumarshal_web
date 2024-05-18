@@ -1,5 +1,4 @@
-
-const TimePeriod = ["Day", "Week", "Month"];
+const TimePeriod = ["Day", "Month"];
 
 // eslint-disable-next-line react/prop-types
 function SwitchTimePeriod({ activeIndex, onSwitchChange }) {
