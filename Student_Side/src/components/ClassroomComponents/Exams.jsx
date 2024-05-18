@@ -58,7 +58,7 @@ const Exams = () => {
         : examData;
 
     return (
-        <div className="bg-[#ffffff]  max-[1024px]:ml-[80px] max-[1024px]:w-[98%]  h-[95%] max-[768px]:h-[100%] max-[768px]:ml-[4.75rem] rounded-3xl mx-4 mt-4 overflow-auto">
+        <div className="bg-[#ffffff] max-[md]:h-[100%] max-[lg]:w-[98%] max-[md]:ml-[4.75rem] rounded-3xl mx-4 mt-4 overflow-y-auto overflow-x-hidden">
             <div className="sticky top-0 bg-white mr-4 flex flex-wrap items-center gap-3 text-lg ml-6 z-10">
                 {["Your Result", "Time Table"].map((item, index) => (
                     <div
@@ -94,11 +94,11 @@ const Exams = () => {
                             ))}
                         </select>
                     </div>
-                    <div className="max-[768px]:flex max-[768px]:justify-center max-[768px]:items-center">
-                        <div className="w-full max-[768px]:w-[65%] max-[500px]:w-full grid grid-cols-3 max-[1024px]:grid-cols-2 max-[768px]:grid-cols-1 gap-4">
+                    <div className="flex justify-center items-center">
+                    <div className="w-[89.5rem] grid justify-items-center grid-cols-1 xmd:grid-cols-2 xml:grid-cols-3 xl:grid-cols-3 gap-1">
                             {filteredExamData.map((exam, index) =>
                                 exam.result.map((result, resultIndex) => (
-                                    <div key={resultIndex} className="w-full">
+                                    <div key={resultIndex} >
                                         <ExamComponent
                                             subject={result.subject}
                                             maximumMarks={result.maximumMarks}
@@ -112,7 +112,7 @@ const Exams = () => {
                 </div>
             )}
             {activeOption === 1 && (
-                <div className="flex h-5/6 justify-center my-3">
+                <div className="flex h-5/6 w-[89.5rem] justify-center my-3">
                     <img src={Timetable} alt="" />
                 </div>
             )}
