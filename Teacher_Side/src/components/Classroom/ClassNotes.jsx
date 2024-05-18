@@ -3,9 +3,10 @@ import { useEffect,useState } from 'react';
 import axios from "axios";
 function ClassNotes() {
   const [data, setData] = useState([]);
-
+  const [sections, setSections] = useState([]);
   useEffect(() => {
     fetchClassnotes();
+    fetchSections();
 }, []);
 
 const fetchClassnotes = async () => {
@@ -17,12 +18,25 @@ const fetchClassnotes = async () => {
             }
         );
         setData(response.data.classNotes);
-        console.log(response.data.classNotes[0].classNotes);
-        console.log(response.data.classNotes[0].subject.name);
-        console
+        // console.log(response.data.classNotes[0].classNotes);
+        // console.log(response.data.classNotes[0].subject.name);
+        
     } catch (error) {
         console.error("Error fetching documents:", error);
     }
+};
+const fetchSections = async () => {
+  try {
+    const response = await axios.get(
+  "https://akgec-edu.onrender.com/v1/teacher/sections",
+      {
+        withCredentials: true,
+      }
+    );
+    console.log(response);
+  } catch (error) {
+    console.error("Error fetching sections:", error);
+  }
 };
   return (
      <div className='w-full'>
@@ -51,8 +65,8 @@ const fetchClassnotes = async () => {
       ) : (
         <div>No class notes available</div>
       )}
-      <div className='flex justify-center items-center text-black gap-5 font-semibold text-2xl'>
-        <div>Add New File</div>
+      <div className='flex justify-center items-center text-black gap-5 font-semibold text-2xl cursor-pointer'>
+        <div>Add New File (classNotes)</div>
         <img src='/plusicon.svg'/>
       </div>
       <div className='bg-black h-[0.1rem] w-full my-6'></div>
