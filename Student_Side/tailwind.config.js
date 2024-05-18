@@ -7,10 +7,11 @@ export default {
   theme: {
     extend: {
       screens: {
-        'xl': '1440px',    
+        'xl': '1440px',  
+        'xml': '1310px',  
         'lg': '1024px',    
-        'md': '768px',
         'sm': '400px',
+        'md': '768px',
         'xmd':'900px'
       },
       colors:{
