@@ -1,7 +1,7 @@
 import React from "react";
 export default function EventCard ({ event, handleViewDetails }) {
     return(
-        <div className="xmd:w-[21rem] w-[16rem] xmd:h-[19rem] h-[13rem] md:mx-7 mt-8 justify-evenly p-2 flex flex-col bg-[#FBFBFB] my-3 rounded-3xl border-y-2 ">
+        <div className="xmd:w-[21rem] w-[16rem] xmd:h-[19rem] h-[13rem] md:mx-7 mt-8 justify-evenly p-2 flex flex-col bg-[#FBFBFB] my-3 rounded-3xl border-y-2">
             <div className="ml-4">
             <div className="text-2xl font-medium">{event.eventName}</div>
             <div className="text-lg text-[#4D4D4D]">{event.event}</div>
@@ -11,11 +11,6 @@ export default function EventCard ({ event, handleViewDetails }) {
             <div className="text-base text-[#808080]">IT Department</div>
             </div>
             <div className="flex text-xs justify-evenly">
-                <div className="flex gap-1 justify-center items-center">
-                <img src='./rupeesign.svg'/>
-                <div>6000</div>
-                </div>
-                <div class=" border-[#00000033] border-r-[0.1rem]"></div>
                 <div className="flex gap-1 justify-center items-center">
                 <img src='./clocksign.svg'/>
                 <div>23 Days Left</div>
