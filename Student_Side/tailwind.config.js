@@ -10,8 +10,8 @@ export default {
         'xl': '1440px',  
         'xml': '1310px',  
         'lg': '1024px',    
+        'md': '769px',
         'sm': '400px',
-        'md': '768px',
         'xmd':'900px'
       },
       colors:{
