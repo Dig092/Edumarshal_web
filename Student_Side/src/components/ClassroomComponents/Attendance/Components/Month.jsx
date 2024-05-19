@@ -7,7 +7,8 @@ const Month = ({ attendanceData, subjectName }) => {
   const [defaultSubject, setDefaultSubject] = useState("");
   const [isSmallDevice, setIsSmallDevice] = useState(false);
   const [dayLabels, setDayLabels] = useState([]);
-  
+  const [loading, setLoading] = useState(true);
+
   const daysInMonth = new Date(selectedYear, selectedMonth, 0).getDate();
   const firstDayOfMonth = new Date(selectedYear, selectedMonth - 1, 1).getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
 
@@ -17,16 +18,11 @@ const Month = ({ attendanceData, subjectName }) => {
     }
 
     const checkScreenSize = () => {
-      setIsSmallDevice(window.innerWidth < 768); // Change the width according to your breakpoint
+      setIsSmallDevice(window.innerWidth < 769);
     };
 
-    // Listen for resize events to update screen size state
     window.addEventListener("resize", checkScreenSize);
-
-    // Call it initially to set the initial state
     checkScreenSize();
-
-    // Clean up the event listener on component unmount
     return () => window.removeEventListener("resize", checkScreenSize);
   }, [attendanceData, subjectName]);
 
@@ -42,8 +38,30 @@ const Month = ({ attendanceData, subjectName }) => {
     };
 
     setDayLabels(generateDayLabels());
+    setLoading(false);
   }, [isSmallDevice, firstDayOfMonth]);
 
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center space-y-4">
+        <div className="animate-pulse bg-gray-200 w-24 h-8 rounded-lg"></div>
+        <div className="grid grid-cols-7 gap-2 w-full">
+          {Array.from({ length: 7 }, (_, index) => (
+            <div
+              key={index}
+              className="animate-pulse bg-gray-200 h-8 rounded-lg"
+            ></div>
+          ))}
+          {Array.from({ length: daysInMonth }, (_, index) => (
+            <div
+              key={index}
+              className="animate-pulse bg-gray-200 h-8 rounded-lg"
+            ></div>
+          ))}
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="w-full md:ml-6 justify-center items-center">
       {/* Month and Year picker */}
