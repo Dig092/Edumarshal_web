@@ -14,7 +14,7 @@ function ClassnotesPdf({ link, subjectName }) {
     };
 
     return (
-        <div className="w-[87rem] flex justify-center">
+        <div className="w-full flex justify-center">
             <div className="pdf-card border-black justify-center">
                 <div className="pdf-image" onClick={openPdf}>
                     {loadError ? (

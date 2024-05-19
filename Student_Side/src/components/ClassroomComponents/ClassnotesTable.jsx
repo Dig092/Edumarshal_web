@@ -27,7 +27,7 @@ function ClassnotesTable({ subjectName, setPageName }) {
 
   return (
     <div className=''>
-      <table className="w-[87rem] border-collapse">
+      <table className="w-full border-collapse">
         <thead>
           <tr className="text-lg">
             <th className="px-5 py-4 text-center">Subject</th>
