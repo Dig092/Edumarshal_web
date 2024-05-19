@@ -127,10 +127,10 @@ export default function DashBoardPage() {
                 <Loader />
             ) : (
                 <div className="bg-[#ECEBFE] w-full flex">
-                    <div className="max-[767px]:hidden">
+                    <div className="hidden md:block">
                         <SideBar active={active} />
                     </div>
-                    <div className="min-[767px]:hidden">
+                    <div className="block md:hidden">
                         <SideBarMobile active={active} />
                     </div>
                     <div className="text-black flex flex-col max-[500px]:items-center w-full">
