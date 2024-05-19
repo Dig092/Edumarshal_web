@@ -7,9 +7,11 @@ import PayOnline from "../components/FeesComponents/PayOnline";
 import PaymentHistory from "../components/FeesComponents/PaymentHistory";
 import OfflinePaymentHistory from "../components/FeesComponents/OfflinePaymentHistory";
 import NavBar from "../components/NavBar";
+import SideBarMobile from "../components/SideBarMobile";
 
 export default function Fees() {
     const [activefees, setActivefees] = useState(0);
+    const [active, setActive] = useState("");
     const handleoptionfees = (index) => {
         setActivefees(index);
     };
@@ -17,14 +19,16 @@ export default function Fees() {
         <div className="h-screen bg-[#ECEBFE] w-full flex">
             <SideBar/>
             <div className="flex flex-col w-full">
+            <div className="block md:hidden">
+            <SideBarMobile active={active} />
+             </div>
                <NavBar title="Fees"/>
                 <div className="bg-[#ffffff] h-full overflow-y-auto">
                  {/* Select Option for fees */}
-                 <div className=" sticky top-0 w-full bg-white flex flex-wrap items-center md:gap-5 gap-1 md:text-lg text-sm  p-4  px-8 ml-0">
+                 <div className=" sticky top-0 w-full bg-white flex flex-wrap items-center md:gap-5 gap-1 md:text-lg text-sm  p-4  px-8 ml-0 ">
                 {[
                     "Fee Structure",
                     "Pay Online",
-                    "Payment History",
                     "Offline Payment History"
                 ].map((item, index) => (
                     <div
@@ -43,8 +47,7 @@ export default function Fees() {
               {/* Fee Structure components */}
               { activefees===0 && <FeeStructure/> }
               { activefees===1 && <PayOnline/> }
-              { activefees===2 && <PaymentHistory/> }
-              { activefees===3 && <OfflinePaymentHistory/> }
+              { activefees===2 && <OfflinePaymentHistory/> }
               {/* Fee Structure components Ends */}
             </div>
             </div>
