@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React from "react";
 import error from "../../assets/404 error with portals-rafiki.png";
 
 const Syllabus = () => {
