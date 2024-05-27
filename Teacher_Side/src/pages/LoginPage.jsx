@@ -140,7 +140,6 @@ const LoginPage = () => {
                     >
                         Teacher Login
                     </h1>
-
                     <TextField
                         variant="outlined"
                         style={{ width: "100%", marginBottom: "24px" }}
@@ -149,6 +148,16 @@ const LoginPage = () => {
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter Your Email"
                         autoComplete="email"
+                        InputProps={{
+                            style: {
+                                backgroundColor: "rgba(255, 255, 255, 0.1)"
+                            }
+                        }}
+                        InputLabelProps={{
+                            style: {
+                                backgroundColor: "rgba(255, 255, 255, 0)"
+                            }
+                        }}
                     />
 
                     <TextField
@@ -161,6 +170,9 @@ const LoginPage = () => {
                         placeholder="Enter Your password"
                         autoComplete="current-password"
                         InputProps={{
+                            style: {
+                                backgroundColor: "rgba(255, 255, 255, 0.1)"
+                            },
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton
@@ -177,7 +189,13 @@ const LoginPage = () => {
                                 </InputAdornment>
                             ),
                         }}
+                        InputLabelProps={{
+                            style: {
+                                backgroundColor: "rgba(0,0,0,0)"
+                            }
+                        }}
                     />
+
 
                     <div
                         style={{
