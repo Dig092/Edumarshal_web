@@ -6,6 +6,7 @@ import PersonalInfo from "./ProfileSectionComponents/PersonalInfo";
 import ContactInfo from "./ProfileSectionComponents/ContactInfo";
 import ParentsInfo from "./ProfileSectionComponents/ParentsInfo";
 import Subjects from "./ProfileSectionComponents/Subjects";
+import OtherInfo from "./ProfileSectionComponents/OtherInfo";
 
 export default function ProfileSection() {
     const [activeoption, setActiveoption] = useState(0);
@@ -19,7 +20,8 @@ export default function ProfileSection() {
     useEffect(() => {
         axios
             .get(
-                "https://akgec-edu.onrender.com/v1/student/profile/personalInfo",
+                import.meta.env.VITE_BACKEND_API +
+                    "/v1/student/profile/personalInfo",
                 { withCredentials: true }
             )
             .then((res) => {
@@ -30,7 +32,8 @@ export default function ProfileSection() {
             });
         axios
             .get(
-                "https://akgec-edu.onrender.com/v1/student/profile/contactdetails",
+                import.meta.env.VITE_BACKEND_API +
+                    "/v1/student/profile/contactdetails",
                 { withCredentials: true }
             )
             .then((res) => {
@@ -41,7 +44,8 @@ export default function ProfileSection() {
             });
         axios
             .get(
-                "https://akgec-edu.onrender.com/v1/student/profile/parentinfo",
+                import.meta.env.VITE_BACKEND_API +
+                    "/v1/student/profile/parentinfo",
                 { withCredentials: true }
             )
             .then((res) => {
@@ -51,7 +55,7 @@ export default function ProfileSection() {
                 console.log(err);
             });
         axios
-            .get("https://akgec-edu.onrender.com/v1/student/subject", {
+            .get(import.meta.env.VITE_BACKEND_API + "/v1/student/subject", {
                 withCredentials: true,
             })
             .then((res) => {
@@ -62,9 +66,9 @@ export default function ProfileSection() {
             });
     }, []);
     return (
-        <div className="bg-[#ffffff] h-[72vh] rounded-3xl mx-4 mt-4 overflow-y-auto">
+        <div className="bg-[#ffffff] h-[75vh] max-[1024px]:w-[94%] max-[1024px]:ml-[100px] max-[1024px]:mx-0 max-[767px]:translate-x-5 rounded-3xl mx-4 mt-4 overflow-y-scroll overflow-x-hidden">
             {/*select option profile*/}
-            <div className="h-[9.6vh] max-[1088px]:h-[13vh] mb-4 max-[1200px]:text-sm z-50 sticky top-0 bg-white mr-3 flex flex-wrap items-center gap-3 text-base">
+            <div className="h-[9.6vh] translate-x-4 max-[1088px]:h-[13vh] mb-4 max-[1200px]:text-sm z-50 sticky top-0 bg-white mr-3 flex flex-wrap items-center gap-3 text-base max-[425px]:text-xs">
                 {[
                     "Personal Info",
                     "Contact Details",
@@ -103,6 +107,7 @@ export default function ProfileSection() {
             {activeoption === 5 && (
                 <Subjects personalData={personalData} subjects={subjects} />
             )}
+            {activeoption === 6 && <OtherInfo personalData={personalData} />}
         </div>
     );
 }

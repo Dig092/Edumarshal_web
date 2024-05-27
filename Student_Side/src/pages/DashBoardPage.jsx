@@ -12,6 +12,8 @@ import totalAtt from "../constants/totalAtt";
 import { separateAssignment } from "../constants/separateAssignments";
 import Loader from "../components/Loader";
 import EventsCard from "../components/DashboardComponents/EventsCard";
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/lab/Alert";
 
 export default function DashBoardPage() {
     const [active, setActive] = useState("");
@@ -23,23 +25,25 @@ export default function DashBoardPage() {
     const [pdp, setPdp] = useState([0, 0]);
     const [events, setEvents] = useState([]);
     const location = useLocation();
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
 
     const getResponses = () => {
         axios
-            .get(import.meta.env.VITE_API + "/v1/student/attendance", {
+            .get(import.meta.env.VITE_BACKEND_API + "/v1/student/attendance", {
                 withCredentials: true,
             })
             .then((res) => {
                 setArray(res.data);
                 setAtt(totalAtt(res.data).attendance);
                 axios
-                    .get(import.meta.env.VITE_API + "/v1/student/event")
+                    .get(import.meta.env.VITE_BACKEND_API + "/v1/student/event")
                     .then((res) => {
                         setEvents(res.data.event);
                         axios
                             .get(
-                                import.meta.env.VITE_API +
-                                    "/v1/student/timetable",
+                                import.meta.env.VITE_BACKEND_API +
+                                "/v1/student/timetable",
                                 {
                                     withCredentials: true,
                                 }
@@ -48,8 +52,8 @@ export default function DashBoardPage() {
                                 setTimetable(res.data.timetable);
                                 axios
                                     .get(
-                                        import.meta.env.VITE_API +
-                                            "/v1/student/assignment",
+                                        import.meta.env.VITE_BACKEND_API +
+                                        "/v1/student/assignment",
                                         {
                                             withCredentials: true,
                                         }
@@ -62,14 +66,15 @@ export default function DashBoardPage() {
                                         );
                                         axios
                                             .get(
-                                                import.meta.env.VITE_API +
-                                                    "/v1/student/pdpattendance",
+                                                import.meta.env
+                                                    .VITE_BACKEND_API +
+                                                "/v1/student/pdpattendance",
                                                 { withCredentials: true }
                                             )
                                             .then((res) => {
                                                 setPdp([
                                                     res.data.totalClasses -
-                                                        res.data.totalPresent,
+                                                    res.data.totalPresent,
                                                     res.data.totalPresent,
                                                 ]);
                                             })
@@ -107,17 +112,25 @@ export default function DashBoardPage() {
         }
         setLoading(true);
         getResponses();
-    }, []);
+
+        // Check if there's a success message from the login page
+        const successMessage = location.state?.successMessage;
+        if (successMessage) {
+            setSnackbarMessage(successMessage);
+            setSnackbarOpen(true);
+        }
+    }, [location.state]);
+
     return (
         <div>
             {loading ? (
                 <Loader />
             ) : (
                 <div className="bg-[#ECEBFE] w-full flex">
-                    <div className="max-[500px]:hidden">
+                    <div className="hidden md:block">
                         <SideBar active={active} />
                     </div>
-                    <div className="min-[500px]:hidden">
+                    <div className="block md:hidden">
                         <SideBarMobile active={active} />
                     </div>
                     <div className="text-black flex flex-col max-[500px]:items-center w-full">
@@ -210,6 +223,20 @@ export default function DashBoardPage() {
                             </div>
                         </div>
                     </div>
+                    <Snackbar
+                        open={snackbarOpen}
+                        autoHideDuration={3000}
+                        onClose={() => setSnackbarOpen(false)}
+                    >
+                        <MuiAlert
+                            onClose={() => setSnackbarOpen(false)}
+                            severity="success"
+                            elevation={6}
+                            variant="filled"
+                        >
+                            {snackbarMessage}
+                        </MuiAlert>
+                    </Snackbar>
                 </div>
             )}
         </div>

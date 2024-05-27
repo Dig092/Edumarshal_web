@@ -33,7 +33,7 @@ export default function FeeStructure() {
   });
 
   return (
-    <div className="bg-[#f2f6ff]  md:rounded-3xl rounded-xl overflow-y-auto">
+    <div className="bg-[#f2f6ff]  md:rounded-3xl rounded-xl">
       {Object.keys(imageUrls).map((imageName, index) => (
         <div key={index} className={`mb-10 ${index === 0 ? 'mt-10' : ''}`}>
           <div className={`h-[50px] bg-[#004BB8] my-5 rounded-[0.5rem] items-center flex cursor-pointer sm:mx-10 mx-2`} onClick={() => handleClick(imageName)}>

@@ -7,16 +7,19 @@ import SideBar from "../components/SideBar";
 import SideBarMobile from "../components/SideBarMobile";
 import NavBar from "../components/NavBar";
 import EventCard from "../components/EventsComponents/EventCard";
+import EventCardSkeleton from "../components/EventsComponents/EventCardSkeleton";
 
 export default function Events() {
     const [active, setActive] = useState("");
     const [events, setEvents] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
             try {
-                const response = await axios.get("https://akgec-edu.onrender.com/v1/student/event", { withCredentials: true});
+                const response = await axios.get(import.meta.env.VITE_BACKEND_API + "/v1/student/event", { withCredentials: true});
                 const processedEvents = response.data.event.map(event => {
                     const eventDate = new Date(event.date);
                     const localDate = new Date(eventDate.getTime() - eventDate.getTimezoneOffset() * 60000);
@@ -25,6 +28,8 @@ export default function Events() {
                 setEvents(processedEvents);
             } catch (error) {
                 console.error("Error fetching data: ", error);
+            } finally {
+                setLoading(false);
             }
         };
         fetchData();
@@ -72,8 +77,8 @@ export default function Events() {
                     <Calendar tileContent={renderEventIndicator}/>
                     </div>
                     {selectedEvent ? (
-                        <div className="md:w-[70%] w-[90%] bg-[#F2F6FF] h-[30rem] mt-10 rounded-[0.5rem] overflow-y-auto flex justify-center items-center">   
-                            <div className="w-[33rem] h-[25rem] justify-evenly ml-12 flex flex-col bg-[#FBFBFB] rounded-3xl">
+                        <div className="md:w-[70%] w-[90%] bg-[#F2F6FF] h-[30rem] mt-10 rounded-[0.5rem]  flex justify-center items-center">   
+                            <div className="w-[33rem] h-[25rem] justify-evenly md:ml-12 flex flex-col bg-[#FBFBFB] rounded-3xl">
                                 <div className="flex justify-between">
                                     <div className="ml-10">
                                         <div className="text-2xl font-medium">{selectedEvent.eventName}</div>
@@ -87,10 +92,10 @@ export default function Events() {
                                 <div className="ml-10 text-xl font-semibold">Event Details</div>
                                 <div className="ml-10">
                                     <div className="flex"><p className="text-base font-medium">Date : {selectedEvent.date}</p></div>
-                                    <div className="flex"><p className="text-base font-medium">Venue : {selectedEvent.venue}</p></div>
-                                    <div className="flex"><p className="text-base font-medium">For Queries Contact : {selectedEvent.contact}</p></div>
-                                    <div className="flex"><p className="text-base font-medium">Prize : {selectedEvent.prize}</p></div>
-                                    <div className="flex"><p className="text-base font-medium">Time Left : {selectedEvent.timeLeft}</p></div>
+                                    {/* <div className="flex"><p className="text-base font-medium">Venue : {selectedEvent.venue}</p></div> */}
+                                    <div className="flex"><p className="text-base font-medium">For Queries Contact : 9997132593</p></div>
+                                    <div className="flex"><p className="text-base font-medium">Prize : 6000</p></div>
+                                    <div className="flex"><p className="text-base font-medium">Time Left : 8 days</p></div>
                                 </div>
                                 <div className="bg-[#004BB8] rounded-xl flex justify-center items-center px-8 cursor-pointer"><p className="text-base p-2 px-4 text-white">Register Now</p></div>
                                 <div className="bg-[#F75757] rounded-xl flex justify-center items-center px-8 cursor-pointer" onClick={handleEventDetails}><p className="text-base p-2 px-4 text-white">Close Details</p></div>
@@ -100,9 +105,13 @@ export default function Events() {
                     ) : (
                         <div className="flex justify-center items-center">
                         <div className="lg:w-[95%] xmd:w-[25rem] md:w-[20rem] md:bg-[#F2F6FF] md:h-[30rem] md:overflow-y-auto grid xl:grid-cols-2 grid-cols-1 justify-center items-center rounded-3xl">
-                            {events.map(event => (
-                                <EventCard key={event._id} event={event} handleViewDetails={() => handleViewDetails(event._id)} />
-                            ))}
+                            {loading ? (
+                                <EventCardSkeleton />
+                            ) : (
+                                events.map(event => (
+                                    <EventCard key={event._id} event={event} handleViewDetails={() => handleViewDetails(event._id)} />
+                                ))
+                            )}
                         </div>
                         </div>
                     )}

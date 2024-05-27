@@ -1,70 +1,65 @@
-import React, { useEffect, useState } from 'react'
-import AssignmentCard from './AssignmentCard';
+import { useEffect, useState } from "react";
+import AssignmentCard from "./AssignmentCard";
 import axios from "axios";
 const Assignments = () => {
   const [activeoption, setActiveoption] = useState(0);
-    const handleoptionClick = (index) => {
-        setActiveoption(index);
-    };
-    useEffect(() => {
-        getAssignment();
-      }, []); 
+  const handleoptionClick = (index) => {
+    setActiveoption(index);
+  };
+  useEffect(() => {
+    getAssignment();
+  }, []);
 
-    const [data, setData] = useState([]);
-    const getAssignment = () => {
-        axios
-            .get("https://akgec-edu.onrender.com/v1/student/assignment", {
-                withCredentials: true,
-            })
-            .then((res) => {
-                console.log(res)
-                const responseData= res.data.assignment
-                console.log(responseData)
-                setData(responseData);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-    };
-
+  const [data, setData] = useState([]);
+  const getAssignment = () => {
+    axios
+      .get(import.meta.env.VITE_BACKEND_API + "/v1/student/assignment", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res);
+        const responseData = res.data.assignment;
+        console.log(responseData);
+        setData(responseData);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   return (
-    <div className="bg-[#ffffff] h-[95%] max-[768px]:h-[100%] max-[768px]:ml-[4.75rem] rounded-3xl mx-4 mt-4 overflow-auto">
-        <div className="h-[9.6vh] sticky top-0 bg-white mr-4 flex flex-wrap items-center gap-3 text-lg ml-6 z-10">
-  {[
-      "All Assignment",
-      "Recent Assignment",
-  ].map((item, index) => (
-      <div
-          key={index}
-          onClick={() => handleoptionClick(index)}
-          className={`${
-              activeoption === index ? "border-b-4" : "border-b-0"
-          }
-       flex items-center p-3 font-medium gap-2 cursor-pointer ml-8 mt-5  border-[#004BB8]`}
-      >
-          <span>{item}</span>
-      </div>
-  ))}
-</div>
-<div className="sticky top-[9.6vh] bg-white mr-4 flex justify-center items-center z-10">
-  <div className="w-[94%] h-[1.5px] bg-[#D9D9D9] my-0"></div>
-</div>
-
-            <div className='w-full grid grid-cols-3 gap-4 mx-20'>
-    
-      {data.length > 0 ? (
-        data.map(item => (
-          <AssignmentCard key={item.id} sub={item.subject.name} description={item.description} deadline={item.deadline} status="Pending" question={item.assignment}  />
-          ))
-          ) : (
-          <div className='mt-10  font-medium text-xl text-[#1A1A1A]'>No assignments available.</div>
-          )}
-
+    <div className="bg-[#ffffff] w-full flex items-center justify-center rounded-3xl mx-4 mt-4 overflow-y-auto ">
+      <div className="w-[98%] flex justify-center items-center">
+        <div className="w-full grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1">
+          {data.length > 0
+            ? data.map((item) => (
+                <AssignmentCard
+                  key={item.id}
+                  sub={item.subject.name}
+                  description={item.description}
+                  deadline={item.deadline}
+                  status="Pending"
+                  question={item.assignment}
+                />
+              ))
+            : Array.from({ length: 6 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="animate-pulse w-[90%] flex flex-col justify-center rounded-[15px] shadow-lg border border-[#c9c1f1] p-4 m-4"
+                >
+                  <div className="bg-blue-200 h-8 w-2/3 mb-4 rounded"></div>
+                  <div className="bg-blue-200 h-5 w-3/4 mb-2 rounded"></div>
+                  <div className="bg-blue-200 h-5 w-1/2 mb-2 rounded"></div>
+                  <div className="bg-blue-200 h-4 w-1/3 mb-1 rounded"></div>
+                  <div className="bg-blue-200 h-4 w-5/6 mb-4 rounded"></div>
+                  <div className="bg-blue-200 h-10 w-4/5 mb-5 mt-5 rounded-[10px]"></div>
+                  <div className="bg-blue-200 h-10 w-4/5 mt-2 mb-5 rounded-[10px]"></div>
+                </div>
+              ))}
         </div>
-
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Assignments
+export default Assignments;

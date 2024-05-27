@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import DashBoardPage from "./pages/DashBoardPage";
 import ProfilePage from "./pages/ProfilePage";
@@ -6,6 +5,8 @@ import Classroom from "./pages/Classroom";
 import Fees from "./pages/Fees";
 import LoginPage from "./pages/LoginPage";
 import Events from "./pages/Events";
+import PlacementPage from "./pages/Placement";
+import Hostel from "./pages/Hostel";
 export default function App() {
     return (
         <Router>
@@ -15,8 +16,10 @@ export default function App() {
                 <Route exact path="/profile" element={<ProfilePage/>}/>
                 {/* <Route exact path="/hostelpage" element={<HostelPage />} /> */}
                 <Route exact path="/Classroom" element={<Classroom/>}/>
+                <Route exact path="/Hostel" element={<Hostel/>}/>
                 <Route exact path="/Fees" element={<Fees/>}/>
                 <Route exact path="/events" element={<Events/>}/>
+                <Route exact path="/placement" element={<PlacementPage/>}/>
             </Routes>
         </Router>
     );

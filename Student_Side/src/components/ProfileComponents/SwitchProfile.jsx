@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProfileSections = ["My profile", "My document", "Registration Form"];
+const ProfileSections = ["My profile", "My document"];
 
 function SwitchProfile({ activeIndex, onSwitchChange }) {
   return (

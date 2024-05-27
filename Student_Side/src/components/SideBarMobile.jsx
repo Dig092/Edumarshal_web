@@ -7,6 +7,7 @@ export default function SideBarMobile(props) {
     const [flag, setFlag] = useState(false);
     const menu = useSelector((state) => state.menu.isOpen);
     const navigate = useNavigate();
+    const profileSubMenu = ["My Profile", "My Document", "Registration Form"];
 
     useEffect(() => {
         if (props.active != "") {
