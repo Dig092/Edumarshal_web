@@ -8,6 +8,14 @@ const imageUrls = {
   image4: "./Mba2ndfees.svg",
 };
 
+const preloadImages = (urls) => {
+  Object.values(urls).forEach((url) => {
+    const img = new Image();
+    img.src = url;
+  });
+};
+
+
 export default function FeeStructure() {
   const [visibleImage, setVisibleImage] = useState(null);
 

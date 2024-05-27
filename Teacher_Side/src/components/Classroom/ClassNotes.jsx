@@ -24,6 +24,8 @@ const fetchClassnotes = async () => {
         console.error("Error fetching documents:", error);
     }
 };
+
+
   return (
      <div className='w-full'>
       <div className='flex flex-wrap text-black justify-evenly items-center text-2xl font-semibold mt-5'>
