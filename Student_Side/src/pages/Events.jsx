@@ -8,6 +8,7 @@ import SideBarMobile from "../components/SideBarMobile";
 import NavBar from "../components/NavBar";
 import EventCard from "../components/EventsComponents/EventCard";
 import EventCardSkeleton from "../components/EventsComponents/EventCardSkeleton";
+import { useLocation } from "react-router-dom";
 
 export default function Events() {
     const [active, setActive] = useState("");
@@ -15,11 +16,14 @@ export default function Events() {
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    const location = useLocation()
+
     useEffect(() => {
+        setActive(location.state.active);
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(import.meta.env.VITE_BACKEND_API + "/v1/student/event", { withCredentials: true});
+                const response = await axios.get(import.meta.env.VITE_BACKEND_API + "/v1/student/event", { withCredentials: true });
                 const processedEvents = response.data.event.map(event => {
                     const eventDate = new Date(event.date);
                     const localDate = new Date(eventDate.getTime() - eventDate.getTimezoneOffset() * 60000);
@@ -34,7 +38,7 @@ export default function Events() {
         };
         fetchData();
     }, []);
-    
+
     const handleViewDetails = (eventId) => {
         const selected = events.find(event => event._id === eventId);
         setSelectedEvent(selected);
@@ -43,7 +47,7 @@ export default function Events() {
     const handleEventDetails = () => {
         setSelectedEvent(null);
     };
-    const eventDates = events.map(event => event.date); 
+    const eventDates = events.map(event => event.date);
 
     const renderEventIndicator = ({ date, view }) => {
         if (view === 'month') {
@@ -51,7 +55,7 @@ export default function Events() {
             const month = date.getMonth() + 1;
             const day = date.getDate();
             const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-    
+
             if (eventDates.includes(formattedDate)) {
                 return <div style={{ color: 'red' }}>●</div>;
             }
@@ -74,10 +78,10 @@ export default function Events() {
                 </div>
                 <div className="bg-[#ffffff] md:h-[73vh] h-[85vh]  items-center md:justify-evenly rounded-3xl md:m-6 overflow-y-auto md:flex md:flex-row flex flex-col mt-3">
                     <div className="md:m-4 w-[250px] md:w-[350px]  border-2 border-double mt-4 border-[#004BB8] flex justify-center items-center">
-                    <Calendar tileContent={renderEventIndicator}/>
+                        <Calendar tileContent={renderEventIndicator} />
                     </div>
                     {selectedEvent ? (
-                        <div className="md:w-[70%] w-[90%] bg-[#F2F6FF] h-[30rem] mt-10 rounded-[0.5rem]  flex justify-center items-center">   
+                        <div className="md:w-[70%] w-[90%] bg-[#F2F6FF] h-[30rem] mt-10 rounded-[0.5rem]  flex justify-center items-center">
                             <div className="w-[33rem] h-[25rem] justify-evenly md:ml-12 flex flex-col bg-[#FBFBFB] rounded-3xl">
                                 <div className="flex justify-between">
                                     <div className="ml-10">
@@ -104,15 +108,15 @@ export default function Events() {
                         </div>
                     ) : (
                         <div className="flex justify-center items-center">
-                        <div className="lg:w-[95%] xmd:w-[25rem] md:w-[20rem] md:bg-[#F2F6FF] md:h-[30rem] md:overflow-y-auto grid xl:grid-cols-2 grid-cols-1 justify-center items-center rounded-3xl">
-                            {loading ? (
-                                <EventCardSkeleton />
-                            ) : (
-                                events.map(event => (
-                                    <EventCard key={event._id} event={event} handleViewDetails={() => handleViewDetails(event._id)} />
-                                ))
-                            )}
-                        </div>
+                            <div className="lg:w-[95%] xmd:w-[25rem] md:w-[20rem] md:bg-[#F2F6FF] md:h-[30rem] md:overflow-y-auto grid xl:grid-cols-2 grid-cols-1 justify-center items-center rounded-3xl">
+                                {loading ? (
+                                    <EventCardSkeleton />
+                                ) : (
+                                    events.map(event => (
+                                        <EventCard key={event._id} event={event} handleViewDetails={() => handleViewDetails(event._id)} />
+                                    ))
+                                )}
+                            </div>
                         </div>
                     )}
                 </div>

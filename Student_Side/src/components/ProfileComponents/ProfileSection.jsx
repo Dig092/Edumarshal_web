@@ -14,6 +14,8 @@ export default function ProfileSection() {
     const [contactData, setContactData] = useState(null);
     const [parentsData, setParentsData] = useState(null);
     const [subjects, setSubjects] = useState(null);
+    const [documentUrls, setDocumentUrls] = useState({});
+
     const handleoptionClick = (index) => {
         setActiveoption(index);
     };
@@ -21,7 +23,7 @@ export default function ProfileSection() {
         axios
             .get(
                 import.meta.env.VITE_BACKEND_API +
-                    "/v1/student/profile/personalInfo",
+                "/v1/student/profile/personalInfo",
                 { withCredentials: true }
             )
             .then((res) => {
@@ -33,7 +35,7 @@ export default function ProfileSection() {
         axios
             .get(
                 import.meta.env.VITE_BACKEND_API +
-                    "/v1/student/profile/contactdetails",
+                "/v1/student/profile/contactdetails",
                 { withCredentials: true }
             )
             .then((res) => {
@@ -45,7 +47,7 @@ export default function ProfileSection() {
         axios
             .get(
                 import.meta.env.VITE_BACKEND_API +
-                    "/v1/student/profile/parentinfo",
+                "/v1/student/profile/parentinfo",
                 { withCredentials: true }
             )
             .then((res) => {
@@ -64,6 +66,16 @@ export default function ProfileSection() {
             .catch((err) => {
                 console.log(err);
             });
+        axios.get(
+            import.meta.env.VITE_BACKEND_API + "/v1/student/profile/documents",
+            {
+                withCredentials: true,
+            }
+        ).then((response) => {
+            setDocumentUrls(response.data.documents.studentPhoto);
+        }).catch(err => {
+            console.log(err)
+        })
     }, []);
     return (
         <div className="bg-[#ffffff] h-[75vh] max-[1024px]:w-[94%] max-[1024px]:ml-[100px] max-[1024px]:mx-0 max-[767px]:translate-x-5 rounded-3xl mx-4 mt-4 overflow-y-scroll overflow-x-hidden">
@@ -81,9 +93,8 @@ export default function ProfileSection() {
                     <div
                         key={index}
                         onClick={() => handleoptionClick(index)}
-                        className={`${
-                            activeoption === index ? "border-b-4" : "border-b-0"
-                        }
+                        className={`${activeoption === index ? "border-b-4" : "border-b-0"
+                            }
                         flex items-center p-1 font-medium gap-2 cursor-pointer ml-8 border-[#004BB8]`}
                     >
                         <span>{item}</span>
@@ -91,23 +102,25 @@ export default function ProfileSection() {
                 ))}
             </div>
             {/*select option ends*/}
-            {activeoption === 0 && <PersonalInfo personalData={personalData} />}
+            {activeoption === 0 && <PersonalInfo personalData={personalData} profilePhoto={documentUrls} />}
             {activeoption === 1 && (
                 <ContactInfo
                     personalData={personalData}
                     contactData={contactData}
+                    profilePhoto={documentUrls}
                 />
             )}
             {activeoption === 2 && (
                 <ParentsInfo
                     personalData={personalData}
                     parentsData={parentsData}
+                    profilePhoto={documentUrls}
                 />
             )}
             {activeoption === 5 && (
-                <Subjects personalData={personalData} subjects={subjects} />
+                <Subjects personalData={personalData} subjects={subjects} profilePhoto={documentUrls} />
             )}
-            {activeoption === 6 && <OtherInfo personalData={personalData} />}
+            {activeoption === 6 && <OtherInfo personalData={personalData} profilePhoto={documentUrls} />}
         </div>
     );
 }

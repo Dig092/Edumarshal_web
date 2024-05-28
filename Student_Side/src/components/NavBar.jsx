@@ -10,13 +10,11 @@ import { useNavigate } from "react-router-dom";
 export default function NavBar(props) {
   const [sem, setSem] = useState("Select Semester");
   const [toggle, setToggle] = useState(false);
+  const [open, setOpen] = useState(false);
   const [documentUrls, setDocumentUrls] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleNavigation = () => {
-    navigate("/profile"); // Adjust the path to your profile section
-  };
   useEffect(() => {
     fetchDocuments();
   }, []);
@@ -39,6 +37,9 @@ export default function NavBar(props) {
 
   return (
     <div className="flex h-[60px] sticky top-0 z-[98] bg-white w-full px-4 justify-between items-center">
+      {open ? <div className="absolute top-0 left-0 bg-gray-400 h-screen bg-opacity-70">
+        <button className="bg-gray-600 opacity-80 float-right mr-2 mt-2 text-white w-[50px] rounded-full h-[50px] text-4xl " onClick={() => setOpen(false)}>&#x2716;</button>
+        <img className="w-[50%] m-auto" src={documentUrls} /></div> : null}
       <img
         className="max-md:block hidden w-[30px]"
         src={!toggle ? "./hamburgerDark.png" : "./closeDark.png"}
@@ -74,7 +75,7 @@ export default function NavBar(props) {
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
-          onClick={handleNavigation}
+          onClick={() => setOpen(!open)}
         ></div>
       </div>
     </div>

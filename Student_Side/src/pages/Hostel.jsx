@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import SideBar from "../components/SideBar";
 import SideBarMobile from "../components/SideBarMobile";
 import FeeStructure from "../components/FeesComponents/FeeStructure";
 import PayOnline from "../components/FeesComponents/PayOnline";
 import NavBar from "../components/NavBar";
+import { useLocation } from "react-router-dom";
 
 export default function Fees() {
   const [active, setActive] = useState("");
@@ -12,14 +13,19 @@ export default function Fees() {
   const handleoptionfees = (index) => {
     setActivefees(index);
   };
+  const location = useLocation()
+  useEffect(() => {
+    setActive(location.state.active);
+  }, []);
+
   return (
     <div className="bg-[#ECEBFE] w-full flex">
       <div className="hidden md:block">
-          <SideBar active={active} />
-        </div>
-        <div className="block md:hidden">
-          <SideBarMobile active={active} />
-        </div>
+        <SideBar active={active} />
+      </div>
+      <div className="block md:hidden">
+        <SideBarMobile active={active} />
+      </div>
       <div className="flex flex-col w-full">
         <NavBar title="Hostel" />
         <div className="bg-[#ffffff] h-full overflow-y-auto">
@@ -29,11 +35,10 @@ export default function Fees() {
               <div
                 key={index}
                 onClick={() => handleoptionfees(index)}
-                className={`${
-                  activefees === index
-                    ? "md:border-b-4 border-b-2"
-                    : "md:border-b-0"
-                }
+                className={`${activefees === index
+                  ? "md:border-b-4 border-b-2"
+                  : "md:border-b-0"
+                  }
                      flex items-center p-1  font-medium cursor-pointer border-[#004BB8]`}
               >
                 <span>{item}</span>
