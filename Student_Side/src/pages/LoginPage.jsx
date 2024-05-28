@@ -163,6 +163,16 @@ const LoginPage = () => {
                         onChange={(e) => setUsername(e.target.value)}
                         placeholder="Enter Your Username"
                         autoComplete="username"
+                        InputProps={{
+                            style: {
+                                backgroundColor: "rgba(255, 255, 255, 0.1)"
+                            }
+                        }}
+                        InputLabelProps={{
+                            style: {
+                                backgroundColor: "rgba(255, 255, 255, 0)"
+                            }
+                        }}
                     />
 
                     <TextField
