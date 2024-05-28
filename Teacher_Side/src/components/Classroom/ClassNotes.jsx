@@ -2,8 +2,30 @@ import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 function ClassNotes() {
+  useEffect(() => {
+    fetchSections();
+}, []);
+
+const fetchSections = async () => {
+  try {
+    const response = await axios.get(
+      'https://akgec-edu.onrender.com/v1/teacher/sections',
+      {
+        withCredentials: true,
+      }
+    );
+    console.log(response.data.sections[0].section.sectionId);
+    setSection(response.data.sections[0].section.sectionId);
+  } catch (error) {
+    console.error("Error fetching documents:", error);
+    toast.error("Error fetching documents");
+  }
+};
+
   const [data, setData] = useState([]);
+  const [section,setSection]=useState([]);
   const fileInputRef = useRef(null);
   const handleUploadClick = () => {
     if (fileInputRef.current) {
@@ -18,7 +40,7 @@ function ClassNotes() {
       formData.append("document", file);
       try {
         await axios.post(
-          'https://akgec-edu.onrender.com/v1/teacher/uploadNotes?sectionId=65c5376010a2efe56771f3ab&subject=COA',
+         `https://akgec-edu.onrender.com/v1/teacher/uploadNotes?sectionId=${section}&subject=COA`,
           formData,
           {
             withCredentials: true,
