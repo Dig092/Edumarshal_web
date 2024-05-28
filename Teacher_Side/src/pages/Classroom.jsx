@@ -30,7 +30,7 @@ const Classroom = () => {
           sectionId: item.section.sectionId,
           sectionName: item.section.sectionName,
           subjectName: item.subject.name,
-          subjectCode: item.subject.code,
+          subjectCode: item.subject.code,a
         }));
 
         setSections(sectionData);

@@ -5,6 +5,8 @@ import axios from "axios";
 import PersonalInfo from "./ProfileSectionComponents/PersonalInfo";
 import ContactInfo from "./ProfileSectionComponents/ContactInfo";
 import ParentsInfo from "./ProfileSectionComponents/ParentsInfo";
+import Education from "./ProfileSectionComponents/Education";
+import Awards from "./ProfileSectionComponents/Awards";
 import Subjects from "./ProfileSectionComponents/Subjects";
 import OtherInfo from "./ProfileSectionComponents/OtherInfo";
 

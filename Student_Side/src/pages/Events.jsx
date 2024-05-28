@@ -74,7 +74,7 @@ export default function Events() {
             <div className="text-black flex flex-col  w-full">
                 <NavBar title="Events" />
                 <div className="bg-[#ffffff] mt-4 flex rounded-2xl w-[97%] md:h-[4rem] md:ml-5 ml-2 h-[3rem] items-center md:justify-start justify-center">
-                    <div className="my-3 ml-10 bg-[#004BB8] md:p-2 p-1 px-4 rounded-[0.5rem]"><p className="text-white text-sm md:text-base">College Events</p></div>
+                    <div className="my-3 md:ml-10 bg-[#004BB8] md:p-2 p-1 px-4 rounded-[0.5rem]"><p className="text-white text-sm md:text-base">College Events</p></div>
                 </div>
                 <div className="bg-[#ffffff] md:h-[73vh] h-[85vh]  items-center md:justify-evenly rounded-3xl md:m-6 overflow-y-auto md:flex md:flex-row flex flex-col mt-3">
                     <div className="md:m-4 w-[250px] md:w-[350px]  border-2 border-double mt-4 border-[#004BB8] flex justify-center items-center">
