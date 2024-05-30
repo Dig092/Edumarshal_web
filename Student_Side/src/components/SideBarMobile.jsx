@@ -49,19 +49,17 @@ export default function SideBarMobile(props) {
             {sideMenu.map((element, id) => (
                 <div
                     key={id}
-                    className={`flex relative bg-${
-                        element.focus == props.active ? "white" : "transparent"
-                    } items-center w-[${
-                        menu ? "87%" : "95%"
-                    }] rounded-lg text-${
-                        element.focus == props.active ? "blue-600" : "white"
-                    } my-1 ml-1 hover:bg-white hover:text-blue-600`}
+                    className={`flex relative bg-${element.focus == props.active ? "white" : "transparent"
+                        } items-center w-[${menu ? "87%" : "95%"
+                        }] rounded-lg text-${element.focus == props.active ? "blue-600" : "white"
+                        } my-1 ml-1 hover:bg-white hover:text-blue-600`}
                 >
                     <div
                         className="absolute cursor-pointer top-0 w-full h-full bg-transparent"
                         onMouseOver={(e) => hoverEffect(element.focus, e)}
                         onMouseOut={(e) => hoverEffect(element.unfocus, e)}
                         onClick={(e) => {
+
                             navigate(`/${getClickData(e)}`, {
                                 state: { active: getClickData(e) },
                             });
@@ -72,11 +70,10 @@ export default function SideBarMobile(props) {
                         // alt=""
                         // src={element.focus}
                         style={{
-                            backgroundImage: `url('./icons/${
-                                flag && props.active == element.focus
-                                    ? element.focus
-                                    : element.unfocus
-                            }.png')`,
+                            backgroundImage: `url('./icons/${flag && props.active == element.focus
+                                ? element.focus
+                                : element.unfocus
+                                }.png')`,
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "50%",
                             backgroundPosition: "center",

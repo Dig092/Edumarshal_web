@@ -164,27 +164,17 @@ const LoginPage = () => {
                         onChange={(e) => setUsername(e.target.value)}
                         placeholder="Enter Your Username"
                         autoComplete="username"
-                    /> */}
-<TextField
-    variant="outlined"
-    style={{ width: "100%", marginBottom: "24px" }}
-    label="Username"
-    value={username}
-    onChange={(e) => setUsername(e.target.value)}
-    placeholder="Enter Your Username"
-    autoComplete="username"
-    inputProps={{
-        pattern: "[0-9]*", // Allow only numeric input
-    }}
-    error={!/^\d*$/.test(username)} // Apply error style if username is not numeric
-    helperText={
-        !/^\d*$/.test(username) && ( // Display helper text conditionally
-            <span>
-                Enter Valid Username
-            </span>
-        )
-    }
-/>
+                        InputProps={{
+                            style: {
+                                backgroundColor: "rgba(255, 255, 255, 0.1)"
+                            }
+                        }}
+                        InputLabelProps={{
+                            style: {
+                                backgroundColor: "rgba(255, 255, 255, 0)"
+                            }
+                        }}
+                    />
 
                     <TextField
                         variant="outlined"

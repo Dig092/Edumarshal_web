@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import Events from "./pages/Events";
 import PlacementPage from "./pages/Placement";
 import Hostel from "./pages/Hostel";
+import CustomerCare from "./pages/CustomerCare";
 import ResetPassword from "./pages/ResetPassword";
 import VerifyOtp from "./pages/VerifyOtp";
 import { SetMealTwoTone } from "@mui/icons-material";
@@ -27,6 +28,7 @@ export default function App() {
                 <Route exact path="/Fees" element={<Fees/>}/>
                 <Route exact path="/events" element={<Events/>}/>
                 <Route exact path="/placement" element={<PlacementPage/>}/>
+                <Route exact path="/care" element={<CustomerCare/>}/>
             </Routes>
         </Router>
     );

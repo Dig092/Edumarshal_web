@@ -27,10 +27,11 @@ function Internship() {
   return (
     <>
     <div>
-    <div className="h-[3rem] bg-[#004BB8] my-5 rounded-[0.5rem] items-center md:justify-between justify-center md:px-12 px-6 flex cursor-pointer sm:mx-10 ml-2 text-lg text-[#FFFFFF]">
+    <div className="h-[3rem] bg-[#004BB8] mb-5 md:my-5 rounded-[0.5rem] items-center md:justify-between justify-center  md:px-12 px-6 flex cursor-pointer sm:mx-10 ml-2 text-lg text-[#FFFFFF]">
       <pre>Internship Details</pre>
     </div>
-    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 ml-10 md:justify-items-start justify-items-center">
+    <div className='bg-white w-[96%] h-full  rounded-[2rem] pt-7 ml-2 md:ml-5'>
+    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:ml-10 md:justify-items-start justify-items-center">
       {Labels.map((label, index) => (
         <div key={index} className={`relative my-5 md:my-3 ${label.smallWidth} `}>
           <input
@@ -49,11 +50,13 @@ function Internship() {
         </div>
       ))}
     </div>
-    <div className="flex items-center ml-12 md:gap-5 gap-2 font-medium justify-start flex-wrap">
+    <div className="flex items-center h-auto ml-12 md:gap-5 gap-2 font-medium justify-start flex-wrap">
             <div>Attachments (5MB MAX)</div>
             <div className="bg-[#004BB8] h-[2.5rem] w-[3.5rem] flex items-center justify-center rounded-xl cursor-pointer" onClick={handleupload}><img src="./uploadarrow1.svg"/></div>
           </div>
     </div>
+    </div>
+  
     <input
                 type="file"
                 id="fileInput"

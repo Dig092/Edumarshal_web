@@ -17,9 +17,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const LoginPage = () => {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [dob, setDob] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -28,15 +27,13 @@ const LoginPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const storedUsername = Cookies.get("rememberedUsername");
+        const storedEmail = Cookies.get("rememberedEmail");
         const storedPassword = Cookies.get("rememberedPassword");
-        const storedDob = Cookies.get("rememberedDob");
         const storedRememberMe = Cookies.get("rememberMe");
 
-        if (storedRememberMe && storedUsername && storedPassword && storedDob) {
-            setUsername(storedUsername);
+        if (storedRememberMe && storedEmail && storedPassword) {
+            setEmail(storedEmail);
             setPassword(storedPassword);
-            setDob(storedDob);
             setRememberMe(true);
         }
     }, []);
@@ -45,11 +42,10 @@ const LoginPage = () => {
         try {
             setLoading(true);
 
-            const formattedDate = dob.split("-").reverse().join("-");
-            const item = { username, password, dob: formattedDate };
+            const item = { email, password };
 
             const response = await axios.post(
-                `${import.meta.env.VITE_BACKEND_API}/v1/student/login`,
+                'https://akgec-edu.onrender.com/v1/teacher/login', 
                 item,
                 {
                     withCredentials: true,
@@ -58,16 +54,12 @@ const LoginPage = () => {
 
             if (response.status === 200) {
                 if (rememberMe) {
-                    // Store information in cookies
-                    Cookies.set("rememberedUsername", username);
+                    Cookies.set("rememberedEmail", email);
                     Cookies.set("rememberedPassword", password);
-                    Cookies.set("rememberedDob", dob);
                     Cookies.set("rememberMe", true);
                 } else {
-                    // Remove cookies if "Remember me" is not checked
-                    Cookies.remove("rememberedUsername");
+                    Cookies.remove("rememberedEmail");
                     Cookies.remove("rememberedPassword");
-                    Cookies.remove("rememberedDob");
                     Cookies.remove("rememberMe");
                 }
 
@@ -79,18 +71,12 @@ const LoginPage = () => {
                 console.error("Login failed");
             }
         } catch (error) {
-            // Handle any error and display a Snackbar
-            // setSnackbarMessage('An error occurred during login. Please try again later.');
             setSnackbarMessage("Invalid Credentials! Please try again later.");
             setSnackbarOpen(true);
             console.error("An error occurred during login", error);
         } finally {
             setLoading(false);
         }
-    };
-
-    const handleDateChange = (e) => {
-        setDob(e.target.value);
     };
 
     const handleShowPasswordToggle = () => {
@@ -150,20 +136,28 @@ const LoginPage = () => {
                             fontSize: "2.0rem",
                             fontWeight: "550",
                             marginBottom: "16px",
-                            fontFamily:"sans-serif"
                         }}
                     >
-                        Login
+                        Teacher Login
                     </h1>
-
                     <TextField
                         variant="outlined"
                         style={{ width: "100%", marginBottom: "24px" }}
-                        label="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        placeholder="Enter Your Username"
-                        autoComplete="username"
+                        label="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter Your Email"
+                        autoComplete="email"
+                        InputProps={{
+                            style: {
+                                backgroundColor: "rgba(255, 255, 255, 0.1)"
+                            }
+                        }}
+                        InputLabelProps={{
+                            style: {
+                                backgroundColor: "rgba(255, 255, 255, 0)"
+                            }
+                        }}
                     />
 
                     <TextField
@@ -176,6 +170,9 @@ const LoginPage = () => {
                         placeholder="Enter Your password"
                         autoComplete="current-password"
                         InputProps={{
+                            style: {
+                                backgroundColor: "rgba(255, 255, 255, 0.1)"
+                            },
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton
@@ -192,17 +189,13 @@ const LoginPage = () => {
                                 </InputAdornment>
                             ),
                         }}
+                        InputLabelProps={{
+                            style: {
+                                backgroundColor: "rgba(0,0,0,0)"
+                            }
+                        }}
                     />
 
-                    <TextField
-                        variant="outlined"
-                        style={{ width: "100%", marginBottom: "0.8rem" }}
-                        label=""
-                        type="date"
-                        value={dob}
-                        onChange={handleDateChange}
-                        placeholder="Enter Your Date Of Birth"
-                    />
 
                     <div
                         style={{
@@ -224,24 +217,6 @@ const LoginPage = () => {
                         />
                     </div>
 
-                    {/* <Button
-            style={{
-              backgroundColor: '#004BB8',
-              color: 'white',
-              width: '100%',
-              maxWidth: '400px',
-              padding: '12px',
-              borderRadius: '5px',
-              '&:hover': {
-                backgroundColor: 'skyblue',
-                
-              },
-            }}
-            onClick={signIn}
-            disabled={loading}
-          >
-            Login
-          </Button> */}
                     <Button
                         style={{
                             backgroundColor: "#004BB8",
@@ -265,16 +240,15 @@ const LoginPage = () => {
                         ) : (
                             "Login"
                         )}
-                        {/* {loading ? 'Logging in...' : 'Login'} */}
                     </Button>
 
                     <div className="text-center pt-4 font-normal text-sm ">
-                        <span className="font-bold font-sans">
+                        <span className="font-semibold">
                             Forgot Your Password?{" "}
                         </span>
                         <Link
-                            to="/resetPassword"
-                            className="text-white font-normal font-sans"
+                            to="/dashboard"
+                            className="text-[#dae9ff] font-normal underline"
                         >
                             Reset Password
                         </Link>
@@ -309,15 +283,6 @@ const LoginPage = () => {
                     {snackbarMessage}
                 </MuiAlert>
             </Snackbar>
-            {/* <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={3000}
-        onClose={handleSnackbarClose}
-      >
-        <MuiAlert onClose={handleSnackbarClose} severity="success" elevation={6} variant="filled">
-          Successfully logged in!
-        </MuiAlert>
-      </Snackbar> */}
         </div>
     );
 };

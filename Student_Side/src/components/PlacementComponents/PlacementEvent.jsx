@@ -14,10 +14,11 @@ const Labels = [
 export default function PlacementEvent() {
   return (
     <div>
-      <div className="h-[3rem] bg-[#004BB8] my-5 rounded-[0.5rem] items-center md:justify-between justify-center md:px-12 px-6 flex cursor-pointer sm:mx-10 ml-2 text-lg text-[#FFFFFF]">
+      <div className="h-[3rem] bg-[#004BB8] mb-5 md:my-5 rounded-[0.5rem] items-center md:justify-between justify-center md:px-12 px-6 flex cursor-pointer sm:mx-10 ml-2 text-lg text-[#FFFFFF]">
         <pre>#1  Microsoft</pre>
       </div>
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 ml-10 md:justify-items-start justify-items-center">
+      <div className='bg-white w-[96%] h-auto overflow-y-auto rounded-[2rem] pt-7 ml-2 md:ml-5'>
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:ml-10 md:justify-items-start justify-items-center">
         {Labels.map((label, index) => (
           <div key={index} className={`relative my-5 md:my-3 ${label.smallWidth} `}>
             <input
@@ -35,6 +36,7 @@ export default function PlacementEvent() {
             </label>
           </div>
         ))}
+      </div>
       </div>
     </div>
   );

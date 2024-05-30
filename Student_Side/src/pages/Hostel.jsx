@@ -1,4 +1,3 @@
-
 // import { useState } from "react";
 
 // import SideBar from "../components/SideBar";
@@ -53,15 +52,13 @@
 //                 <span className="flex" onClick={handleApplyLeaveClick}>Apply Leave<span className="pl-2 pt-0.5 pr-6"><img src="./icons/PlusSign.png"/></span></span>
 //               </div>
 //             </div>
-            
+
 //             {isLeaveContentVisible && (
 //               <div className="content-below bg-white p-4 rounded shadow-md sm:mx-10 mx-2">
 //                 {/* Your content goes here */}
-                
-
 
 //                 <ApplyForm />
-                
+
 //               </div>
 //             )}
 //           </div>
@@ -71,10 +68,6 @@
 //     </div>
 //   );
 // }
-
-
-
-
 
 // import { useState } from "react";
 
@@ -149,7 +142,7 @@
 //                 </span>
 //               </div>
 //             </div>
-            
+
 //             {isLeaveContentVisible && (
 //               <div className="content-below bg-white p-4 rounded shadow-md sm:mx-10 mx-2">
 //                 <ApplyForm />
@@ -168,7 +161,6 @@
 //     </div>
 //   );
 // }
-
 
 // import { useState } from "react";
 
@@ -245,7 +237,7 @@
 //                 </div>
 //               </div>
 //             )}
-            
+
 //             {isLeaveContentVisible && !isYourLeaveContentVisible && (
 //               <div className="content-below bg-white p-4 rounded shadow-md sm:mx-10 mx-2">
 //                 <ApplyForm />
@@ -264,7 +256,6 @@
 //   );
 // }
 
-
 import { useState } from "react";
 
 import SideBar from "../components/SideBar";
@@ -274,7 +265,8 @@ import ApplyForm from "../components/HostelComponents/ApplyForm";
 
 export default function Hostel() {
   const [isLeaveContentVisible, setLeaveContentVisible] = useState(false);
-  const [isYourLeaveContentVisible, setYourLeaveContentVisible] = useState(false); // State for "Your Leaves" content
+  const [isYourLeaveContentVisible, setYourLeaveContentVisible] =
+    useState(false); // State for "Your Leaves" content
 
   const handleApplyLeaveClick = () => {
     setLeaveContentVisible(!isLeaveContentVisible);
@@ -298,8 +290,14 @@ export default function Hostel() {
   };
 
   return (
-    <div className="bg-[#ECEBFE] w-full flex">
-      <div className="hidden md:block">
+    <>
+      <div className="bg-[#ECEBFE] w-full flex">
+        <div className="hidden md:block">
+          <SideBar active={active} />
+        </div>
+        <div className="block md:hidden">
+          <SideBarMobile active={active} />
+        </div>
         <SideBar active={active} />
       </div>
       <div className="block md:hidden">
@@ -327,7 +325,9 @@ export default function Hostel() {
           </div>
           <div className="bg-[#f2f6ff] md:rounded-3xl rounded-xl overflow-y-auto">
             {!isYourLeaveContentVisible && (
-              <div className={`h-[50px] bg-[#004BB8] my-5 rounded-[0.5rem] items-center flex justify-between cursor-pointer sm:mx-10 mx-2`}>
+              <div
+                className={`h-[50px] bg-[#004BB8] my-5 rounded-[0.5rem] items-center flex justify-between cursor-pointer sm:mx-10 mx-2`}
+              >
                 <div className="text-white md:font-semibold sm:text-base text-xs px-3 md:pl-10 flex justify-between w-full">
                   <span>My Hostel/Room</span>
                   <span className="flex" onClick={handleApplyLeaveClick}>
@@ -339,7 +339,7 @@ export default function Hostel() {
                 </div>
               </div>
             )}
-            
+
             {isLeaveContentVisible && !isYourLeaveContentVisible && (
               <div className="content-below bg-white p-4 rounded shadow-md sm:mx-10 mx-2">
                 <ApplyForm />
@@ -348,7 +348,9 @@ export default function Hostel() {
 
             {isYourLeaveContentVisible && (
               <>
-                <div className={`h-[50px] bg-[#004BB8] my-5 rounded-[0.5rem] items-center flex justify-between cursor-pointer sm:mx-10 mx-2`}>
+                <div
+                  className={`h-[50px] bg-[#004BB8] my-5 rounded-[0.5rem] items-center flex justify-between cursor-pointer sm:mx-10 mx-2`}
+                >
                   <div className="text-white md:font-semibold sm:text-base text-xs px-3 md:pl-10 flex justify-between w-full">
                     <span>S.No.</span>
                     <span>Reason</span>
@@ -368,19 +370,23 @@ export default function Hostel() {
                     </div>
                     {/* Add sample leave records or leave this section for dynamic content */}
                     <div className="flex justify-between py-2">
-                    <span>2</span>
+                      <span>2</span>
                       <span>Sick Leave</span>
                       <span>01/05/2024</span>
                       <span>05/05/2024</span>
-                      <span><button className="text-blue-500">Download</button></span>
+                      <span>
+                        <button className="text-blue-500">Download</button>
+                      </span>
                     </div>
                     <div className="flex justify-between py-2">
-                    <span>3</span>
+                      <span>3</span>
                       <span>Family Function</span>
-                  
+
                       <span>15/05/2024</span>
                       <span>20/05/2024</span>
-                      <span><button className="text-blue-500">Download</button></span>
+                      <span>
+                        <button className="text-blue-500">Download</button>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -389,6 +395,6 @@ export default function Hostel() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
