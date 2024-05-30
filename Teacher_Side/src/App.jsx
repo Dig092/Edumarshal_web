@@ -4,6 +4,7 @@ import Events from "./pages/Events";
 import ClassNotes from "./pages/ClassNotes";
 import Dashboard from "./pages/Dashboard";
 import Classroom from "./pages/Classroom";
+import LoginPage from "./pages/LoginPage";
 export default function App() {
     return (
         <Router>
@@ -13,6 +14,7 @@ export default function App() {
             <Route exact path="/" element={<Dashboard/>} />
             <Route exact path="/Classroom" element={<Classroom/>} />
             <Route exact path="/Events" element={<Events/>} />
+            <Route exact path="/login" element={<LoginPage/>} />
             </Routes>
         </Router>
     );
