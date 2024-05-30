@@ -156,7 +156,7 @@ const LoginPage = () => {
                         Login
                     </h1>
 
-                    {/* <TextField
+                    <TextField
                         variant="outlined"
                         style={{ width: "100%", marginBottom: "24px" }}
                         label="Username"
@@ -233,7 +233,6 @@ const LoginPage = () => {
                             label="Remember me"
                         />
                     </div>
-
                     {/* <Button
             style={{
               backgroundColor: '#004BB8',
@@ -275,7 +274,7 @@ const LoginPage = () => {
                         ) : (
                             "Login"
                         )}
-                        {/* {loading ? 'Logging in...' : 'Login'} */}
+                        
                     </Button>
 
                     <div className="text-center pt-4 font-normal text-sm ">
@@ -291,7 +290,7 @@ const LoginPage = () => {
                     </div>
                 </div>
             </Paper>
-            <Snackbar
+            {/* <Snackbar
                 open={snackbarOpen}
                 autoHideDuration={3000}
                 onClose={handleSnackbarClose}
@@ -304,7 +303,7 @@ const LoginPage = () => {
                 >
                     Successfully logged in!
                 </MuiAlert>
-            </Snackbar>
+            </Snackbar> */}
             <Snackbar
                 open={snackbarOpen}
                 autoHideDuration={3000}
@@ -327,7 +326,7 @@ const LoginPage = () => {
         <MuiAlert onClose={handleSnackbarClose} severity="success" elevation={6} variant="filled">
           Successfully logged in!
         </MuiAlert>
-      </Snackbar> */}
+      </Snackbar>  */}
         </div>
     );
 };

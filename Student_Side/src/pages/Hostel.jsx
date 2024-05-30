@@ -292,14 +292,9 @@ export default function Hostel() {
   return (
     <>
       <div className="bg-[#ECEBFE] w-full flex">
-        <div className="hidden md:block">
-          <SideBar active={active} />
-        </div>
-        <div className="block md:hidden">
-          <SideBarMobile active={active} />
-        </div>
+       
         <SideBar active={active} />
-      </div>
+      
       <div className="block md:hidden">
         <SideBarMobile active={active} />
       </div>
@@ -394,6 +389,7 @@ export default function Hostel() {
             )}
           </div>
         </div>
+      </div>
       </div>
     </>
   );
