@@ -1,12 +1,13 @@
 import { TextField } from "@mui/material";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 export default function ContactInfo(props) {
     return (
         <div className="w-[95%] pb-10 m-auto flex h-fit justify-evenly max-[768px]:items-center max-[768px]:flex-col">
             <div className="w-[25%] max-[768px]:w-[90%] max-[768px]:mb-5 max-[1148px]:w-[35%] pb-6 items-center rounded-xl flex flex-col bg-[#F2F6FF] h-full">
                 <img
-                    src="./displayPicture.png"
+                    src={props.profilePhoto}
                     className="w-[80%] max-[768px]:w-[200px] mt-6"
                     alt=""
                 />
@@ -15,11 +16,10 @@ export default function ContactInfo(props) {
                         id > 5 ? null : (
                             <TextField
                                 style={{
-                                    margin: `${
-                                        id == 0
-                                            ? "30px 5px 10px 5px"
-                                            : "10px 5px"
-                                    }`,
+                                    margin: `${id == 0
+                                        ? "30px 5px 10px 5px"
+                                        : "10px 5px"
+                                        }`,
                                     width: "88%",
                                 }}
                                 key={id}
@@ -43,12 +43,11 @@ export default function ContactInfo(props) {
                         <TextField
                             style={{
                                 margin: "10px 0",
-                                width: `${
-                                    key == "presentAddress" ||
+                                width: `${key == "presentAddress" ||
                                     key == "permanentAddress"
-                                        ? "93%"
-                                        : "45%"
-                                }`,
+                                    ? "93%"
+                                    : "45%"
+                                    }`,
                             }}
                             key={id}
                             id="outlined-disabled"

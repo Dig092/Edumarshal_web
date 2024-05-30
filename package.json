@@ -1,0 +1,6 @@
+{
+    "dependencies": {
+        "react-pdf": "^7.7.1",
+        "react-tooltip": "^5.26.4"
+    }
+}

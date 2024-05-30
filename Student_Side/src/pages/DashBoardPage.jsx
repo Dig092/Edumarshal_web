@@ -5,7 +5,7 @@ import DoughNut from "../components/DashboardComponents/DonutGraph";
 import ColumnGraph from "../components/DashboardComponents/ColumnGraph";
 import SemiCircle from "../components/DashboardComponents/SemiCircle";
 import SideCard from "../components/DashboardComponents/SideCard";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import SideBarMobile from "../components/SideBarMobile";
 import axios from "axios";
 import totalAtt from "../constants/totalAtt";
@@ -27,6 +27,7 @@ export default function DashBoardPage() {
     const location = useLocation();
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState("");
+    const navigate = useNavigate();
 
     const getResponses = () => {
         axios
@@ -43,7 +44,7 @@ export default function DashBoardPage() {
                         axios
                             .get(
                                 import.meta.env.VITE_BACKEND_API +
-                                    "/v1/student/timetable",
+                                "/v1/student/timetable",
                                 {
                                     withCredentials: true,
                                 }
@@ -53,7 +54,7 @@ export default function DashBoardPage() {
                                 axios
                                     .get(
                                         import.meta.env.VITE_BACKEND_API +
-                                            "/v1/student/assignment",
+                                        "/v1/student/assignment",
                                         {
                                             withCredentials: true,
                                         }
@@ -68,13 +69,13 @@ export default function DashBoardPage() {
                                             .get(
                                                 import.meta.env
                                                     .VITE_BACKEND_API +
-                                                    "/v1/student/pdpattendance",
+                                                "/v1/student/pdpattendance",
                                                 { withCredentials: true }
                                             )
                                             .then((res) => {
                                                 setPdp([
                                                     res.data.totalClasses -
-                                                        res.data.totalPresent,
+                                                    res.data.totalPresent,
                                                     res.data.totalPresent,
                                                 ]);
                                             })
@@ -145,8 +146,8 @@ export default function DashBoardPage() {
                                                 Attendence
                                             </h1>
                                             <a
-                                                className="text-xs text-blue-500"
-                                                href=""
+                                                className="text-xs text-blue-500 cursor-pointer"
+                                                onClick={() => navigate("/classroom", { state: { active: "classroom" } })}
                                             >
                                                 View Details
                                             </a>
@@ -158,8 +159,8 @@ export default function DashBoardPage() {
                                         <div className="flex my-1 mt-3 justify-between w-[90%] items-center font-semibold text-lg z-50">
                                             <h1>PDP Attendence</h1>
                                             <a
-                                                href=""
-                                                className="text-blue-500 font-normal text-xs"
+                                                className="text-blue-500 font-normal text-xs cursor-pointer"
+                                                onClick={() => navigate("/placement", { state: { active: "placement" } })}
                                             >
                                                 View Details
                                             </a>
@@ -207,7 +208,7 @@ export default function DashBoardPage() {
                                             <h1 className="text-lg">
                                                 Upcoming Events
                                             </h1>
-                                            <h2 className="text-xs">
+                                            <h2 className="text-xs cursor-pointer" onClick={() => navigate("/events", { state: { active: "events" } })}>
                                                 view all
                                             </h2>
                                         </div>
