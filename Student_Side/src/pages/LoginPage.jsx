@@ -233,24 +233,7 @@ const LoginPage = () => {
                             label="Remember me"
                         />
                     </div>
-                    {/* <Button
-            style={{
-              backgroundColor: '#004BB8',
-              color: 'white',
-              width: '100%',
-              maxWidth: '400px',
-              padding: '12px',
-              borderRadius: '5px',
-              '&:hover': {
-                backgroundColor: 'skyblue',
                 
-              },
-            }}
-            onClick={signIn}
-            disabled={loading}
-          >
-            Login
-          </Button> */}
                     <Button
                         style={{
                             backgroundColor: "#004BB8",
