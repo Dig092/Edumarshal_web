@@ -290,20 +290,7 @@ const LoginPage = () => {
                     </div>
                 </div>
             </Paper>
-            {/* <Snackbar
-                open={snackbarOpen}
-                autoHideDuration={3000}
-                onClose={handleSnackbarClose}
-            >
-                <MuiAlert
-                    onClose={handleSnackbarClose}
-                    severity="success"
-                    elevation={6}
-                    variant="filled"
-                >
-                    Successfully logged in!
-                </MuiAlert>
-            </Snackbar> */}
+            
             <Snackbar
                 open={snackbarOpen}
                 autoHideDuration={3000}
@@ -318,15 +305,7 @@ const LoginPage = () => {
                     {snackbarMessage}
                 </MuiAlert>
             </Snackbar>
-            {/* <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={3000}
-        onClose={handleSnackbarClose}
-      >
-        <MuiAlert onClose={handleSnackbarClose} severity="success" elevation={6} variant="filled">
-          Successfully logged in!
-        </MuiAlert>
-      </Snackbar>  */}
+            
         </div>
     );
 };
