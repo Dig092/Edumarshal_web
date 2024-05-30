@@ -13,6 +13,7 @@ export default function App() {
             <Route exact path="/" element= {<LoginPage/>} />
             <Route exact path="/Classroom" element={<Classroom/>} />
             <Route exact path="/Events" element={<Events/>} />
+            <Route exact path="/login" element={<LoginPage/>} />
             </Routes>
         </Router>
     );

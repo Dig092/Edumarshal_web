@@ -150,6 +150,7 @@ const LoginPage = () => {
                             fontSize: "2.0rem",
                             fontWeight: "550",
                             marginBottom: "16px",
+                            fontFamily:"sans-serif"
                         }}
                     >
                         Login
@@ -232,25 +233,7 @@ const LoginPage = () => {
                             label="Remember me"
                         />
                     </div>
-
-                    {/* <Button
-            style={{
-              backgroundColor: '#004BB8',
-              color: 'white',
-              width: '100%',
-              maxWidth: '400px',
-              padding: '12px',
-              borderRadius: '5px',
-              '&:hover': {
-                backgroundColor: 'skyblue',
                 
-              },
-            }}
-            onClick={signIn}
-            disabled={loading}
-          >
-            Login
-          </Button> */}
                     <Button
                         style={{
                             backgroundColor: "#004BB8",
@@ -274,36 +257,23 @@ const LoginPage = () => {
                         ) : (
                             "Login"
                         )}
-                        {/* {loading ? 'Logging in...' : 'Login'} */}
+                        
                     </Button>
 
                     <div className="text-center pt-4 font-normal text-sm ">
-                        <span className="font-semibold">
+                        <span className="font-bold font-sans">
                             Forgot Your Password?{" "}
                         </span>
                         <Link
-                            to="/register"
-                            className="text-[#dae9ff] font-normal underline"
+                            to="/resetPassword"
+                            className="text-white font-normal font-sans"
                         >
                             Reset Password
                         </Link>
                     </div>
                 </div>
             </Paper>
-            <Snackbar
-                open={snackbarOpen}
-                autoHideDuration={3000}
-                onClose={handleSnackbarClose}
-            >
-                <MuiAlert
-                    onClose={handleSnackbarClose}
-                    severity="success"
-                    elevation={6}
-                    variant="filled"
-                >
-                    Successfully logged in!
-                </MuiAlert>
-            </Snackbar>
+            
             <Snackbar
                 open={snackbarOpen}
                 autoHideDuration={3000}
@@ -318,15 +288,7 @@ const LoginPage = () => {
                     {snackbarMessage}
                 </MuiAlert>
             </Snackbar>
-            {/* <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={3000}
-        onClose={handleSnackbarClose}
-      >
-        <MuiAlert onClose={handleSnackbarClose} severity="success" elevation={6} variant="filled">
-          Successfully logged in!
-        </MuiAlert>
-      </Snackbar> */}
+            
         </div>
     );
 };
