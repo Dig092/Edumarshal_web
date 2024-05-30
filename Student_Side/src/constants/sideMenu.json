@@ -29,15 +29,16 @@
         "link": "placement"
     },
     {
-        "title": "PYQ's Papers",
-        "focus": "pyq",
-        "unfocus": "pyqUnfocus"
+        "title": "PYQ Paper",
+        "focus": "pyqpapers",
+        "unfocus": "pyqUnfocus",
+        "link": "pyqpapers"
     },
     {
         "title": "Fees",
         "focus": "fees",
         "unfocus": "feesUnfocus",
-        "link": "Fees"
+        "link": "fees"
     },
     {
         "title": "Events",

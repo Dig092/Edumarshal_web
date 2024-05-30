@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import Events from "./pages/Events";
 import PlacementPage from "./pages/Placement";
 import Hostel from "./pages/Hostel";
+import PyqPapers from "./pages/PyqPapers";
 export default function App() {
     return (
         <Router>
@@ -19,6 +20,7 @@ export default function App() {
                 <Route exact path="/Hostel" element={<Hostel/>}/>
                 <Route exact path="/Fees" element={<Fees/>}/>
                 <Route exact path="/events" element={<Events/>}/>
+                <Route exact path="/pyqpapers" element={<PyqPapers/>}/>
                 <Route exact path="/placement" element={<PlacementPage/>}/>
             </Routes>
         </Router>
