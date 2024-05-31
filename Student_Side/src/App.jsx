@@ -12,6 +12,7 @@ import ResetPassword from "./pages/ResetPassword";
 import VerifyOtp from "./pages/VerifyOtp";
 import { SetMealTwoTone } from "@mui/icons-material";
 import SetNewPassword from "./pages/SetNewPassword";
+import PYQPage from "./pages/PYQPage";
 export default function App() {
     return (
         <Router>
@@ -21,14 +22,15 @@ export default function App() {
                 <Route exact path="/VerifyOtp" element={<VerifyOtp />} />
                 <Route exact path="/SetNewPassword" element={<SetNewPassword />} />
                 <Route exact path="/dashboard" element={<DashBoardPage />} />
-                <Route exact path="/profile" element={<ProfilePage/>}/>
+                <Route exact path="/profile" element={<ProfilePage />} />
                 {/* <Route exact path="/hostelpage" element={<HostelPage />} /> */}
-                <Route exact path="/Classroom" element={<Classroom/>}/>
-                <Route exact path="/Hostel" element={<Hostel/>}/>
-                <Route exact path="/Fees" element={<Fees/>}/>
-                <Route exact path="/events" element={<Events/>}/>
-                <Route exact path="/placement" element={<PlacementPage/>}/>
-                <Route exact path="/care" element={<CustomerCare/>}/>
+                <Route exact path="/Classroom" element={<Classroom />} />
+                <Route exact path="/Hostel" element={<Hostel />} />
+                <Route exact path="/Fees" element={<Fees />} />
+                <Route exact path="/events" element={<Events />} />
+                <Route exact path="/placement" element={<PlacementPage />} />
+                <Route exact path="/care" element={<CustomerCare />} />
+                <Route exact path="/pyq" element={<PYQPage />} />
             </Routes>
         </Router>
     );
