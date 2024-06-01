@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -9,7 +8,6 @@ import {
     Snackbar,
 } from "@mui/material";
 import MuiAlert from "@mui/lab/Alert";
-
 import axios from "axios";
 import Cookies from "js-cookie";
 
