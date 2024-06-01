@@ -31,7 +31,7 @@ const SetNewPassword = () => {
             setLoading(true);
             const item = { newPassword, otp };
             const response = await axios.post(
-                `${import.meta.env.VITE_BACKEND_API}/v1/student/setNewPassword`,
+                `${import.meta.env.VITE_BACKEND_API}/v1/teacher/setNewPassword`,
                 item,
                 { withCredentials: true }
             );
