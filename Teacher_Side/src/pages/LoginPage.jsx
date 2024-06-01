@@ -24,6 +24,7 @@ const LoginPage = () => {
     const [loading, setLoading] = useState(false);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState("");
+    const [emailError, setEmailError] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -38,7 +39,34 @@ const LoginPage = () => {
         }
     }, []);
 
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const handleEmailChange = (e) => {
+        const newEmail = e.target.value;
+        setEmail(newEmail);
+        if (!validateEmail(newEmail)) {
+            setEmailError("Invalid email format");
+        } else {
+            setEmailError("");
+        }
+    };
+
     const signIn = async () => {
+        if (!navigator.onLine) {
+            setSnackbarMessage("No internet connectivity. Please check your connection and try again.");
+            setSnackbarOpen(true);
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            setSnackbarMessage("Please enter a valid email.");
+            setSnackbarOpen(true);
+            return;
+        }
+
         try {
             setLoading(true);
 
@@ -71,7 +99,11 @@ const LoginPage = () => {
                 console.error("Login failed");
             }
         } catch (error) {
-            setSnackbarMessage("Invalid Credentials! Please try again later.");
+            if (!error.response) {
+                setSnackbarMessage("No internet connectivity. Please check your connection and try again.");
+            } else {
+                setSnackbarMessage("Invalid Credentials! Please try again later.");
+            }
             setSnackbarOpen(true);
             console.error("An error occurred during login", error);
         } finally {
@@ -145,9 +177,11 @@ const LoginPage = () => {
                         style={{ width: "100%", marginBottom: "24px" }}
                         label="Email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={handleEmailChange}
                         placeholder="Enter Your Email"
                         autoComplete="email"
+                        error={!!emailError}
+                        helperText={emailError}
                         InputProps={{
                             style: {
                                 backgroundColor: "rgba(255, 255, 255, 0.1)"
@@ -247,7 +281,7 @@ const LoginPage = () => {
                             Forgot Your Password?{" "}
                         </span>
                         <Link
-                            to="/dashboard"
+                            to="/resetPassword"
                             className="text-[#dae9ff] font-normal underline"
                         >
                             Reset Password

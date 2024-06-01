@@ -15,7 +15,8 @@ export default {
         'xmd':'900px'
       },
       colors:{
-        'bg-color': '#F2F6FF'
+        'bg-color': '#F2F6FF',
+        'CTA' : '#004BB8'
       }
     },
   },

@@ -6,7 +6,7 @@ export default function ParentsInfo(props) {
         <div className="w-[95%] pb-10 m-auto max-[768px]:items-center flex max-[768px]:flex-col h-fit justify-evenly">
             <div className="w-[25%] max-[768px]:w-[90%] max-[768px]:mb-5 max-[1148px]:w-[35%] pb-6 items-center rounded-xl flex flex-col bg-[#F2F6FF] h-full">
                 <img
-                    src="./displayPicture.png"
+                    src={props.profilePhoto}
                     className="w-[80%] max-[768px]:w-[200px] mt-6"
                     alt=""
                 />
@@ -15,11 +15,10 @@ export default function ParentsInfo(props) {
                         id > 5 ? null : (
                             <TextField
                                 style={{
-                                    margin: `${
-                                        id == 0
+                                    margin: `${id == 0
                                             ? "30px 5px 10px 5px"
                                             : "10px 5px"
-                                    }`,
+                                        }`,
                                     width: "88%",
                                 }}
                                 key={id}

@@ -13,19 +13,23 @@ import { useState } from 'react';
 
 function Placement() {
   const [active, setActive] = useState("");
-//   const location = useLocation();
-//   useEffect(() => {
-//     setActive(location.state.active);
-//   }, []);
+  //   const location = useLocation();
+  //   useEffect(() => {
+  //     setActive(location.state.active);
+  //   }, []);
   const [activeItem, setActiveItem] = useState(1);
   const handleSwitchChange = (value) => {
     setActiveItem(value);
   };
+  const location = useLocation()
+  useEffect(() => {
+    setActive(location.state.active);
+  }, []);
   return (
     <>
       <div className="h-screen bg-[#ECEBFE] w-full flex">
         <div className="hidden md:block">
-        <SideBar active={active} />
+          <SideBar active={active} />
         </div>
         <div className="flex flex-col w-full">
           <div className="block md:hidden">
@@ -41,8 +45,8 @@ function Placement() {
             </div>
           </div>
           {activeItem === 0 && <PlacementEvent />}
-          {activeItem === 1 &&  <Internship />}
-          {activeItem === 2 &&  <PdpAttendance/>}
+          {activeItem === 1 && <Internship />}
+          {activeItem === 2 && <PdpAttendance />}
         </div>
       </div>
     </>
