@@ -25,9 +25,18 @@ const LoginPage = () => {
     const [loading, setLoading] = useState(false);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState("");
+    const [backgroundLoaded, setBackgroundLoaded] = useState(false); // Track background image loading state
     const navigate = useNavigate();
 
     useEffect(() => {
+        // Load background image
+        const img = new Image();
+        img.src = "./Loginbg.png";
+        img.onload = () => {
+            setBackgroundLoaded(true);
+        };
+
+        // Load remembered user data
         const storedUsername = Cookies.get("rememberedUsername");
         const storedPassword = Cookies.get("rememberedPassword");
         const storedDob = Cookies.get("rememberedDob");
@@ -111,59 +120,51 @@ const LoginPage = () => {
     return (
         <div
             style={{
-                backgroundImage: `url(./Loginbg.png)`,
+                position: "relative", // Make sure position is relative
+                minHeight: "100vh",
+                backgroundImage: backgroundLoaded ? `url(./Loginbg.png)` : "none", // Apply background image conditionally
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                minHeight: "100vh",
                 display: "flex",
-                alignItems: "center",
                 justifyContent: "center",
-                position: "relative",
+                alignItems: "center",
             }}
         >
-            {loading && (
-                <CircularProgress
+            {backgroundLoaded && (
+                <Paper
                     style={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                    }}
-                />
-            )}
-            <Paper
-                style={{
-                    backgroundColor: "rgba(255, 255, 255, 0.1)",
-                    paddingTop: 60,
-                    paddingBottom: 60,
-                    paddingLeft: 40,
-                    paddingRight: 40,
-                    borderRadius: "10px",
-                    width: "100%",
-                    maxWidth: "400px",
-                    backdropFilter: "blur(10px)",
-                }}
-            >
-                <div
-                    style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
+                        backgroundColor: "rgba(255, 255, 255, 0.1)",
+                        paddingTop: 60,
+                        paddingBottom: 60,
+                        paddingLeft: 40,
+                        paddingRight: 40,
+                        borderRadius: "10px",
+                        width: "100%",
+                        maxWidth: "400px",
+                        margin: "auto",
+                        backdropFilter: "blur(10px)",
                     }}
                 >
-                    <h1
+                    <div
                         style={{
-                            fontSize: "2.0rem",
-                            fontWeight: "550",
-                            marginBottom: "16px",
-                            fontFamily: "sans-serif",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
                         }}
                     >
-                        Login
-                    </h1>
+                        <h1
+                            style={{
+                                fontSize: "2.0rem",
+                                fontWeight: "550",
+                                marginBottom: "16px",
+                                fontFamily: "sans-serif",
+                            }}
+                        >
+                            Login
+                        </h1>
 
-                    <TextField
+                            <TextField
                         variant="outlined"
                         style={{ width: "100%", marginBottom: "24px" }}
                         label="Username"
@@ -278,7 +279,23 @@ const LoginPage = () => {
                         </Link>
                     </div>
                 </div>
-            </Paper>
+                       
+                    
+                </Paper>
+            )}
+
+            {!backgroundLoaded && (
+                <div
+                    style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                    }}
+                >
+                    <CircularProgress />
+                </div>
+            )}
 
             <Snackbar
                 open={snackbarOpen}
