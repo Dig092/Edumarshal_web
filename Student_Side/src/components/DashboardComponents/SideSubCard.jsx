@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export default function SideSubCard(props) {
     return (
@@ -25,3 +26,12 @@ export default function SideSubCard(props) {
         </div>
     );
 }
+
+SideSubCard.propTypes = {
+    open: PropTypes.bool.isRequired,
+    desc: PropTypes.string
+};
+
+SideSubCard.defaultProps = {
+    desc: ""
+};
