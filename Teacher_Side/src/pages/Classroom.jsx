@@ -13,7 +13,8 @@ import Feedback from "../components/Classroom/Feedback";
 
 const Classroom = () => {
   const [sections, setSections] = useState([]);
-  const [selectedSection, setSelectedSection] = useState(null);
+  const [selectedSection, setSelectedSection] = useState('');
+  const [selectedSubject, setSelectedSubject] = useState('');
   const [activeItem, setActiveItem] = useState(0);
 
   useEffect(() => {
@@ -26,20 +27,29 @@ const Classroom = () => {
           }
         );
 
-        const sectionData = response.data.map((item) => ({
+        const sectionData = response.data.sections.map((item) => ({
           sectionId: item.section.sectionId,
           sectionName: item.section.sectionName,
           subjectName: item.subject.name,
-          subjectCode: item.subject.code,a
+          subjectCode: item.subject.code,
         }));
 
         setSections(sectionData);
-        if (sectionData.length > 0) {
+
+        // Retrieve selected section from local storage or set it to the first section
+        const savedSection = localStorage.getItem('selectedSection');
+        if (savedSection) {
+          const savedSectionData = sectionData.find(section => section.sectionId === savedSection);
+          if (savedSectionData) {
+            setSelectedSection(savedSectionData.sectionId);
+            setSelectedSubject(savedSectionData.subjectCode);
+          }
+        } else if (sectionData.length > 0) {
           setSelectedSection(sectionData[0].sectionId);
+          setSelectedSubject(sectionData[0].subjectCode);
         }
       } catch (error) {
         if (error.response && error.response.status === 401) {
-          // Handle unauthorized error, maybe redirect to login page or show a message
           console.error("Unauthorized access. Please login again.");
         } else {
           console.error("Error fetching sections:", error);
@@ -54,7 +64,11 @@ const Classroom = () => {
   };
 
   const handleSectionChange = (event) => {
-    setSelectedSection(event.target.value);
+    const newSectionId = event.target.value;
+    const newSectionData = sections.find(section => section.sectionId === newSectionId);
+    setSelectedSection(newSectionId);
+    setSelectedSubject(newSectionData ? newSectionData.subjectCode : '');
+    localStorage.setItem('selectedSection', newSectionId);
   };
 
   return (
@@ -64,10 +78,6 @@ const Classroom = () => {
         <div className="hidden md:block">
           <SideBarTeacher />
         </div>
-        {/* <div className="block md:hidden">
-          <SideBarMobile active={active} />
-        </div> */}
-
         <div className="flex flex-col w-full">
           {/* Navbar */}
           <NavBarTeacher title="Classroom" />
@@ -82,12 +92,13 @@ const Classroom = () => {
             </div>
 
             {/* Section Dropdown */}
-            <div className="mt-4 mx-8">
+            <div className="mx-8">
               <select
                 value={selectedSection}
                 onChange={handleSectionChange}
-                className="p-2 border rounded"
+                className="px-4 py-1 border border-black rounded-lg text-black"
               >
+                <option value="" disabled>Select a section</option>
                 {sections.map((section) => (
                   <option key={section.sectionId} value={section.sectionId}>
                     {section.sectionName} ({section.subjectName})
@@ -99,7 +110,7 @@ const Classroom = () => {
 
           {/* Main Content */}
           <div className="flex w-full">
-            {activeItem === 0 && <Attendance sectionId={selectedSection} />}
+            {activeItem === 0 && <Attendance sectionId={selectedSection} subjectCode={selectedSubject} />}
             {activeItem === 1 && <Assignments />}
             {activeItem === 2 && <ClassNotes />}
             {activeItem === 3 && <Exams />}

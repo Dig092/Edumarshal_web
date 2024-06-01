@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import sideMenu from "../constants/SideMenu.json";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Tooltip } from 'react-tooltip';
+
 
 export default function SideBarTeacher(props) {
     const [menu, setMenu] = useState(true);
@@ -38,11 +40,12 @@ export default function SideBarTeacher(props) {
 
     return (
         <div
-            className="transition-all hidden md:block sticky max-[1024px]:fixed z-[99] left-0 top-0 h-screen max-[1024px]:h-full flex-col py-5 px-1 items-start bg-[#004BB8]"
+            className="transition-all hidden md:block fixed max-[1024px]:fixed z-[99] left-0 top-0 min-h-screen max-[1024px]:h-full flex-col py-5 px-1 items-start bg-[#004BB8]"
             style={{
                 width: `${menu ? "70px" : "230px"}`,
             }}
         >
+            <Tooltip id="my-tooltip" />
             <img
                 className="cursor-pointer p-0 w-[40px]"
                 onClick={() => setMenu(!menu)}
@@ -59,6 +62,8 @@ export default function SideBarTeacher(props) {
             {sideMenu.map((element, id) => (
                 <div
                     key={id}
+                    data-tooltip-id="my-tooltip"
+                    data-tooltip-content={menu ? element.title : ""}
                     className={`flex relative bg-${element.focus == props.active ? "white" : "transparent"
                         } items-center w-[${menu ? "80%" : "95%"
                         }] rounded-lg text-${element.focus == props.active ? "blue-600" : "white"
@@ -97,8 +102,9 @@ export default function SideBarTeacher(props) {
                         {element.title}
                     </h1>
                 </div>
-            ))}
-        </div>
+            ))
+            }
+        </div >
     );
 }
 
