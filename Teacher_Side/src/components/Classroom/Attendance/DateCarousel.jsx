@@ -1,16 +1,11 @@
-/* eslint-disable react/prop-types */
-import { useState, useRef, useEffect, useMemo } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState, useRef, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { selectDate } from "../../../../store/store";
-import { memoizedSelectDate } from "../../../../store/store";
 
-const DateCarousel = ({ onDateSelect, defualtDate }) => {
+const DateCarousel = ({ onDateSelect }) => {
   const sliderRef = useRef(null);
-  const dispatch = useDispatch();
-  const selectedDate = useSelector((state) => memoizedSelectDate(state));
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
@@ -49,35 +44,9 @@ const DateCarousel = ({ onDateSelect, defualtDate }) => {
     return dates;
   };
 
-  useEffect(() => {
-    if (selectedDate instanceof Date && !isNaN(selectedDate)) {
-      dispatch(
-        selectDate({
-          timestamp: selectedDate.getTime(),
-          backgroundColor: "#004BBB",
-          textColor: "white",
-        })
-      );
-    }
-  }, [selectedDate, dispatch]);
-
-  useEffect(() => {
-    // Initialize selected date to the current date when the component mounts
-    const currentDate = new Date();
-    dispatch(
-      selectDate({
-        timestamp: currentDate.getTime(),
-        backgroundColor: "#004BBB",
-        textColor: "white",
-      })
-    );
-  }, [dispatch]);
-
   const handleDateClick = (date) => {
-    dispatch(
-      selectDate({ timestamp: date.getTime(), date: date.toISOString() })
-    );
-    onDateSelect(date); // Make sure this line is present
+    setSelectedDate(date);
+    onDateSelect(date);
   };
 
   const getWeeks = () => {
@@ -147,16 +116,14 @@ const DateCarousel = ({ onDateSelect, defualtDate }) => {
     sliderRef.current.slickPrev();
   };
 
-  const memoizedWeeks = useMemo(() => getWeeks(), [selectedDate]);
-
   return (
-    <div className="grid grid-cols-9 items-center my-4">
+    <div className="grid grid-cols-12 items-center my-6">
       <button onClick={handlePrev} className="col-span-1 justify-self-center">
         {"<"}
       </button>
 
-      <Slider ref={sliderRef} {...settings} className="col-span-7">
-        {memoizedWeeks}
+      <Slider ref={sliderRef} {...settings} className="col-span-10">
+        {getWeeks()}
       </Slider>
 
       <button onClick={handleNext} className="col-span-1 justify-self-center">

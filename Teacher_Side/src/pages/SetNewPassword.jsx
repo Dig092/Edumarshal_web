@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -9,7 +8,6 @@ import {
     Snackbar,
 } from "@mui/material";
 import MuiAlert from "@mui/lab/Alert";
-
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -31,7 +29,7 @@ const SetNewPassword = () => {
             setLoading(true);
             const item = { newPassword, otp };
             const response = await axios.post(
-                `${import.meta.env.VITE_BACKEND_API}/v1/student/setNewPassword`,
+                `${import.meta.env.VITE_BACKEND_API}/v1/teacher/setNewPassword`,
                 item,
                 { withCredentials: true }
             );
