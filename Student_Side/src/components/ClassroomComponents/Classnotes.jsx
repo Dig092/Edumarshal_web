@@ -37,18 +37,18 @@ const Classnotes = () => {
   const subjectNames = new Set();
 
   classNotes.forEach((note) => {
-    if (!subjectNames.has(note.subject.name)) {
+    if (note.subject && !subjectNames.has(note.subject.name)) {
       subjectNames.add(note.subject.name);
       uniqueClassNotes.push(note);
     }
   });
 
   return (
-    <div className="bg-[#ffffff] w-full md:h-[80vh] items-center justify-center px-5 rounded-3xl mx-4 mt-4 ">
+    <div className="bg-[#ffffff] w-full md:h-[80vh] items-center justify-center px-5 rounded-3xl mx-4 mt-4">
       
       {pageName === "All Class Notes" && (
         <div className="w-full flex justify-center md:justify-start items-center">
-          <div className="w-full grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 ">
+          <div className="w-full grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
             {uniqueClassNotes.length > 0
               ? uniqueClassNotes.map((note, index) => (
                   <ClassnotesCard
@@ -79,9 +79,11 @@ const Classnotes = () => {
           setPageName={(name) => {
             setPageName(name);
             const selectedNote = classNotes.find(
-              (note) => note.subject.name === name
+              (note) => note.subject && note.subject.name === name
             );
-            setPdfLink(selectedNote.classnotes);
+            if (selectedNote) {
+              setPdfLink(selectedNote.classnotes);
+            }
           }}
         />
       )}
