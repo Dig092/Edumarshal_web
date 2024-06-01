@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import sideMenu from "../constants/SideMenu.json";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Tooltip } from 'react-tooltip';
+
 
 export default function SideBarTeacher(props) {
     const [menu, setMenu] = useState(true);
@@ -43,6 +45,7 @@ export default function SideBarTeacher(props) {
                 width: `${menu ? "70px" : "230px"}`,
             }}
         >
+            <Tooltip id="my-tooltip" />
             <img
                 className="cursor-pointer p-0 w-[40px]"
                 onClick={() => setMenu(!menu)}
@@ -59,6 +62,8 @@ export default function SideBarTeacher(props) {
             {sideMenu.map((element, id) => (
                 <div
                     key={id}
+                    data-tooltip-id="my-tooltip"
+                    data-tooltip-content={menu ? element.title : ""}
                     className={`flex relative bg-${element.focus == props.active ? "white" : "transparent"
                         } items-center w-[${menu ? "80%" : "95%"
                         }] rounded-lg text-${element.focus == props.active ? "blue-600" : "white"
@@ -97,8 +102,9 @@ export default function SideBarTeacher(props) {
                         {element.title}
                     </h1>
                 </div>
-            ))}
-        </div>
+            ))
+            }
+        </div >
     );
 }
 
