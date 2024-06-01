@@ -4,19 +4,20 @@ import SideBarTeacher from '../components/SideBarTeacher'
 import NavBarTeacher from '../components/NavBarTeacher'
 import DashboardCard from '../components/DashboardCard'
 import SubCardsCircular from '../components/SubCardsCircular'
+import dashboardMenu from "../constants/dashboardMenu.json"
 
 const Dashboard = () => {
     return (
         <div className='flex w-full min-h-[100vh]'>
             <SideBarTeacher />
             <NavBarTeacher title={"Dashboard"} />
-            <div className='absolute top-20 left-20 w-[90%]'>
+            <div className='absolute top-20 left-[8vw] w-[90%]'>
                 <div className='flex justify-evenly '>
-                    <div>
+                    <div className='w-[80%]'>
                         <div className='flex justify-evenly'>
-                            <DashboardCard title="Total Students" src="./icons/totalStudents.png" data="120" />
-                            <DashboardCard title="Total Students" src="./icons/totalStudents.png" data="120" />
-                            <DashboardCard title="Total Students" src="./icons/totalStudents.png" data="120" />
+                            {dashboardMenu.map((e, id) => (
+                                <DashboardCard key={id} title={e.title} data={e.data} src={e.src} />
+                            ))}
                         </div>
                         <div></div>
                     </div>
@@ -28,7 +29,7 @@ const Dashboard = () => {
                         <SubCardsCircular date="21 February" title="Event" />
                     </div>
                 </div>
-                <img src="./icons/teacherTimetable.png" alt="" />
+                <img className='mt-6 pb-10' src="./icons/teacherTimetable.png" alt="" />
             </div>
         </div>
     )

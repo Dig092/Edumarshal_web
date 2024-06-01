@@ -6,11 +6,11 @@ const Assignments = () => {
   const handleoptionClick = (index) => {
     setActiveoption(index);
   };
+  
+  const [data, setData] = useState([]);
   useEffect(() => {
     getAssignment();
   }, []);
-
-  const [data, setData] = useState([]);
   const getAssignment = () => {
     axios
       .get(import.meta.env.VITE_BACKEND_API + "/v1/student/assignment", {

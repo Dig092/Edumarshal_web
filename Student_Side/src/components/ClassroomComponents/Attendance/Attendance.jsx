@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import CircularProgress from "@mui/joy/CircularProgress";
-import Tooltip from "@mui/material/Tooltip"; // Import Tooltip component
+import Tooltip from "@mui/material/Tooltip";
 
 import SwitchTimePeriod from "./Components/SwitchTimePeriod";
 import Day from "./Components/Day";
