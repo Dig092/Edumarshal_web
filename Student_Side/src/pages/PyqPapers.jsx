@@ -7,9 +7,7 @@ import Subjectwise from '../components/PYQComponents/Subjectwise';
 import Yearwise from '../components/PYQComponents/Yearwise';
 import SwitchPYQ from '../components/PYQComponents/SwitchPWQ';
 
-
-// Example subjects
-const subjects = ["Math", "Science", "History"]; 
+const subjects = ["Math-IV", "Operating System", "Java", "Python"];
 
 function PyqPapers() {
   const [active, setActive] = useState("");
@@ -22,16 +20,15 @@ function PyqPapers() {
   }, [location.state]);
 
   const [activeItem, setActiveItem] = useState(0);
-  const [selectedSubject, setSelectedSubject] = useState(0); // New state for selected subject
+  const [selectedSubject, setSelectedSubject] = useState(0);
 
   const handleSwitchChange = (value) => {
     setActiveItem(value);
-    setSelectedSubject(0); // Reset selected subject when switching between Subjectwise and Yearwise
+    setSelectedSubject(0);
   };
 
   return (
     <div className="bg-[#ECEBFE] w-full flex">
-      {/* SideBar */}
       <div className="hidden md:block">
         <SideBar active={active} />
       </div>
@@ -40,11 +37,9 @@ function PyqPapers() {
       </div>
 
       <div className="flex flex-col w-full">
-        {/* Navbar */}
         <NavBar title="PYQ Papers" />
 
-        {/* Select Bar */}
-        <div className="hidden md:block items-center justify-center py-4 bg-[#ffffff]  mt-4 mx-4 rounded-3xl">
+        <div className="hidden md:block items-center justify-center py-4 bg-[#ffffff] mt-4 mx-4 rounded-3xl">
           <div className="ml-10 flex justify-between rounded-2xl">
             <div className="flex gap-4">
               {activeItem === 0 ? (
@@ -68,16 +63,14 @@ function PyqPapers() {
 
             <SwitchPYQ onSwitchChange={handleSwitchChange} activeIndex={activeItem} />
           </div>
-          
         </div>
 
         {/* Main Content */}
-        <div className="bg-[#ffffff] h-dvh flex items-center justify-center rounded-3xl mx-4 mt-4 overflow-y-auto ">
-      <div className="w-[95%] flex justify-center items-center">
-      {activeItem === 0 ? <Subjectwise/> : <Yearwise />}
+        <div className="bg-[#ffffff] h-dvh flex items-start justify-start rounded-3xl mx-4 mt-4 overflow-y-auto">
+          <div className="w-[95%] flex justify-start">
+            {activeItem === 0 ? <Subjectwise selectedSubject={subjects[selectedSubject]} /> : <Yearwise />}
+          </div>
         </div>
-        </div>
-       
       </div>
     </div>
   );

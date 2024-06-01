@@ -29,6 +29,7 @@ export default function App() {
                 <Route exact path="/Fees" element={<Fees/>}/>
                 <Route exact path="/events" element={<Events/>}/>
                 <Route exact path="/placement" element={<PlacementPage/>}/>
+                <Route exact path="/pyqpapers" element={<PyqPapers/>}/>
             </Routes>
         </Router>
     );
