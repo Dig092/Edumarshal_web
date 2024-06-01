@@ -101,6 +101,13 @@ const LoginPage = () => {
         setSnackbarOpen(false);
     };
 
+    const handleUsernameChange = (e) => {
+        const value = e.target.value;
+        if (/^\d*$/.test(value)) {
+            setUsername(value);
+        }
+    };
+
     return (
         <div
             style={{
@@ -150,7 +157,7 @@ const LoginPage = () => {
                             fontSize: "2.0rem",
                             fontWeight: "550",
                             marginBottom: "16px",
-                            fontFamily:"sans-serif"
+                            fontFamily: "sans-serif",
                         }}
                     >
                         Login
@@ -161,7 +168,7 @@ const LoginPage = () => {
                         style={{ width: "100%", marginBottom: "24px" }}
                         label="Username"
                         value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        onChange={handleUsernameChange}
                         placeholder="Enter Your Username"
                         autoComplete="username"
                         InputProps={{
@@ -233,7 +240,7 @@ const LoginPage = () => {
                             label="Remember me"
                         />
                     </div>
-                
+
                     <Button
                         style={{
                             backgroundColor: "#004BB8",
@@ -257,7 +264,6 @@ const LoginPage = () => {
                         ) : (
                             "Login"
                         )}
-                        
                     </Button>
 
                     <div className="text-center pt-4 font-normal text-sm ">
@@ -273,7 +279,7 @@ const LoginPage = () => {
                     </div>
                 </div>
             </Paper>
-            
+
             <Snackbar
                 open={snackbarOpen}
                 autoHideDuration={3000}
@@ -288,7 +294,6 @@ const LoginPage = () => {
                     {snackbarMessage}
                 </MuiAlert>
             </Snackbar>
-            
         </div>
     );
 };
