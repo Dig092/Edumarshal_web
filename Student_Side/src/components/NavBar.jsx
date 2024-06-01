@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { toggleMenu } from "../store/store";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import semester from "../constants/semester.json";
 import axios from "axios";
 import { useEffect } from "react";
@@ -10,13 +10,12 @@ import { useNavigate } from "react-router-dom";
 export default function NavBar(props) {
   const [sem, setSem] = useState("Select Semester");
   const [toggle, setToggle] = useState(false);
+  const [open, setOpen] = useState(false);
   const [documentUrls, setDocumentUrls] = useState({});
   const dispatch = useDispatch();
+  const menu = useSelector((state) => state.menu.isOpen);
   const navigate = useNavigate();
 
-  const handleNavigation = () => {
-    navigate("/profile"); // Adjust the path to your profile section
-  };
   useEffect(() => {
     fetchDocuments();
   }, []);
@@ -39,12 +38,29 @@ export default function NavBar(props) {
 
   return (
     <div className="flex h-[60px] sticky top-0 z-[98] bg-white w-full px-4 justify-between items-center">
+      {toggle ? (
+        <div className="absolute w-full top-0 left-0 bg-gray-400 h-screen bg-opacity-70 transition-all ease-in-out duration-500 transform">
+          <button
+            className="bg-gray-600 opacity-80 float-right mr-2 mt-2 text-white w-[50px] rounded-full h-[50px] text-4xl transition-transform transform hover:scale-110 duration-300"
+            onClick={() => {
+              setToggle(false);
+              dispatch(toggleMenu());
+            }}
+          >
+            &#x2716;
+          </button>
+          <img
+            className="w-[50%] mt-[50vh] transition-all transform -translate-y-1/2 mx-auto duration-500"
+            src={documentUrls}
+            alt="Document"
+          />
+        </div>
+      ) : null}
       <img
         className="max-md:block hidden w-[30px]"
-        src={!toggle ? "./hamburgerDark.png" : "./closeDark.png"}
+        src={menu ? "./hamburgerDark.png" : "./closeDark.png"}
         alt=""
         onClick={() => {
-          setToggle(!toggle);
           dispatch(toggleMenu());
         }}
       />
@@ -74,7 +90,7 @@ export default function NavBar(props) {
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
-          onClick={handleNavigation}
+          onClick={() => setToggle(!toggle)}
         ></div>
       </div>
     </div>

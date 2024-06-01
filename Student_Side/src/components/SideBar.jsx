@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import sideMenu from "../constants/sideMenu.json";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Tooltip } from 'react-tooltip'
+import Cookies from 'js-cookie';
 
 export default function SideBar(props) {
     const [menu, setMenu] = useState(true);
@@ -43,6 +45,7 @@ export default function SideBar(props) {
                 width: `${menu ? "70px" : "230px"}`,
             }}
         >
+            <Tooltip id="my-tooltip" />
             <img
                 className="cursor-pointer p-0 w-[40px]"
                 onClick={() => setMenu(!menu)}
@@ -59,22 +62,26 @@ export default function SideBar(props) {
             {sideMenu.map((element, id) => (
                 <div
                     key={id}
-                    className={`flex relative bg-${
-                        element.focus == props.active ? "white" : "transparent"
-                    } items-center w-[${
-                        menu ? "80%" : "95%"
-                    }] rounded-lg text-${
-                        element.focus == props.active ? "blue-600" : "white"
-                    } my-1 ml-1 hover:bg-white hover:text-blue-600`}
+                    data-tooltip-id="my-tooltip" data-tooltip-content={menu ? element.title == "Fees" ? "Fees Section" : element.title : ""}
+                    className={`flex relative bg-${element.focus == props.active ? "white" : "transparent"
+                        } items-center w-[${menu ? "80%" : "95%"
+                        }] rounded-lg text-${element.focus == props.active ? "blue-600" : "white"
+                        } my-1 ml-1 hover:bg-white hover:text-blue-600 ${id == 9 ? "mt-[26vh]" : null}`}
                 >
                     <div
                         className="absolute cursor-pointer top-0 w-full h-full bg-transparent"
                         onMouseOver={(e) => hoverEffect(element.focus, e)}
                         onMouseOut={(e) => hoverEffect(element.unfocus, e)}
                         onClick={(e) => {
-                            navigate(`/${getClickData(e)}`, {
-                                state: { active: getClickData(e) },
-                            });
+                            if (id != 9) {
+                                navigate(`/${getClickData(e)}`, {
+                                    state: { active: getClickData(e) },
+                                });
+                            }
+                            else {
+                                document.cookie = `accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+                                alert("Removed access token")
+                            }
                         }}
                     ></div>
                     <div
@@ -82,11 +89,10 @@ export default function SideBar(props) {
                         // alt=""
                         // src={element.focus}
                         style={{
-                            backgroundImage: `url('./icons/${
-                                flag && props.active == element.focus
-                                    ? element.focus
-                                    : element.unfocus
-                            }.png')`,
+                            backgroundImage: `url('./icons/${flag && props.active == element.focus
+                                ? element.focus
+                                : element.unfocus
+                                }.png')`,
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "50%",
                             backgroundPosition: "center",

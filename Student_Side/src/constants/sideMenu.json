@@ -49,5 +49,10 @@
         "title": "Customer Care",
         "focus": "care",
         "unfocus": "careUnfocus"
+    },
+    {
+        "title": "Logout",
+        "focus": "logout",
+        "unfocus": "logoutUnfocus"
     }
 ]

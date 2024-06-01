@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import sideMenu from "../constants/sideMenu.json";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleMenu } from "../store/store";
 
 export default function SideBarMobile(props) {
     const [flag, setFlag] = useState(false);
     const menu = useSelector((state) => state.menu.isOpen);
     const navigate = useNavigate();
+    const dispatch = useDispatch()
     const profileSubMenu = ["My Profile", "My Document", "Registration Form"];
 
     useEffect(() => {
@@ -40,30 +42,31 @@ export default function SideBarMobile(props) {
 
     return (
         <div
-            className="flex sticky top-0 transition-all mt-[60px] pl-5 max-[780px]:fixed z-[99] h-screen max-[780px]:h-full flex-col py-5 px-1 items-start bg-[#004BB8]"
+            className="flex sticky top-0 transition-all mt-[60px] max-[780px]:fixed z-[99] h-screen max-[780px]:h-full flex-col max-w-[425px] py-5 px-1 items-start bg-[#004BB8]"
             style={{
-                width: `${menu ? "0px" : "100%"}`,
-                display: `${menu ? "none" : "flex"}`,
+                width: `${menu ? "0" : "100%"}`,
+                padding: `${menu ? "0" : "20px"}`,
             }}
         >
             {sideMenu.map((element, id) => (
                 <div
                     key={id}
-                    className={`flex relative bg-${
-                        element.focus == props.active ? "white" : "transparent"
-                    } items-center w-[${
-                        menu ? "87%" : "95%"
-                    }] rounded-lg text-${
-                        element.focus == props.active ? "blue-600" : "white"
-                    } my-1 ml-1 hover:bg-white hover:text-blue-600`}
+                    style={{
+                        display: `${menu ? "none" : "flex"}`,
+                    }}
+                    className={`flex relative bg-${element.focus == props.active ? "white" : "transparent"
+                        } items-center w-[${menu ? "87%" : "95%"
+                        }] rounded-lg text-${element.focus == props.active ? "blue-600" : "white"
+                        } my-1 ml-1 hover:bg-white hover:text-blue-600`}
                 >
                     <div
                         className="absolute cursor-pointer top-0 w-full h-full bg-transparent"
                         onMouseOver={(e) => hoverEffect(element.focus, e)}
                         onMouseOut={(e) => hoverEffect(element.unfocus, e)}
                         onClick={(e) => {
-                            navigate(`/${getClickData(e)}`, {
-                                state: { active: getClickData(e) },
+                            dispatch(toggleMenu())
+                            navigate(`/${element.focus}`, {
+                                state: { active: element.focus },
                             });
                         }}
                     ></div>
@@ -72,11 +75,10 @@ export default function SideBarMobile(props) {
                         // alt=""
                         // src={element.focus}
                         style={{
-                            backgroundImage: `url('./icons/${
-                                flag && props.active == element.focus
-                                    ? element.focus
-                                    : element.unfocus
-                            }.png')`,
+                            backgroundImage: `url('./icons/${flag && props.active == element.focus
+                                ? element.focus
+                                : element.unfocus
+                                }.png')`,
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "50%",
                             backgroundPosition: "center",
