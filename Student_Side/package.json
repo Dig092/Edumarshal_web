@@ -42,7 +42,7 @@
         "react-spinners": "^0.13.8",
         "react-spring": "^9.7.3",
         "react-switch-selector": "^2.2.1",
-        "react-toastify": "^10.0.4",
+        "react-toastify": "^10.0.5",
         "react-tooltip": "^5.26.4",
         "redux": "^5.0.1",
         "reselect": "^5.1.0",

@@ -44,7 +44,7 @@ export default function NavBar(props) {
             className="bg-gray-600 opacity-80 float-right mr-2 mt-2 text-white w-[50px] rounded-full h-[50px] text-4xl transition-transform transform hover:scale-110 duration-300"
             onClick={() => {
               setToggle(false);
-              dispatch(toggleMenu());
+              // dispatch(toggleMenu());
             }}
           >
             &#x2716;
