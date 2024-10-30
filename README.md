@@ -1,7 +1,3 @@
-Here’s a professional and detailed README for your Edumarshal project:
-
----
-
 # 📚 Edumarshal
 
 **A Unified & Personalized Education Management Solution for AKGEC**
@@ -93,7 +89,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 Edumarshal is more than an application—it’s a solution designed to transform educational management for institutions like AKGEC, offering efficiency and ease in every task.
-
---- 
-
-This README provides a detailed overview and professional appearance, making your project appealing to users and contributors alike. Let me know if you’d like to add or adjust anything further!
